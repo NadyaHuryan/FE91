@@ -19,7 +19,7 @@
 + Не забудем оставить комментарий к сохранению и напишем `git commit -m 'init(hw_1): start course Javascript Basic'`
 + Наконец отправим изменения на **github** с помощью команды `git push -u origin ivan.ivanov-hw_1`
 
-+ Перейдите на сайт github и зайдите в ветку `ivan.ivanov-hw_1`
++ Перейдите на сайт githut pull и зайдите в ветку `ivan.ivanov-hw_1`
 + Нажмите клавишу `compare & pull request`
 + В меню замените ветку в которую вы хотите произвести слияние с `main` на свою основную ветку `ivan.ivanov` (с вашим именем и фамилией)
 + Напишите заголовок своего первого `pull request` => `Ivan Ivanov [hw_1]: My first pull request`
