@@ -77,4 +77,23 @@ switch(userQuestion){
     default:
         console.log( "Нет таких значений" );                
 }
+// task 7 done 
 
+//##############  ADVANCED level  ############### //
+
+let startNumber = prompt("Введи число");
+let value1  = Number (prompt("1. cколько отнять от числа?"));
+let value2  = Number (prompt("2. cколько прибавить к предыдущему результату  ?"));
+let value3  = Number (prompt("3. на cколько умножить предыдущий результат?"));
+let value4  = Number (prompt("4. на cколько разделить предыдущий результат?"));
+
+alert(`((((${startNumber} - ${value1}) + ${value2}) * ${value4}) / ${value4} = ${(((startNumber - value1) + value2) * value3) / value4}`);
+//task 2 done
+
+let stage ="#"
+
+for(let stairs = 1; stairs <=6; stairs++ ){
+    console.log(stage);
+    stage = stage + "#";
+}
+//task 3 done
