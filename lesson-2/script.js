@@ -81,6 +81,17 @@ switch(userQuestion){
 
 //##############  ADVANCED level  ############### //
 
+/*
+let aCounter;
+let aSum;
+do{
+    a = ('введи число, для выхода из цикла введи 0 или оставь пустую строку');
+    
+  }
+  while (a != '0' && a != null);
+
+//task 1 done 
+*/
 let startNumber = prompt("Введи число");
 let value1  = Number (prompt("1. cколько отнять от числа?"));
 let value2  = Number (prompt("2. cколько прибавить к предыдущему результату  ?"));
