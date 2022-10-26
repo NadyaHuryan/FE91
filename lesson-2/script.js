@@ -81,18 +81,20 @@ switch(userQuestion){
 
 //##############  ADVANCED level  ############### //
 
-/*
-let aCounter;
-let aSum;
-do{
-    a = ('введи число, для выхода из цикла введи 0 или оставь пустую строку');
-    
-  }
-  while (a != '0' && a != null);
 
+let aCounter = -1 ; //  счётчик prompt считает 0 и пустую строку вточисле !!!
+let aSum = 0;
+do{
+    a = Number( prompt ('введи число, для выхода из цикла введи 0 или оставь пустую строку'));
+    aSum = aSum + a;
+    aCounter++;
+  }
+  while (a != 0);
+alert(`сумма введённых чисел = ${aSum},
+среднее арифметическое введённых чисел = ${aSum / aCounter}`);
 //task 1 done 
-*/
-let startNumber = prompt("Введи число");
+
+let startNumber = prompt("введи число");
 let value1  = Number (prompt("1. cколько отнять от числа?"));
 let value2  = Number (prompt("2. cколько прибавить к предыдущему результату  ?"));
 let value3  = Number (prompt("3. на cколько умножить предыдущий результат?"));
