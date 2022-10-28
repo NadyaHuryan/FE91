@@ -1,15 +1,19 @@
-let height = 15;
-let width = 20;
 
-let value;
+let height = 14;
+let width = 14;
 
-if(height && width){
+if(height == width){
+    console.log('Upsss...  height = width');
+}else if(height && width){
     value = "height";
+    console.log(`${height} = height`) ;
     }else{
         value = "width";
+        console.log(`${width} = width}`) ;
     }
 
-console.log(`${value} = ${(height && width)}`) ;
+
+
 // task 1 done 
 
 for(let curentNumber = 1; curentNumber <=5; curentNumber++){
@@ -23,7 +27,7 @@ for(let curentNumber = 1; curentNumber <=5; curentNumber++){
 // task 2 done     
 
 for(let anyNymber = 1; anyNymber <=20; anyNymber++){
-    if(anyNymber % 3 == 0){
+    if(anyNymber % 3 == 0 && anyNymber != 0){
         console.log(`Число ${anyNymber} кратно трём`);
     }
 }
@@ -32,7 +36,7 @@ for(let anyNymber = 1; anyNymber <=20; anyNymber++){
 let key = true;
 let documents = true;
 let pen = true;
-let apple = false;
+let apple = true;
 let orange = true;
 
 let shouldGoToWork = key && documents && pen && (apple || orange);
@@ -41,7 +45,7 @@ console.log('shouldGoToWork = ' + shouldGoToWork);
 
 let userNumber = prompt("Введи число", 14);
 
- if(userNumber % 5 == 0  && userNumber % 3 ==0 ){
+ if((userNumber % 5 == 0 ) && (userNumber % 3 == 0 )){
     alert('FizBuz');
     } else if (userNumber % 5 == 0) {
         alert('Fiz');
@@ -82,8 +86,6 @@ switch(userQuestion){
 //##############  ADVANCED level  ############### //
 
 
-let aCounter = -1 ; //  счётчик prompt считает 0 и пустую строку вточисле !!!
-let aSum = 0;
 do{
     a = Number( prompt ('введи число, для выхода из цикла введи 0 или оставь пустую строку'));
     aSum = aSum + a;
@@ -92,6 +94,29 @@ do{
   while (a != 0);
 alert(`сумма введённых чисел = ${aSum},
 среднее арифметическое введённых чисел = ${aSum / aCounter}`);
+
+
+let aCounter = 0 ; 
+let aSum = 0;
+
+
+let aCounter = 0 ; 
+let aSum = 0;
+while(true){
+    a = Number( prompt ('введи число, для выхода из цикла введи 0 или оставь пустую строку'));
+    if (isNaN(a) == true ){
+        alert ('это не число');
+    }else if(a == 0 ){
+        break
+    }else{
+        aCounter++ ; 
+        aSum = aSum + a;
+    }
+}
+
+alert(`сумма введённых чисел = ${aSum},
+среднее арифметическое введённых чисел = ${aSum / aCounter}`);
+
 //task 1 done 
 
 let startNumber = prompt("введи число");
@@ -110,3 +135,4 @@ for(let stairs = 1; stairs <=6; stairs++ ){
     stage = stage + "#";
 }
 //task 3 done
+
