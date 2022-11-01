@@ -163,3 +163,33 @@ fooboo(false, foo, boo);
   console.log(greet('Vova'));
   console.log(greet('Galina'))
 //task 9 NORMAL level
+
+function checkTriangle(a, b, c){
+    if((a < b+c) && (b < a+c) && (c < a+b)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+console.log('возможен ли треугольник со сторонами: 5 7 3 - ' + checkTriangle(5, 7, 3));
+console.log('возможен ли треугольник со сторонами: 10 5 3 - ' + checkTriangle(10, 5, 3));
+console.log('возможен ли треугольник со сторонами: 7 7 7 - ' + checkTriangle(7, 7, 7));
+//task 1 ADVANCED level 
+
+//task 2 ADVANCED level
+
+
+// в kata другие условия задачи !! 
+
+let getRectanglePerimeter = (w,l) => {return (w + l) * 2};
+// альтернаитивная версия 
+// function getRectanglePerimeter(w,l){
+//     return (w + l) * 2;
+// }
+
+console.log("периметр прямоугольника со сторанами 4 и 3 = " + getRectanglePerimeter(4,3));
+console.log("периметр прямоугольника со сторанами 10 и 6 = " + getRectanglePerimeter(10,6));
+console.log("периметр прямоугольника со сторанами 5 и 5 = " + getRectanglePerimeter(5,5));
+//task 3 ADVANCED level 
+//task 4 ADVANCED level 
