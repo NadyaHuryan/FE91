@@ -49,12 +49,12 @@ console.log("Готов");
 else{console.log("Не Готов");}
 //Работает//
 //////////////////////Задание 5///////////////////////
-let num = prompt('Введите число');
-if (num % 3 == 0) {
+let namber = prompt('Введите число');
+if (namber % 3 == 0) {
 alert("Fiz");
-} else if (num % 5 == 0) {
+} else if (namber % 5 == 0) {
 alert("Buz");
-} else if (num % 5 == 0 && num % 3 == 0){
+} else if (namber % 5 == 0 && namber % 3 == 0){
 alert("FizBuz");
 } else {
 alert("Введите другое число");
@@ -91,11 +91,29 @@ break;
 }
 //Работает//
 //////////////////////Задание 01///////////////////////
+let ssum = 0;
+let count = 0;
+let namberr;
 
-
-
+while ((namberr = prompt("Введите число")), namberr !== "0" && namberr !== "") {
+    count++;
+    ssum = sum + +namberr;
+    console.log("Сумма: " + ssum + " Среднее арифметическое: " + (ssum / count));
+}
 //////////////////////Задание 02///////////////////////
+let namber1 = prompt("Введите 1-ое число");
+let namber2 = prompt("Сколько отнять?");
+let namber3 = prompt("Сколько прибавить?");
+let namber4 = prompt("Сколько умножить?");
+let namber5 = prompt("Сколько разделить?");
 
+console.log("((((" + namber1 + " - " + namber2 + ")" + " + " + namber3 + ")" + " * " + namber4 + ")" + " / " + namber5 + " = " + (((((namber1 - namber2) + +namber3) * namber4) / namber5)));
 
-
+//Работает//
 //////////////////////Задание 03///////////////////////
+let grid = "#"
+sum = "";
+for (i = 0; i < 10; i++) {
+    console.log(sum += grid)
+}
+//Работает//
