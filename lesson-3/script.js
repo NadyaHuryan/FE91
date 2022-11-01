@@ -1,7 +1,7 @@
 'use strict';
 
-function isEven(number){
-    if(+number % 2 == 0){
+function isEven(number) {
+    if (+number % 2 == 0) {
         return true;
     } else{
         return false;
@@ -19,7 +19,7 @@ console.log ("это правда что чиcло -10 чётное? - " + isEve
 //task 1 NORMAL level
 
 
-function getNumberLength(number){
+function getNumberLength(number) {
     if (number >= 0){
         number = String(number);
         return number.length;
@@ -42,9 +42,9 @@ console.log ("длинна числа 0 равна " + getNumberLength (0));
 
 
 
-function getSum(number){
+function getSum(number) {
     let sum = 0;
-    for(let i = 0; i <= number; i++){
+    for(let i = 0; i <= number; i++) {
         sum = sum + i;
     }
     return sum;
@@ -60,7 +60,7 @@ console.log ("сумма чисел числа 3 = " + getSum(3));
 let investRate = 17;
 let years = 5;
 
-function getOverpayment(creditAmount){
+function getOverpayment(creditAmount) {
     return (((creditAmount/100) * investRate) * years);
 };
 // скорей вcего формула неверная
@@ -70,7 +70,7 @@ console.log(getOverpayment(50000));
 //task 4 NORMAL level
 
 
-function  trimString(userString, start, finish){
+function  trimString(userString, start, finish) {
     return userString.slice(start - 1, finish);
 }
 
@@ -79,16 +79,15 @@ console.log("функция trimString('паравоз', 5, 7 ) выдала р�
 console.log("функция trimString('frendship', 1, 5 ) выдала результат  " + trimString('frendship', 1, 5 ));
 //task 5 NORMAL level
 
-function getSumNumbers(number){
+function getSumNumbers(number) {
     number = String(number);
     let sumNumbers = 0;
-
 
     for(let i = 0; i < number.length; i++){
         sumNumbers = sumNumbers + +number[i];
     }
 
-    if (isNaN(sumNumbers)){
+    if (isNaN(sumNumbers)) {
         sumNumbers ="ошибка. функция getSumNumbers работает только для целых положительных чисел";
     }
 
@@ -104,7 +103,60 @@ console.log("сумма цифр числа -50 = " + getSumNumbers(-50));
 console.log("сумма цифр числа 'число' = " + getSumNumbers('число'));
 //task 6 NORMAL level
 
+function getSum2(a, b) {
+    if ( a == b){
+        return `${a} Since both are same`;
+    } else {
 
+        let start, finish;
+        if( a < b){
+            start = a;
+            finish = b;
+        } else {
+            start = b;
+            finish = a;
+        }
+            /// код из функции getSum ; тупняк
+            let sum = start;
+            for(let i = 0; i <= finish - start; i++) {
+                sum = sum + i;
+            }
+            return sum;
+
+
+     }
+
+}
+
+console.log(getSum2(1, 0));  
+console.log(getSum2(1, 2)); 
+console.log(getSum2(3, 1)); 
+console.log(getSum2(0, 1));
+console.log(getSum2(1, 1));
+console.log(getSum2(-1, 0));
+console.log(getSum2(-1, 2));
+//task 7 NORMAL level
+
+
+function foo(){
+    console.log(`foo`);
+}
+
+
+function boo(){
+    console.log(`boo`);
+}
+
+function fooboo(boleanValue, yes, no){
+    if (boleanValue == true)  yes() 
+    else no();
+}
+
+console.log ("результат работы fooboo(true, foo, boo)");
+fooboo(true, foo, boo);
+console.log ("результат работы fooboo(false, foo, boo)");
+fooboo(false, foo, boo);
+//task 8 NORMAL level
   let greet = (name) => {return `Hello, ${name} how are you doing today?`;}
 
   
