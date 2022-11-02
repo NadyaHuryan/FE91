@@ -57,11 +57,15 @@ console.log ("сумма чисел числа 3 = " + getSum(3));
 //task 3 NORMAL level
 
 
-let investRate = 17;
-let years = 5;
+function getOverpayment(creditAmount, years, investRate) {
+    // let time = years * 12;
+    // let sum = 0;
+    // let percent = 0;
 
-function getOverpayment(creditAmount) {
-    return (((creditAmount/100) * investRate) * years);
+    // for (let i = 0; i <= time; i++) {
+
+
+    // }
 };
 // скорей вcего формула неверная
 
