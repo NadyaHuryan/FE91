@@ -1,11 +1,7 @@
 'use strict';
 
 function isEven(number) {
-    if (+number % 2 == 0) {
-        return true;
-    } else{
-        return false;
-    }
+    return (+number % 2 == 0);
 };
 
 
@@ -19,16 +15,8 @@ console.log ("это правда что чиcло -10 чётное? - " + isEve
 //task 1 NORMAL level
 
 
-function getNumberLength(number) {
-    if (number >= 0){
-        number = String(number);
-        return number.length;
-    }else{
-        number = String(number);
-        return number.length - 1;
-    }
-
-
+function getNumberLength(num) {
+    return (num >= 0) ?  String(num).length : String(num).length - 1;
 };
 
 
@@ -42,9 +30,9 @@ console.log ("длинна числа 0 равна " + getNumberLength (0));
 
 
 
-function getSum(number) {
+function getSum(num) {
     let sum = 0;
-    for(let i = 0; i <= number; i++) {
+    for(let i = 0; i <= num; i++) {
         sum = sum + i;
     }
     return sum;
@@ -68,13 +56,15 @@ function getOverpayment(creditAmount, years, investRate) {
 
     for (let i = 0; i < time; i++) {
        let curentPercent =  ((balance * investRate) / time).toFixed(1);
-       balance = (balance - fixPiece) .toFixed(1);
+       balance = (balance - fixPiece).toFixed(1);
        percent = +percent + +curentPercent;
    }
    
    return Math.floor(percent);
 };
 
+
+// формула расчёта кредита на картинке в папке 
 console.log("переплата по кредиту в 1000 на 1 год  под 20% составит " + getOverpayment(1000, 1, 20));
 console.log("переплата по кредиту в 10000 на 5 лет  под 17% составит " + getOverpayment(10000, 5, 17));
 //task 4 NORMAL level
@@ -118,7 +108,8 @@ function getSum2(a, b) {
         return `${a} Since both are same`;
     } else {
 
-        let start, finish;
+        let start = a;
+        let finish = b;
         if( a < b){
             start = a;
             finish = b;
@@ -167,19 +158,17 @@ fooboo(true, foo, boo);
 console.log ("результат работы fooboo(false, foo, boo)");
 fooboo(false, foo, boo);
 //task 8 NORMAL level
-  let greet = (name) => {return `Hello, ${name} how are you doing today?`;}
+
+
+let greet = (name) => {return `Hello, ${name} how are you doing today?`;}
 
   
-  console.log(greet('Vova'));
-  console.log(greet('Galina'))
+console.log(greet('Vova'));
+console.log(greet('Galina'))
 //task 9 NORMAL level
 
 function checkTriangle(a, b, c){
-    if((a < b+c) && (b < a+c) && (c < a+b)){
-        return true;
-    }else{
-        return false;
-    }
+    return ((a < b+c) && (b < a+c) && (c < a+b))
 }
 
 console.log('возможен ли треугольник со сторонами: 5 7 3 - ' + checkTriangle(5, 7, 3));
@@ -227,7 +216,7 @@ console.log("периметр прямоугольника со сторанам
 
 function dutyFree(normPrice, discount, hol){
     return Math.floor(hol / (normPrice  * (discount / 100)));
-   }
+}
 
 
    console.log("отпускные 500$, бухлишко за 10$ со скидой 10%, бутылок в отпуске - " + dutyFree(10, 10, 500));
