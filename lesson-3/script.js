@@ -58,19 +58,25 @@ console.log ("сумма чисел числа 3 = " + getSum(3));
 
 
 function getOverpayment(creditAmount, years, investRate) {
-    // let time = years * 12;
-    // let sum = 0;
-    // let percent = 0;
 
-    // for (let i = 0; i <= time; i++) {
+    investRate = investRate / 100;
+    let time = years * 12;
+    let fixPiece = (creditAmount / time).toFixed(1);
+    let balance = creditAmount;
+    let percent = 0;
+   
 
-
-    // }
+    for (let i = 0; i < time; i++) {
+       let curentPercent =  ((balance * investRate) / time).toFixed(1);
+       balance = (balance - fixPiece) .toFixed(1);
+       percent = +percent + +curentPercent;
+   }
+   
+   return Math.floor(percent);
 };
-// скорей вcего формула неверная
 
-console.log(getOverpayment(10000));
-console.log(getOverpayment(50000));
+console.log("переплата по кредиту в 1000 на 1 год  под 20% составит " + getOverpayment(1000, 1, 20));
+console.log("переплата по кредиту в 10000 на 5 лет  под 17% составит " + getOverpayment(10000, 5, 17));
 //task 4 NORMAL level
 
 
