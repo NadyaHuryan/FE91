@@ -21,7 +21,6 @@ function getNumberLength(num) {
     }
     return  String(num).length;
 };
-// the num can be positive or negative
 
 console.log ("длинна числа 5 равна " + getNumberLength (5));
 console.log ("длинна числа 55 равна " + getNumberLength (55));
