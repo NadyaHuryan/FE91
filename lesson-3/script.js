@@ -1,7 +1,7 @@
 'use strict';
 
-function isEven(number) {
-    return (+number % 2 == 0);
+function isEven(num) {
+    return (+num % 2 == 0);
 };
 
 
@@ -16,9 +16,12 @@ console.log ("это правда что чиcло -10 чётное? - " + isEve
 
 
 function getNumberLength(num) {
-    return (num >= 0) ?  String(num).length : String(num).length - 1;
+    if (num < 0) {
+        num = -num;
+    }
+    return  String(num).length;
 };
-
+// the num can be positive or negative
 
 console.log ("длинна числа 5 равна " + getNumberLength (5));
 console.log ("длинна числа 55 равна " + getNumberLength (55));
@@ -47,26 +50,26 @@ console.log ("сумма чисел числа 3 = " + getSum(3));
 
 function getOverpayment(creditAmount, years, investRate) {
 
-    investRate = investRate / 100;
-    let time = years * 12;
+    investRate = investRate / 100;                   
+    let time = years * 12;                              
     let fixPiece = (creditAmount / time).toFixed(1);
     let balance = creditAmount;
-    let percent = 0;
+    let overpayment = 0;
    
 
     for (let i = 0; i < time; i++) {
-       let curentPercent =  ((balance * investRate) / time).toFixed(1);
+       let curentOverPay =  ((balance * investRate) / time).toFixed(1);
        balance = (balance - fixPiece).toFixed(1);
-       percent = +percent + +curentPercent;
+       overpayment = +overpayment + +curentOverPay;
    }
    
-   return Math.floor(percent);
+   return Math.floor(overpayment);
 };
 
 
-// формула расчёта кредита на картинке в папке 
-console.log("переплата по кредиту в 1000 на 1 год  под 20% составит " + getOverpayment(1000, 1, 20));
-console.log("переплата по кредиту в 10000 на 5 лет  под 17% составит " + getOverpayment(10000, 5, 17));
+// формула расчёта кредита на картинке в папке
+console.log("переплата по кредиту в 1000$ на 1 год  под 20% составит " + getOverpayment(1000, 1, 20) + "$");
+console.log("переплата по кредиту в 10000$ на 5 лет  под 17% составит " + getOverpayment(10000, 5, 17) + "$");
 //task 4 NORMAL level
 
 
@@ -79,16 +82,20 @@ console.log("функция trimString('паравоз', 5, 7 ) выдала р�
 console.log("функция trimString('frendship', 1, 5 ) выдала результат  " + trimString('frendship', 1, 5 ));
 //task 5 NORMAL level
 
-function getSumNumbers(number) {
-    number = String(number);
+function getSumNumbers(num) {
+    if (num < 0) {
+        num = -num;
+    }
+
+    num = String(num);
     let sumNumbers = 0;
 
-    for(let i = 0; i < number.length; i++){
-        sumNumbers = sumNumbers + +number[i];
+    for(let i = 0; i < num.length; i++){
+        sumNumbers += +num[i];
     }
 
     if (isNaN(sumNumbers)) {
-        sumNumbers ="ошибка. функция getSumNumbers работает только для целых положительных чисел";
+        sumNumbers ="ошибка. функция getSumNumbers работает только для целых чисел";
     }
 
     return sumNumbers;
@@ -107,24 +114,21 @@ function getSum2(a, b) {
     if ( a == b){
         return `${a} Since both are same`;
     } else {
-
         let start = a;
         let finish = b;
-        if( a < b){
-            start = a;
-            finish = b;
-        } else {
+        if( a > b){
             start = b;
             finish = a;
         }
-            /// код из функции getSum ; тупняк
-            let sum = start;
-            for(let i = 0; i <= finish - start; i++) {
-                sum = sum + i;
-            }
-            return sum;
 
+        let sum = 0;
 
+        for (let i = start; i <= finish ; i++) {
+            sum += start;
+            start++;
+        }
+        
+        return sum;   
      }
 
 }

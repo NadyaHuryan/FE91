@@ -2,23 +2,21 @@ function getSum2(a, b) {
     if ( a == b){
         return `${a} Since both are same`;
     } else {
-
-        let start, finish;
-        if( a < b){
-            start = a;
-            finish = b;
-        } else {
+        let start = a;
+        let finish = b;
+        if( a > b){
             start = b;
             finish = a;
+        } 
+
+        let sum = 0;
+
+        for (let i = start; i <= finish ; i++) {
+            sum = sum + start;
+            start++;
         }
-            /// код из функции getSum ; тупняк
-            let sum = start;
-            for(let i = 0; i <= finish - start; i++) {
-                sum = sum + i;
-            }
-            return sum;
 
-
+        return sum;   
      }
 
 }
