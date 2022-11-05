@@ -12,36 +12,11 @@
 
 // ##### Task 2 #####
 
-//Вариант 1:
-    let num = '12345';
-    let sum = prompt('Введите позицию числа');
-    switch(sum) {
-            case 1 :
-                console.log(+num[0]);
-                break;  
-            case 2 :
-                console.log(+num[0] + +num[1]);
-                break;
-            case 3 :
-                console.log(+num[0] + +num[1] + +num[2]);
-                break;
-            case 4 :
-                console.log(+num[0] + +num[1] + +num[2] + +num[3]);
-                break;
-            case 5 :
-                console.log(+num[0] + +num[1] + +num[2] + +num[3] + +num[4]);
-                break;
-            default:
-                console.log("Вне диапазона числа");
-                break;   
-        }
 
-// Вариант 2:
-    let num_ = "12345";
-    let summ;
-    for (i = 1; i <= num_.length; i++) {
-        summ = (i * (i + 1)) / 2;
-        console.log(summ)
+    let sum;
+    for (i = 1; i <=5; i++) {
+        sum = (i * (i + 1)) / 2;
+        console.log(sum)
     }
 
 
@@ -66,11 +41,11 @@
 // ##### Task 5 #####
 
     let userNumm = prompt('Write your number');
-    if ((userNumm % 3 === 0) && (userNumm % 5 === 0)){
+    if (userNumm % 3 == 0 && userNumm % 5 == 0){
         alert('FizBuz');
-    } else if(userNumm % 5 === 0){
+    } else if(userNumm % 5 == 0){
         alert('Fiz');
-    } else if(userNumm % 3 === 0){
+    } else if(userNumm % 3 == 0){
         alert('Buz');
     }  else if(typeof(userNumm) != Number){
         alert('Try one more time with number!');
@@ -84,6 +59,7 @@
     if (userAge > 18){
         alert('Доступ разрешён');
     } else if((userAge >= 16) && (userAge <=18)){
+        alert('Доступ запрещён');
         alert('Уже почти');
     } else if((userAge < 16) && (userAge > 0)){
         alert('Доступ запрещён');
@@ -96,15 +72,19 @@
     let direction = prompt('В какую сторону поедем?')
     switch(direction) {
         case 'юг' :
+        case 'Юг' :
             console.log('на юг пойдешь счастье найдешь');
             break;  
         case 'север' :
+        case 'Север' :
             console.log('на север пойдешь много денег найдешь');
             break;
         case 'запад' :
+        case 'Запад' :
             console.log('на запад пойдешь верного друга найдешь');
             break;
         case `восток` :
+        case `Восток` :
             console.log('на восток пойдешь разработчиком станешь');
             break;
         default :
@@ -127,6 +107,6 @@ alert(`((((${usrNumber} - ${usrNumberMinus}) + ${usrNumberPlus}) * ${usrNumberMu
 // ##### Task 3 #####
 
 let stairHeight = 7;
-for(i = 1; i <= stairHeight; i++){
-console.log('#'.repeat(i));
+    for(i = 1; i <= stairHeight; i++){
+    console.log('#'.repeat(i));
 }
