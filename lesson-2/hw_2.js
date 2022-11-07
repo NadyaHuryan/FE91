@@ -19,18 +19,16 @@ sum = 0;
 
 for (let i = 0; i <= n; i++) {
     sum += i;
+    console.log(sum);
 }
-console.log(sum);
 
 // Task 3
 
 let num3 = 20;
 
 for (i = 1; i <= 20; i++) {
-    if(i % 3 == 0) {
+    if (i % 3 == 0) {
         console.log(i);
-    } else {
-        continue;
     }
 };
 
@@ -40,9 +38,10 @@ let key = true,
 documents = true,
 pen = true,
 apple = false,
-orange = true;
+orange = true,
+shouldGoToWork = key && documents && pen && apple || orange;
 
-if(key = true && documents == true && pen == true && apple == true && orange == true) {
+if (shouldGoToWork) {
     console.log("Готов")
 } else (
     console.log("Не готов")
@@ -51,11 +50,11 @@ if(key = true && documents == true && pen == true && apple == true && orange == 
 // Task 5
 
 let num = prompt('Введите число');
-if(num % 5 == 0 && num % 3 == 0){
+if (num % 5 == 0 && num % 3 == 0){
     alert('FizBuz');
-} else if(num % 3 == 0) {
+} else if (num % 3 == 0) {
     alert('Buz');
-} else if(num % 5 == 0){
+} else if (num % 5 == 0){
     alert('Fiz');
 } else {
     alert('Nope');
@@ -65,12 +64,11 @@ if(num % 5 == 0 && num % 3 == 0){
 
 let age = prompt('Введите свой возраст');
 
-if(age > 18){
+if (age >= 18){
     alert('Доступ разрешен');
-} else if( age >= 16 && age <= 18) {
-    alert('Уже почти');
-} else {
+} else if ( age >= 16 && age < 18) {
     alert('Доступ запрещен');
+    alert('Уже почти');
 };
 
 // Task 7
@@ -79,19 +77,24 @@ let worldSide = prompt('Введите сторону света');
 
 switch(worldSide) {
     case 'Юг': 
+    case 'юг':
         console.log('На юг пойдешь - счастье найдешь');
         break;
     case 'Север': 
+    case 'север':
         console.log('На север пойдешь - много денег найдешь');
         break;
     case 'Запад': 
+    case 'запад':
         console.log('На запад пойдешь - верного друга найдешь');
         break;
     case 'Восток': 
+    case 'восток': 
         console.log('На восток пойдешь - разработчиком станешь');
         break;
     default:
         console.log ('Введите заново');
+        break;
 }
 
 // ADVANCED LVL
@@ -102,24 +105,27 @@ let numb,
 sumnum = 0,
 average = 0;
 
-
-for(; ; i++) {
+while (true) {
     numb = prompt('Введите число');
-    if(numb !== "0" && numb !== "") {
-        sumnum += +numb;
-        average = sumnum/2;
-    } else if(numb == "0" || numb == "") {
-        console.log(sumnum, average);
+    if (+numb == 0) {
         break;
+    } else if (isNaN(numb)) {
+        alert('Введено не число')
+    } else {
+        sumnum += +numb;
     }
+    average++
 }
+
+console.log(`Сумма ${sumnum} и среднее арифметическое ${sumnum/average}`)
 
 //Task 2
 
-let numb1 = prompt('Введите число');
+let numb1 = prompt('Введите число'),
+i;
 
 for( ; ; i++) {
-    if(numb1 == undefined || numb1 == "" || isNaN(numb1) == NaN) {
+    if(isNaN(numb1)) {
         alert('Eщё раз!!');
         numb1 = prompt('Введите число');
     }
@@ -131,7 +137,7 @@ for( ; ; i++) {
 let numbMinus = prompt('Сколько отнять?');
 
 for( ; ; i++) {
-    if(numbMinus == undefined || numbMinus == "" || +numbMinus == NaN) {
+    if(isNaN(numbMinus)) {
         alert('Eщё раз!!');
         numbMinus = prompt('Введите число');
     }
@@ -143,7 +149,7 @@ for( ; ; i++) {
 let numbPlus = prompt('Сколько прибавить?');
 
 for( ; ; i++) {
-    if(numbPlus == undefined || numbPlus == "" || +numbPlus == NaN) {
+    if(isNaN(numbPlus)) {
         alert('Eщё раз!!');
         numbPlus = prompt('Введите число');
     }
@@ -155,7 +161,7 @@ for( ; ; i++) {
 let numbMulti = prompt('На сколько умножить?');
 
 for( ; ; i++) {
-    if(numbMulti == undefined || numbMulti == "" || isNaN(numbMulti) == NaN) {
+    if(isNaN(numbMulti)) {
         alert('Eщё раз!!');
         numbMulti = prompt('Введите число');
     }
@@ -167,7 +173,7 @@ for( ; ; i++) {
 let numbDivide = prompt('На сколько разделить?');
 
 for( ; ; i++) {
-    if(numbDivide == undefined || numbDivide == "" || +numbDivide == NaN) {
+    if(isNaN(numbDivide)) {
         alert('Eщё раз!!');
         numbDivide = prompt('Введите число');
     }
