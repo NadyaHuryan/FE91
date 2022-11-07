@@ -29,10 +29,10 @@ function getSum(b) {
     for (let i = min; i <= max; i++) {
         sumForGetSum +=i 
     } 
-    console.log(sumForGetSum);
+    return sumForGetSum;
 }
-getSum(100);
-getSum(-100);
+console.log(getSum(100));
+console.log(getSum(-100));
 
 //4
 
@@ -54,21 +54,21 @@ function showOverpaymentCredit(b) {
         overpayment = (((b - (everyMountPay * i))* (rate/100))/365)*30.4;
         sumOverpayment += overpayment;
     }
-    console.log( sumOverpayment);
+    return sumOverpayment;
 }
-showOverpaymentCredit(500);
-showOverpaymentCredit(100);
-showOverpaymentCredit(333);
+console.log(showOverpaymentCredit(500));
+console.log(showOverpaymentCredit(100));
+console.log(showOverpaymentCredit(333));
 
 //5
 
 function trimString(stringTrim, before, after) {
 
-   console.log(stringTrim.substring(before, after));
+   return stringTrim.substring(before, after);
 }
 
-trimString("Кошелек", 0, 3);
-trimString("Сарафан", 2, 6);
+console.log(trimString("Кошелек", 1, 3));
+console.log(trimString("Сарафан", 2, 6));
 
 //6
 
@@ -79,14 +79,14 @@ function getSumNumber(numb) {
         for (let i=0; i < numbString.length; i++){
             sum += +numbString[i];
         }
-        console.log(sum);
+        return sum;
     } else{
-        console.log("Not a number");
+        return "Not a number";
     }
 }
-getSumNumber(2021);
-getSumNumber("2022");
-getSumNumber("text");
+console.log(getSumNumber(2021));
+console.log(getSumNumber("2022"));
+console.log(getSumNumber("text"));
 
 //7
 
@@ -97,110 +97,109 @@ function getSumTwo(a, b) {
     for (let i = min; i <= max; i++) {
         sumForGetSum +=i 
     } 
-    console.log(sumForGetSum);
+    return sumForGetSum;
 }
-getSumTwo(1,1);
-getSumTwo(-1,2);
-getSumTwo(1,2);
+console.log(getSumTwo(1,1));
+console.log(getSumTwo(-1,2));
+console.log(getSumTwo(1,2));
 
 //8
 
-function foo(){
-   return "foo"
+function foo() {
+    return "foo"
 }
 
 function boo() {
     return "boo"
 }
 
-function fooboo (bool, foo, boo) {
+function fooboo (bool, fooNew, booNew) {
     if (bool) {
-        console.log(foo)
+        return fooNew()
     } else {
-        console.log(boo)
+        return booNew()
     }
 }
-fooboo (true, foo(), boo())
-fooboo (1, foo(), boo())
-fooboo (0, foo(), boo())
-fooboo (NaN, foo(), boo())
+console.log(fooboo (true, foo, boo))
+console.log(fooboo (1, foo, boo))
+console.log(fooboo (0, foo, boo))
+console.log(fooboo (NaN, foo, boo))
 
 //9
 
-function showUserName (name){
-    document.write(`Hello, ${name} how are you doing today?`);
+function showUserName (name) {
+    return (`Hello, ${name} how are you doing today?`);
 }
-showUserName (prompt('Введите ваше имя'));
+document.write(showUserName (prompt('Введите ваше имя')));
 
 // ADVANCED level
 
 //1
 
-function checkTriangle(a, b, c){
+function checkTriangle(a, b, c) {
     if (a||b||c !==0){
        if ((a + b > c) && (a + c > b) && (b + c > a)) {
-        console.log("true");
+        return "true";
         } else {
-        console.log("false");
+        return "false";
         } 
     } else {
-        console.log("false");
+        return "false";
     }
    
 }
-checkTriangle(1, 1, 1);
-checkTriangle(3, 1, 1);
-checkTriangle(1, 2, 3);
-checkTriangle(0, 0, 0);
+console.log(checkTriangle(1, 1, 1));
+console.log(checkTriangle(3, 1, 1));
+console.log(checkTriangle(1, 2, 3));
+console.log(checkTriangle(0, 0, 0));
 
 //2
 
-function getManipulationNumber(x){
-    if (!isNaN(x) & x!=""){
+function getManipulationNumber(x) {
+    if (!isNaN(x) && x!=""){
         let xStr = String(x)
         let quantaty = 0;
         let sum = 0;
         let reverse = "";
-        document.write(`<br> Разбиваем число ${x} на цифры: <br>`);
+        let сhar = "";
         for (let i = 0; i  < xStr.length; i++){
-            let сhar = xStr[i];
+            сhar += xStr[i];
             quantaty += i;
             sum += +xStr[i];
-            document.write(`${сhar} <br>`);
+            
             
         }
         for (let i = 1; i  < xStr.length + 1; i++){
             reverse += xStr[xStr.length - i];
         }
-        document.write(`Подсчитывакм количество цифр в числе ${x}: <br>`);
-        document.write(`${quantaty} <br>`);
-        document.write(`Находим сумму цифр числа ${x}: <br>`);
-        document.write(`${sum} <br>`);
-        document.write(`Ввыводим число ${x} в обратном порядке: <br>`);
-        document.write(`${reverse} <br>`);
+        return (`<br> Разбиваем число ${x} на цифры: <br>
+        ${сhar} <br>
+        Подсчитывакм количество цифр в числе ${x}: <br>
+        ${quantaty} <br>
+        Находим сумму цифр числа ${x}: <br>
+        ${sum} <br>
+        Ввыводим число ${x} в обратном порядке: <br>
+        ${reverse} <br>`);
     } else{
-        alert("Ошибка, надо ввести число")
+        return `<br> Ошибка, надо ввести число`;
     }
 }
-getManipulationNumber(prompt("Введите число"));
+document.write(getManipulationNumber(prompt("Введите число")));
 
 //3
 
-function getPerimeter(a, b){
+function getPerimeter(a, b) {
     let p = 0;
     return  p = 2 * (a + b);
 }
-function showPerimeter(x, y){
-    let resultPerimetr = getPerimeter(x, y)
-    console.log(resultPerimetr)
-}
-showPerimeter(2, 4);
+
+console.log(getPerimeter(2, 4));
 
 //4
 
-function dutyFree(normPrice, discount, hol){
+function dutyFree(normPrice, discount, hol) {
     let sum = hol / (normPrice * (discount / 100));
-    console.log(Math.floor(sum));
+    return Math.floor(sum);
 }
 // dutyFree(10, 10, 500);
-dutyFree(prompt("Введите стоимость товара"), prompt("Введите сумму скидки"), prompt("Введите стоимость отпуска"));
+console.log(dutyFree(prompt("Введите стоимость товара"), prompt("Введите сумму скидки"), prompt("Введите стоимость отпуска")));
