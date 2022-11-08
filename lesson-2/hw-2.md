@@ -1,4 +1,4 @@
-<p align='right'>< TeachMeSkills /></p>
+<!-- <p align='right'>< TeachMeSkills /></p>
 <h1 align='center'>Javascript Basic</h1>
 
 ## Complete exercise
@@ -103,4 +103,4 @@
     ######
 ```
 
-> Не забудьте пользоваться циклами
+> Не забудьте пользоваться циклами -->
