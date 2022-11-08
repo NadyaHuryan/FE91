@@ -10,15 +10,14 @@ console.log(colors[colors.length-1]);   //old version
 console.log(colors.at(-1));             // new version
 //task 2  NORMAL level 
 
-const numb = [5, 43, 63, 23, 90];
 
+
+const numb1 = [5, 43, 63, 23, 90];
+console.log(numb1.length = 0);
 //version 1
-for (let i = 0; i < numb.length; i++) {
-    console.log(numb[i]);
-  }
 
+
+const numb2 = [5, 43, 63, 23, 90];
+console.log( numb2.slice(numb2.length));
 //version 2
-for (let j of numb) {
-    console.log( j );
-  }  
   //task 3  NORMAL level 
