@@ -29,4 +29,24 @@ for (let i = numb3.length ; i > 0; i--) {
 };
 console.log(numb3);
 //version 3
-  //task 3  NORMAL level 
+//task 3  NORMAL level 
+
+
+const students1 = ['Polina', 'Dasha', 'Masha'];
+
+students1.pop();
+students1.push('Borya');
+students1.shift();
+students1.unshift('Andrey');
+
+console.log(students1);
+//version 1
+
+const students2 = ['Polina', 'Dasha', 'Masha'];
+students2.splice(students2.length-1 , 1, 'Borya');
+students2.splice(0, 1, 'Andrey');
+console.log(students2);
+//version 2 
+//task 4  NORMAL level 
+
+
