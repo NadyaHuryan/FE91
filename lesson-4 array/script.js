@@ -12,13 +12,13 @@ console.log(animals[animals.length - 1]);
 
 //TASK 3
 
-const numbers = [5, 43, 63, 23, 90];
-numbers.length = 0;
-console.log(numbers);
+const numbers1 = [5, 43, 63, 23, 90];
+numbers1.length = 0;
+console.log(numbers1);
 
-const numbers = [5, 43, 63, 23, 90];
-numbers.splice(0);
-console.log(numbers);
+const numbers2 = [5, 43, 63, 23, 90];
+numbers2.splice(0);
+console.log(numbers2);
 
 //TASK 4
 
@@ -82,5 +82,49 @@ console.log(arr6);
 console.log(arr5);
 console.log(arr7);
 
-//ADVANCED TASK 9
+//ADVANCED TASK 1
 
+function isPalindrom(str){
+    strReverse = str.split('').reverse().join('');
+    if (str == strReverse) {
+        return console.log("слово палиндром")
+    } else console.log("слово не палиндром")
+}
+
+isPalindrom("тенет");
+isPalindrom("парк");
+
+//ADVANCED TASK 2
+
+const matrix = [
+    [12, 98, 78, 65, 23],
+    [54, 76, 98, 43, 65],
+    [13, 324, 65, 312],
+    [9092, 22, 45, 90000],
+];
+
+let newArr = matrix.flat(Infinity);
+let sum = 0;
+for (let i = 0; i < newArr.length; i++) {
+         sum = sum + newArr[i];
+}
+let averageNum = sum / newArr.length;
+
+console.log(averageNum);
+
+//ADVANCED TASK 3
+
+const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
+let positiveArr = [];
+let negativeArr = [];
+
+for (let i = 0; i < mixedNumbers.length; i++) {
+    if (mixedNumbers[i] >= 0) {
+        positiveArr.push(mixedNumbers[i]);
+    } else {
+        negativeArr.push(mixedNumbers[i]);
+    }
+}
+
+console.log(positiveArr);
+console.log(negativeArr);
