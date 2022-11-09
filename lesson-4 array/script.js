@@ -102,7 +102,8 @@ console.log (numbers8.indexOf(NaN));
 
 let str9 = "Lorem ipsum";
 
-console.log(str9.slice(2, 6)); - работает
-//console.log(str9.splice()); - не работает
+console.log(str9.slice(2, 6));    //работает со строками
+console.log(str9.slice(-2, -6));  // так тоже работает, осчёт с конца строки
+//console.log(str9.splice()); - не работает со строками, только с масивами.
 
 //task 9 NORMAL level 
