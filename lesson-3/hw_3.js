@@ -59,7 +59,7 @@ let creditSumOverpay = function(sum) {
     monthlyPercent,
     overpay;
     monthlyPercent = rate / 12;
-    monthlyPay = sum/year;
+    monthlyPay = sum / year;
     return overpay = sum * monthlyPercent * ((1 + monthlyPercent) ** year) / ((1 + monthlyPercent) ** year - 1)*60 - sum;
 } 
 
@@ -91,8 +91,7 @@ let getSumNumbers = function(a) {
         return sum;
     } else {
         return 'Not a number';
-    }
-    
+    } 
 }
 
 console.log(getSumNumbers(2736549));
@@ -128,15 +127,15 @@ let boo = function() {
     console.log(boo.name)
 }
 
-function fooboo(choise) {
+function fooboo(choise, fooN, booN) {
     if (choise == true) {
-        foo;
+        fooN();
     } else {
-        boo;
+        booN();
     }
 }
 
-fooboo(true);
+fooboo(false, foo, boo);
 
 // Task 9 
 
