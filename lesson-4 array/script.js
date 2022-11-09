@@ -13,11 +13,20 @@ console.log(colors.at(-1));             // new version
 
 
 const numb1 = [5, 43, 63, 23, 90];
-console.log(numb1.length = 0);
+numb1.length = 0;
+console.log(numb1);
 //version 1
 
 
 const numb2 = [5, 43, 63, 23, 90];
-console.log( numb2.slice(numb2.length));
+numb2.splice(0, numb2.length);
+console.log(numb2);
 //version 2
+
+const numb3 = [5, 43, 63, 23, 90];
+for (let i = numb3.length ; i > 0; i--) {
+  numb3.pop();
+};
+console.log(numb3);
+//version 3
   //task 3  NORMAL level 
