@@ -77,4 +77,10 @@ arrNumbers.sort((a, b) => a - b );
 console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
 
 
-///task 6 NORMAL level 
+//task 6 NORMAL level 
+
+
+const binary = [0, 0, 0, 0];
+let binaryAsStr = binary.join(1);
+console.log(binaryAsStr);
+//task 7 NORMAL level 
