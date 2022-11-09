@@ -75,8 +75,7 @@ console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
 
 arrNumbers.sort((a, b) => a - b );
 console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
-
-
+// так и проситься сортировка, надо 8ку поставить на место =))
 //task 6 NORMAL level 
 
 
@@ -84,3 +83,16 @@ const binary = [0, 0, 0, 0];
 let binaryAsStr = binary.join(1);
 console.log(binaryAsStr);
 //task 7 NORMAL level 
+
+
+
+const arr8 = ["вера", "надежа", "любовь"];
+console.log (arr8.includes("вера"));
+//метод includes ищет совпадение с каким-то значеним  по элементам масива и возвращает true/false
+
+
+const numbers8 = [3, 5, 8, 11, 23, 7, NaN];
+console.log (numbers8.includes(NaN));
+console.log (numbers8.indexOf(NaN));
+//ищет NaN !!! ура!!!
+//task 8 NORMAL level 
