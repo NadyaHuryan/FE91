@@ -61,3 +61,20 @@ for (let cat of cats) {
   console.log(cat);
 }
 //task 5 NORMAL level 
+
+
+const evenNumbers = [2, 4, 6, 8, 10];
+const oddNumbers = [1, 3, 5, 7, 9];
+
+let arrNumbers = evenNumbers.concat(oddNumbers);
+console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
+
+arrNumbers = oddNumbers.concat(evenNumbers);
+console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
+
+
+arrNumbers.sort((a, b) => a - b );
+console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
+
+
+///task 6 NORMAL level 
