@@ -96,3 +96,13 @@ console.log (numbers8.includes(NaN));
 console.log (numbers8.indexOf(NaN));
 //ищет NaN !!! ура!!!
 //task 8 NORMAL level 
+
+
+
+
+let str9 = "Lorem ipsum";
+
+console.log(str9.slice(2, 6)); - работает
+//console.log(str9.splice()); - не работает
+
+//task 9 NORMAL level 
