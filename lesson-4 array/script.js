@@ -109,6 +109,29 @@ console.log(str9.slice(-2, -6));  // так тоже работает, отсч�
 //task 9 NORMAL level 
 
 
+
+function isPolindrom (str){
+  let polindrom = str.split("").reverse().join("");
+  return str === polindrom;
+}
+
+console.log(isPolindrom("tenet"));
+console.log(isPolindrom("mama"));
+
+function isPolindrom2(str){
+  let arrStr =  str.split("");
+  let halfLenght = (arrStr.length / 2) + 1;
+  let arrResult =[];
+  for (let i = 0; i < halfLenght; i++){
+    (arrStr[i] === arrStr.length-1) ? arrResult.push(true) : arrResult.push(false);
+  }
+  return !arr8.includes(false);
+} 
+
+console.log(isPolindrom2("tenet"));
+console.log(isPolindrom2("mama"));
+
+// task 1 ADVANCED level
 const matrix = [
   [12, 98, 78, 65, 23],
   [54, 76, 98, 43, 65],
@@ -125,7 +148,6 @@ for (let i = 0; i < matrix.length; i++ ){
 
    console.log(sum / matrix[i].length -1);
 };
-
 // task 2 ADVANCED level
 
 const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
