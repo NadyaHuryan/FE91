@@ -108,6 +108,26 @@ console.log(str9.slice(-2, -6));  // так тоже работает, отсч�
 // метод slice - не деструктивный, а splice - деструктивный -  меняет масив, но строки неизменны!!
 //task 9 NORMAL level 
 
+
+const matrix = [
+  [12, 98, 78, 65, 23],
+  [54, 76, 98, 43, 65],
+  [13, 324, 65, 312],
+  [9092, 22, 45, 90000],
+]
+
+for (let i = 0; i < matrix.length; i++ ){
+  let sum = 0;
+
+   for ( let j = 0; j < matrix[i].length; j++){       
+    sum += matrix[i][j];                              
+   }
+
+   console.log(sum / matrix[i].length -1);
+};
+
+// task 2 ADVANCED level
+
 const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
 
 let posetiveNumbs = [];
