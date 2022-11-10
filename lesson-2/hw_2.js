@@ -16,18 +16,11 @@ if (height < width) {
 
 // Задание 2
 
-let a = 5;
+let sum = 0;
 
-
-while (a > 0 & a < 6) {
-    let sum = 0;
-
-    for (let i = 0; i <= a; i++) {
-        sum += i;
-    }
-
-    console.log('Сумма чисел в числе ' + a + ' равна ' + sum);
-    --a; // для возвращения а, иначе цикл не останавливается
+for (let i = 1; i <= 5; i++) {
+    sum += i;
+    console.log('Сумма чисел в числе ' + i + ' равна ' + sum);
 }
 
 
@@ -63,17 +56,17 @@ let userNumb, fiz, buz, fizBuz;
 userNumb = prompt('Введите число');
 
 
-if (userNumb % 5 == 0) {
-    alert( 'fiz' );
+if ((userNumb % 5 == 0) && (userNumb % 3 == 0)) {
+    alert('fizBuz');
 }
 else if (userNumb % 3 == 0) {
-    alert( 'buz' );
+    alert('buz');
 }
-else if ((userNumb % 5 == 0) && (userNumb % 3 == 0)) {
-    alert( 'fizBuz' );
+else if (userNumb % 5 == 0) {
+    alert('fiz');
 }
 else {
-    alert( 'Заданное число не делится на 3 или 5' );
+    alert('Заданное число не делится на 3 или 5');
 }
 
 // Задание 6
@@ -81,12 +74,13 @@ else {
 let userAge = prompt('Введите Ваш возраст');
 
 
-if (userAge > 18) {
-    alert( 'Доступ разрешен' );
-} else if (userAge < 16) {
-    alert( 'Доступ запрещен' );
+if (userAge >= 18) {
+    alert('Доступ разрешен');
 } else {
-    alert( 'Уже почти' );
+    alert('Доступ запрещен');
+    if (userAge >= 16 && userAge < 18) {
+        alert('Уже почти');
+    }
 }
 
 // Задание 7
@@ -96,28 +90,24 @@ let side = prompt('В какую сторону света хотите отпр
 
 switch (side) {
     case 'юг':
-        alert( "на юг пойдешь счастье найдешь" );
-        console.log( "на юг пойдешь счастье найдешь" );
+        alert("на юг пойдешь счастье найдешь");
         break;
     case 'север':
-        alert( "на север пойдешь много денег найдешь" );
-        console.log( "на север пойдешь много денег найдешь" );
+        alert("на север пойдешь много денег найдешь");
         break;
     case 'запад':
-        alert( "на запад пойдешь верного друга найдешь" );
-        console.log( "на запад пойдешь верного друга найдешь" );
+        alert("на запад пойдешь верного друга найдешь");
         break;
     case 'восток':
-        alert( "на восток пойдешь разработчиком станешь" );
-        console.log( "на восток пойдешь разработчиком станешь" );
+        alert("на восток пойдешь разработчиком станешь");
         break;
     default:
-        alert( "неверные данные, попробуйте снова" );
-        console.log( "неверные данные, попробуйте снова" );
+        alert("неверные данные, попробуйте снова");
         break;
 }
 
 // ADVANCED 1
+
 
 
 // ADVANCED 2
