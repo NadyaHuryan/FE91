@@ -92,16 +92,51 @@ let str3 = str1.slice(3, 9); // вернёт кусок строки - симв�
 
 
 // ##### ADVANCED level #####
+// (решения пока не работают, тут "мысли вслух" условно)
 
 //##### Task 1 👨‍🏫 #####
 
 function isPalindrom(someWord) {
     let arrSomeWord = someWord.split("");
-    
+    let arrReverse = arrSomeWord.reverse();
+    for (i = 0; i < arrSomeWord; i++) {
+        if (arrSomeWord[i] == arrReverse[i]){
+            return console.log(someWord + 'палиндром');
+    } else {
+        return console.log('не палиндром')
+    }
+    }
 }
+isPalindrom('abba');
 
 //##### Task 2 👨‍🏫 #####
 
+const matrix = [
+    [12, 98, 78, 65, 23],
+    [54, 76, 98, 43, 65],
+    [13, 324, 65, 312],
+    [9092, 22, 45, 90000],
+]
+
 //##### Task 3 👨‍🏫 #####
 
+const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
+let positiveNumbers = [];
+let negativeNumbers = [];
+for (let i = 0; i < mixedNumbers.length; i++) {
+    if (mixedNumbers[i] >= 0) {
+        positiveNumbers = positiveNumbers.push(mixedNumbers[i]);
+    } else {
+        negativeNumbers = negativeNumbers.push(mixedNumbers[i]);
+    }
+    console.log(positiveNumbers);
+    console.log(negativeNumbers);
+}
+
+
 //##### Task 4 👨‍🏫 #####
+
+ let myArr = [-2, -1, -3, 15, 0, -4, 2, -5, 9, -15, 0, 4, 5, -6, 10, 7];
+ let arrCube = myArr.map(item => item ** 3);
+ console.log(myArr);
+ console.log(arrCube);
