@@ -103,7 +103,21 @@ console.log (numbers8.indexOf(NaN));
 let str9 = "Lorem ipsum";
 
 console.log(str9.slice(2, 6));    //работает со строками
-console.log(str9.slice(-2, -6));  // так тоже работает, осчёт с конца строки
+console.log(str9.slice(-2, -6));  // так тоже работает, отсчёт с конца строки
 //console.log(str9.splice()); - не работает со строками, только с масивами.
-
+// метод slice - не деструктивный, а splice - деструктивный -  меняет масив, но строки неизменны!!
 //task 9 NORMAL level 
+
+const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
+
+let posetiveNumbs = [];
+let negativeNumbs = [];
+
+for (let i = 0; i < mixedNumbers.length; i++){
+  (mixedNumbers[i] >= 0) ? posetiveNumbs.push(mixedNumbers[i]) : negativeNumbs.push(mixedNumbers[i]);
+}
+
+console.log(posetiveNumbs);
+console.log(negativeNumbs);
+ 
+// task 3 ADVANCED level
