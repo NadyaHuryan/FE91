@@ -5,6 +5,7 @@ console.log(colors.length);
 //task 1  NORMAL level 
 
 
+
 const animals = ['monkey', 'dog', 'cat'];
 console.log(colors[colors.length-1]);   //old version
 console.log(colors.at(-1));             // new version
@@ -32,6 +33,7 @@ console.log(numb3);
 //task 3  NORMAL level 
 
 
+
 const students1 = ['Polina', 'Dasha', 'Masha'];
 
 students1.pop();
@@ -48,6 +50,7 @@ students2.splice(0, 1, 'Andrey');
 console.log(students2);
 //version 2 
 //task 4  NORMAL level 
+
 
 
 const cats = ['Gachito', 'Tom', 'Batman']
@@ -73,7 +76,7 @@ arrNumbers = oddNumbers.concat(evenNumbers);
 console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
 
 
-arrNumbers.sort((a, b) => a - b );
+arrNumbers.sort((a, b) => a - b );     // функцияя сортировки с лернджаваскрипт ру, хочу её разобрать на адванс уровне по функциям 
 console.log("индекс числа 8 = " + arrNumbers.indexOf(8));
 // так и проситься сортировка, надо 8ку поставить на место =))
 //task 6 NORMAL level 
@@ -105,7 +108,7 @@ let str9 = "Lorem ipsum";
 console.log(str9.slice(2, 6));    //работает со строками
 console.log(str9.slice(-2, -6));  // так тоже работает, отсчёт с конца строки
 //console.log(str9.splice()); - не работает со строками, только с масивами.
-// метод slice - не деструктивный, а splice - деструктивный -  меняет масив, но строки неизменны!!
+// метод slice - не деструктивный, а splice - деструктивный -  меняет масив, но строки "неизменны"!!
 //task 9 NORMAL level 
 
 
@@ -120,18 +123,27 @@ console.log(isPolindrom("mama"));
 
 function isPolindrom2(str){
   let arrStr =  str.split("");
-  let halfLenght = (arrStr.length / 2) + 1;
-  let arrResult =[];
+  let halfLenght = Math.ceil(((arrStr.length) / 2));
+  let result = true;
   for (let i = 0; i < halfLenght; i++){
-    (arrStr[i] === arrStr.length-1) ? arrResult.push(true) : arrResult.push(false);
+    (arrStr[i] === arrStr[arrStr.length-[i+1]]) ? result = result : result = false;
+    /*
+     попарное сровнение с двух концов, 
+     если пары не совподают -> result перезаписываеться, 
+     если совподают не меняеться =))
+     */
   }
-  return !arr8.includes(false);
+  return result;
 } 
 
 console.log(isPolindrom2("tenet"));
 console.log(isPolindrom2("mama"));
-
+console.log(isPolindrom2("redder")); // в русском  языке есть чётный полиндром?
+console.log(isPolindrom2("шалаш"));
 // task 1 ADVANCED level
+
+
+
 const matrix = [
   [12, 98, 78, 65, 23],
   [54, 76, 98, 43, 65],
@@ -139,15 +151,18 @@ const matrix = [
   [9092, 22, 45, 90000],
 ]
 
+let sum = 0;
+let count = 0 
 for (let i = 0; i < matrix.length; i++ ){
-  let sum = 0;
 
    for ( let j = 0; j < matrix[i].length; j++){       
-    sum += matrix[i][j];                              
+    sum += matrix[i][j];  
+    count++;                            
    }
 
-   console.log(sum / matrix[i].length -1);
+   
 };
+console.log(sum / count);
 // task 2 ADVANCED level
 
 const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
