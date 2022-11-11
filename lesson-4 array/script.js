@@ -153,7 +153,7 @@ const matrix = [
 
 let sum = 0;
 let count = 0 
-for (let i = 0; i < matrix.length; i++ ){
+for (let i = 0; i < matrix.length; i++ ) {
 
    for ( let j = 0; j < matrix[i].length; j++){       
     sum += matrix[i][j];  
@@ -165,16 +165,40 @@ for (let i = 0; i < matrix.length; i++ ){
 console.log(sum / count);
 // task 2 ADVANCED level
 
+
+
+
 const mixedNumbers = [-14, 24, -89, 43, 0 , -1, 412, 4];
 
 let posetiveNumbs = [];
 let negativeNumbs = [];
 
-for (let i = 0; i < mixedNumbers.length; i++){
+for (let i = 0; i < mixedNumbers.length; i++) {
   (mixedNumbers[i] >= 0) ? posetiveNumbs.push(mixedNumbers[i]) : negativeNumbs.push(mixedNumbers[i]);
 }
 
 console.log(posetiveNumbs);
 console.log(negativeNumbs);
- 
 // task 3 ADVANCED level
+
+
+
+function createRandomNumb(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
+let randomNumbArr = [];
+let cubingRandomNumbArr = [];
+
+
+for ( let i = 0; i < createRandomNumb(5, 8); i++ ) {
+  randomNumbArr.push(createRandomNumb(2,5));
+}
+
+for (let i = 0; i < randomNumbArr.length; i++ ) {
+  cubingRandomNumbArr.push(randomNumbArr[i] **3);
+}
+
+console.log(randomNumbArr);
+console.log(cubingRandomNumbArr);
+// task 4 ADVANCED level
