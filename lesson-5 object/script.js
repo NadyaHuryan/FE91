@@ -33,3 +33,18 @@ for (key in student){
     console.log(student[key]);
 }
 // task 3 NORMAL level
+
+
+
+
+const colors = {
+    'ru pum pu ru rum': {
+        red: 'красный',
+        green: 'зеленый',
+        blue: 'синий'
+    },
+};
+
+console.log(colors["ru pum pu ru rum"].red);
+console.log(colors["ru pum pu ru rum"].blue);
+// task 4 NORMAL level
