@@ -75,26 +75,54 @@ console.log(avrSalary);
 
 
 
-let userInfo = function() {
-    let userLogin = prompt('Введите логин');
-    let userPass = prompt('Введите пароль');
-    const userInfoObj = {
-        login: userLogin,
-        pass: userPass,
-        check: userCheck
-    };
-    return userInfoObj;
-}
+// let userInfo = function() {
+//     let userLogin = prompt('Введите логин');
+//     let userPass = prompt('Введите пароль');
+//     const userInfoObj = {
+//         login: userLogin,
+//         pass: userPass,
+//         check: userCheck
+//     };
+//     return userInfoObj;
+// }
 
 
-let userCheck = function() {
-    let userLoginCheck = prompt('Подтвердите логин');
-    let userPassCheck = prompt('Подтвердите пароль');
-     (userLoginCheck === this.login && userPassCheck === this.pass) ?  alert('Добро пожаловать') : alert('Неверно');
-}
+// let userCheck = function() {
+//     let userLoginCheck = prompt('Подтвердите логин');
+//     let userPassCheck = prompt('Подтвердите пароль');
+//      (userLoginCheck === this.login && userPassCheck === this.pass) ?  alert('Добро пожаловать') : alert('Неверно');
+// }
 
 
 
-let user1 = userInfo();
-user1.check();
+// let user1 = userInfo();
+// user1.check();
 // task 6 NORMAL level
+
+function getTextMatсhResult(resultAsNumbers){
+    const text ={
+        0 : "ноль",
+        1 : "один",
+        2 : "два",
+        3 : "три",
+        4 : "четыре",
+        5 : "пять",
+        6 : "шесть",
+        7 : "семь",
+        8 : "восемь",
+        9 : "девять",
+    }
+
+
+    resultAsNumbers = resultAsNumbers.split(":");
+    if (+resultAsNumbers[0] + +resultAsNumbers[1] > 9) {
+        return "неверные данные";
+    } else {
+        return resultAsNumbers;
+    }
+
+}
+console.log(getTextMatсhResult("2:5"));
+console.log(getTextMatсhResult("5:6"));
+console.log(getTextMatсhResult("5:4"));
+// task 1 ADVANCED level
