@@ -71,3 +71,30 @@ for (key in salaries){
 avrSalary = sumSalary / employees;
 console.log(avrSalary);
 // task 5 NORMAL level
+
+
+
+
+let userInfo = function() {
+    let userLogin = prompt('Введите логин');
+    let userPass = prompt('Введите пароль');
+    const userInfoObj = {
+        login: userLogin,
+        pass: userPass,
+        check: userCheck
+    };
+    return userInfoObj;
+}
+
+
+let userCheck = function() {
+    let userLoginCheck = prompt('Подтвердите логин');
+    let userPassCheck = prompt('Подтвердите пароль');
+     (userLoginCheck === this.login && userPassCheck === this.pass) ?  alert('Добро пожаловать') : alert('Неверно');
+}
+
+
+
+let user1 = userInfo();
+user1.check();
+// task 6 NORMAL level
