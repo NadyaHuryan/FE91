@@ -48,3 +48,26 @@ const colors = {
 console.log(colors["ru pum pu ru rum"].red);
 console.log(colors["ru pum pu ru rum"].blue);
 // task 4 NORMAL level
+
+
+
+let salaries = {
+    andrey: 500,
+    sveta: 413,
+    anton: 987,
+    andrew: 664,
+    alexandra: 199
+}
+
+let avrSalary = 0;
+let sumSalary = 0;
+let employees = 0;
+
+for (key in salaries){
+    sumSalary += salaries[key];
+    employees++;
+}
+
+avrSalary = sumSalary / employees;
+console.log(avrSalary);
+// task 5 NORMAL level
