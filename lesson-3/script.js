@@ -17,9 +17,11 @@ function isEven(x){
 
 function numberOfSymbols(x){
     x = '' + x;
-    return document.write(`количество символов ${x.length}`);
+    document.write(`количество символов ${x.length} <hr>`);
+    return;
 }
 numberOfSymbols(2121515);
+
 
 // 3 Task
 
@@ -27,8 +29,10 @@ function getSum(x){
     for(i = 0; i <= x; i++){
         sum = sum + i;
     }
-    return document.write(sum);
+    document.write(sum)
+    return ;
 }
+getSum(1525)
 
 // 4 Task
 
@@ -38,14 +42,16 @@ function overpay(x){
         sum = sum + (x * 0.17);
     }
     overpayment = Math.floor(sum - x);
-    return document.write(`Итого переплата по кредиту ${overpayment} <hr>`);// Я не понимаю как работает кредит!?
+    document.write(`Итого переплата по кредиту ${overpayment} <hr>`);
+    return ;// Я не понимаю как работает кредит!?
 }
 overpay(10000);
 
 // 5 Task
 
 function trimString(begin, end, str){
-    return document.write(`${str.slice(begin, end)} <hr>`);
+    document.write(`${str.slice(begin, end)} <hr>`)
+    return 
 }
 trimString(2, 7, 'Hello World');
 
@@ -61,9 +67,11 @@ function getSumNumbers(x){
         for(i = 0; i < (x).length; i++){
             sumNumb = sumNumb + Number(x[i]);
         }
-        return document.write(`Сумма чисел в цифре ${x} равна ${sumNumb} <hr>`);
+        document.write(`Сумма чисел в цифре ${x} равна ${sumNumb} <hr>`);
+        return ;
     } else {
-        return document.write(`Указано не число <hr>`);
+        document.write(`Указано не число <hr>`);
+        return; 
     }
 }
 getSumNumbers(2021);
@@ -80,14 +88,16 @@ function getSum1(a, b){
             sum += i;
         }  
     } else if(a === b){
-        return document.write(`Числа равны друг другу ${a} `);
+        document.write(`Числа равны друг другу ${a} `);
+        return ;
     }
     else{
         for(i = a; i <= b; i++){
             sum += i;
         }
     }
-    return document.write(`Сумма чисел от ${a} до ${b} равна ${sum}`);
+    document.write(`Сумма чисел от ${a} до ${b} равна ${sum}`)
+    return;
 }
 getSum1(-1, 5);
 getSum1(-1, 1);
@@ -117,7 +127,8 @@ fooBoo(true, foo, boo);
 
 
 function greet(name){
-    return document.write(`<hr>Hello, ${name} how are you doing today? <hr>`);
+    document.write(`<hr>Hello, ${name} how are you doing today? <hr>`)
+    return;
 }
 greet('Ivan');
 
@@ -141,24 +152,28 @@ isTriangle(5, 5, 15);
 
 sum = 0;
 function a2(x){
-    return document.write('' + x  + `<br>`);
+    document.write('' + x  + `<br>`);
+    return;
 }
 function b2(x){
-    return document.write(`Цифр в числе ${x} ${x.length} <br>`);
+    document.write(`Цифр в числе ${x} ${x.length} <br>`);
+    return;
 }
 function c2(x){
     for(i = 0; i < x.length; i++){
         a = Number(x[i])
         sum = sum + a;
     }
-    return document.write(`Сумма ${sum}<br>`);
+    document.write(`Сумма ${sum}<br>`)
+    return;
 }
 function d2(x){
     let xReverse = '';
     for(i = 0; i < x.length; i++){
         xReverse = x[i] + xReverse;
     }
-    return document.write(`Число наоборот ${xReverse}<hr>`);
+    document.write(`Число наоборот ${xReverse}<hr>`)
+    return;
 }
 function all(){
     let n = prompt(`Введите число`);
