@@ -118,7 +118,8 @@ function getTextMatсhResult(resultAsNumbers){
     if (+resultAsNumbers[0] + +resultAsNumbers[1] > 9) {
         return "неверные данные";
     } else {
-        return resultAsNumbers;
+        let msg = `${text[resultAsNumbers[0]]} : ${text[resultAsNumbers[1]]}`;
+        return msg;
     }
 
 }
