@@ -180,5 +180,18 @@ function isIdenticObjects (obj1, obj2){
 console.log(isIdenticObjects(student1, student2));
 console.log(isIdenticObjects(student1, student3));
 console.log(isIdenticObjects(student3, student4));
-
 // task 2  ADVANCED level
+
+
+const animals = {
+   cat: {
+      name: 'Енчик',
+      age: 3,
+   },
+   dog: {
+      name: 'Орео',
+      age: 2,
+   }
+}
+console.log( animals.bird === undefined );
+// task 3  ADVANCED level
