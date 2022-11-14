@@ -193,5 +193,5 @@ const animals = {
       age: 2,
    }
 }
-console.log( animals.bird === undefined );
+console.log(animals?.bird?.name); // опциональная цепочка
 // task 3  ADVANCED level
