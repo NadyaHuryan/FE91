@@ -127,3 +127,58 @@ console.log(getTextMatсhResult("2:5"));
 console.log(getTextMatсhResult("5:6"));
 console.log(getTextMatсhResult("5:4"));
 // task 1 ADVANCED level
+
+
+
+let student1 = {
+    name: 'Polina',
+    age: 27,
+}
+
+let student2 = {
+    name: 'Polina',
+    age: 27,
+}
+
+let student3 = {
+    name: 'Polina',
+    age: 28,
+}
+
+let student4 = {
+    name: 'Polina',
+    age: 28,
+    hair: 'blond',
+}
+
+function isIdenticObjects (obj1, obj2){
+    let value = true;
+    let lengthObj1 = 0;
+    let lengthObj2 = 0;
+
+    for (key in obj1){
+        lengthObj1++;
+    }
+    for (key in obj2){
+        lengthObj2++;
+    }
+    //проверка количества ключей
+
+    if( lengthObj1 == lengthObj2){
+        for (key in obj1){
+            (obj1[key] === obj2[key]) ? value = value : value = false;
+        }
+        //перебор ключей объектов и сравнивает значения, кроме объектов внути объектов
+    } else {
+        value = false;
+    }
+
+    return value;
+}
+
+
+console.log(isIdenticObjects(student1, student2));
+console.log(isIdenticObjects(student1, student3));
+console.log(isIdenticObjects(student3, student4));
+
+// task 2  ADVANCED level
