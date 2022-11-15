@@ -12,15 +12,14 @@ let str;
 function isEven(x){
     return ((x % 2) === 0);
 }
-
+document.write(`${isEven(5)} <hr>`);
 // 2 Task
 
 function numberOfSymbols(x){
     x = '' + x;
-    document.write(`количество символов ${x.length} <hr>`);
-    return;
+    return x.length;
 }
-numberOfSymbols(2121515);
+document.write(`количество символов ${numberOfSymbols(2121515)} <hr>`);
 
 
 // 3 Task
@@ -29,10 +28,9 @@ function getSum(x){
     for(i = 0; i <= x; i++){
         sum = sum + i;
     }
-    document.write(sum)
-    return ;
+    return sum;
 }
-getSum(1525)
+document.write(getSum(1525))
 
 // 4 Task
 
@@ -42,18 +40,17 @@ function overpay(x){
         sum = sum + (x * 0.17);
     }
     overpayment = Math.floor(sum - x);
-    document.write(`Итого переплата по кредиту ${overpayment} <hr>`);
-    return ;// Я не понимаю как работает кредит!?
+    return overpayment;// Я не понимаю как работает кредит!?
 }
-overpay(10000);
+document.write(`Итого переплата по кредиту ${overpay(10000)} <hr>`);
 
 // 5 Task
 
 function trimString(begin, end, str){
-    document.write(`${str.slice(begin, end)} <hr>`)
-    return 
+    return str.slice(begin, end)
 }
-trimString(2, 7, 'Hello World');
+document.write(`${trimString(2, 7, 'Hello World')}} <hr>`)
+
 
 //6 Task
 
@@ -67,16 +64,16 @@ function getSumNumbers(x){
         for(i = 0; i < (x).length; i++){
             sumNumb = sumNumb + Number(x[i]);
         }
-        document.write(`Сумма чисел в цифре ${x} равна ${sumNumb} <hr>`);
-        return ;
+        return sumNumb;
     } else {
         document.write(`Указано не число <hr>`);
         return; 
     }
 }
-getSumNumbers(2021);
-getSumNumbers('ascdsaea');
-getSumNumbers(21);
+document.write(`${getSumNumbers(2021)} <hr>`);
+document.write(`${getSumNumbers('ascdsaea')} <hr>`);
+document.write(`${getSumNumbers(21)} <hr>`);
+
 
 // 7 Task
 
@@ -96,13 +93,12 @@ function getSum1(a, b){
             sum += i;
         }
     }
-    document.write(`Сумма чисел от ${a} до ${b} равна ${sum}`)
-    return;
+    return sum;
 }
-getSum1(-1, 5);
-getSum1(-1, 1);
-getSum1(2, 1);
-getSum1(2, 2);
+document.write(`Сумма чисел равна ${getSum1(-1, 5)}`);
+document.write(`Сумма чисел равна ${getSum1(-1, 1)}`);
+document.write(`Сумма чисел равна ${getSum1(2, 1)}`);
+document.write(`Сумма чисел равна ${getSum1(2, 2)}`);
 
 // 8 Task
 
@@ -138,9 +134,9 @@ greet('Ivan');
 
 function isTriangle(a, b, x){
     if(((a + b) > x) && ((b + x) > a) && ((a + x) > b)){
-        return document.write(`true`);
+        return true;
     } else{
-        return document.write(`false`);
+        return false;
     }
 }
 isTriangle(5, 5, 5);
