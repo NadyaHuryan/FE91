@@ -7,7 +7,7 @@ const colors = ['red', 'green', 'blue'];
 console.log(colors.length);
 
 
-// ex 2
+// ex z2
 
 const animals = ['monkey', 'dog', 'cat'];
 
