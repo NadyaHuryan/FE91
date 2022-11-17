@@ -1,0 +1,36 @@
+*{
+    background-color: darkseagreen;
+    font-family:sans-serif, monospace;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+footer {
+    margin-top: auto;
+}
+
+._wrapper{
+    text-align: center;
+    padding: 16px 32px;
+}
+.sheet{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.block{
+    min-height: 100px;
+    min-width: 100px;
+    background-color: inherit;
+}
+.block:hover{
+    background-color: rgba(255, 255, 255, 0.15);
+}
