@@ -99,3 +99,60 @@ let user1 = userInfo();
 user1.check();
 
 // ADVANCED TASK 1
+
+const score = {
+    1: "один",
+    2: "два",
+    3: "три",
+    4: "четыре",
+    5: "пять",
+    6: "шесть",
+    7: "семь",
+    8: "восемь",
+    9: "девять",
+}
+
+function getScore(a, b) {
+    if (a + b < 10) {
+        return score[a] + ":" + score[b];
+    } else {
+        return "Счёт больше 9!";
+    }
+}
+
+console.log(getScore(2, 4));
+console.log(getScore(6, 4));
+
+// ADVANCED TASK 2
+
+let student1 = {
+    name: 'Polina',
+    age: 27,
+}
+
+let student2 = {
+    name: 'Polina',
+    age: 27,
+}
+
+function isEqual(student1, student2) {
+    return JSON.stringify(student1) === JSON.stringify(student2) 
+}
+
+console.log(isEqual(student1, student2));
+
+// ADVANCED TASK 3
+
+const animals = {
+    cat: {
+       name: 'Енчик',
+       age: 3,
+    },
+    dog: {
+       name: 'Орео',
+       age: 2,
+    }
+ }
+
+ console.log(animals?.bird);
+ console.log(animals?.dog);
