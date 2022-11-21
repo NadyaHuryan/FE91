@@ -13,17 +13,17 @@ const obj2 = {};
   // ключ: значение;
 // }
 
-const object = {
-  user: 'Nadya',
-  age: 18,
-  city: 'Minsk',
-  isAdmin: true,
-  pets: {
-    cat: true,
-    dog: true,
-  },
-  'has car': true // но лучше сокращать до hasCar
-}
+// const object = {
+//   user: 'Nadya',
+//   age: 18,
+//   city: 'Minsk',
+//   isAdmin: true,
+//   pets: {
+//     cat: true,
+//     dog: true,
+//   },
+//   'has car': true // но лучше сокращать до hasCar
+// }
 //Свойства объекта можно читать, редактировать, удалять и добавлять
 
 // чтение
@@ -60,6 +60,17 @@ console.log(object);
 // Проверка существования свойста освществляеться с помощью оператора in
 
 // 1 способ
+const object = {
+  user: 'Nadya',
+  age: 18,
+  city: 'Minsk',
+  isAdmin: true,
+  pets: {
+    cat: true,
+    dog: true,
+  },
+  'has car': true // но лучше сокращать до hasCar
+}
 console.log(object.user === undefined); // true
 console.log(object.color === undefined); // false
 
