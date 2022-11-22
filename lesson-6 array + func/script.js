@@ -1,3 +1,4 @@
+
 const fibonacci = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987];
 
 
@@ -71,3 +72,30 @@ console.log('---------');
 console.log(findNumb2);
 console.log('##########');
 //task 5 NORMAL level
+
+
+
+
+function Student(name, salary, rate){
+    this.name = name;
+    this.salary = salary;
+    this.rate = rate;
+    this.maxCreditSum = function() { 
+        return rates[rate] * this.salary};
+}//  конструктор сткдентов
+
+const rates = {
+    A: 12,
+    B: 9,
+    C: 6,
+    D: 0,
+} // объект с категориями платежеспособности
+
+let std1 = new Student("Ivan", 1000, "A");
+let std2 = new Student("Kate", 500, "B");
+let std3 = new Student("Sergjio", 700, "C");
+let std4 = new Student("Ksenija", 200, "D");
+let std5 = new Student("Vlad", 666, "B");
+
+const students =  [std1, std2, std3, std4, std5];
+// редьюсом посчитать бабки
