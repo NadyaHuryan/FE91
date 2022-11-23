@@ -172,7 +172,7 @@ function isUnique(str){
         let arr1 = arr.slice(index + 1);
         let arr2 = arr.slice(0, index)
         arrR = arr2.concat(arr1)
-        let arrF = arr3.find(function(elem){
+        let arrF = arrR.find(function(elem){
             return elem === itemRight;
         })
         if (arrF === undefined){
