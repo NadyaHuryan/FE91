@@ -82,7 +82,7 @@ function Student(name, salary, rate){
     this.rate = rate;
     this.maxCreditSum = function() { 
         return rates[rate] * this.salary};
-}//  конструктор сткдентов
+}//  конструктор стeдентов
 
 const rates = {
     A: 12,
@@ -107,3 +107,75 @@ console.log(bigMoney);
 console.log('##########');
 //task 1 ADVANCED level
 
+
+
+function deleteVowelENG(str){
+    const vowels = ["A", "E", "I", "O", "U", "a", "e", "i", "o", "u"];
+    let localArr = str.split("").filter(item => !vowels.includes(item));
+    return localArr.join("");
+}
+
+/// в названии функции определён язык, поэтому гласные как локальная константа
+console.log("This website is for losers LOL!");
+console.log(deleteVowelENG("This website is for losers LOL!"));
+console.log('##########');
+//task 2 ADVANCED level
+
+
+
+
+function accum (str){
+    let separator = "-";
+    let oldArr = str.split("");
+    let newArr = oldArr.map(function(item,index){
+        let localArr = [];
+        let LocalStr;
+        let localItem = String(item).toLowerCase();
+
+        for(let i = 0; i <= index; i++){
+            (i == 0 ) ? localItem = localItem.toUpperCase() : localItem = localItem.toLowerCase();
+            localArr.push(localItem);
+        }
+        LocalStr = localArr.join("");
+        return LocalStr;
+    });
+    return newArr.join(separator);
+}
+
+/// строка бьёться в масив, создаёться новый масив где индекс элемента в исходном масиве длинна элимента в новом
+/// плюс принудительный перевод в нужный регистр
+
+
+console.log (accum("abcd"));
+console.log (accum("RqaEzty"));
+console.log (accum("cwAt"));
+console.log('##########');
+//task 3 ADVANCED level
+
+
+
+
+function highAndLow (str){
+    let result = str.split(" ").sort( (a, b) => a - b ); 
+    return result[result.length-1] + " " + result[0];    
+
+}
+
+console.log(highAndLow("1 2 3 4 5")); // return "5 1"
+console.log(highAndLow("1 2 -3 4 5")); // return "5 -3"
+console.log(highAndLow("1 9 3 4 -5")); // return "9 -5
+console.log('##########');
+//task 4 ADVANCED level
+
+
+function isIsogram(str){
+    let arrDate = str.split("").map(item => item.toLowerCase());
+    let arrRules = [];
+    let value = true;
+//// цикл каторый каждую этэрацию сравнивает date b rules
+    return value;
+}
+
+console.log(isIsogram("Dermatoglyphics"));// == true
+console.log(isIsogram("aba"));// == false
+console.log(isIsogram("moOse"));// == false // -- ignore letter case
