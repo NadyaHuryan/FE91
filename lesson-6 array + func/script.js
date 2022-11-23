@@ -98,4 +98,12 @@ let std4 = new Student("Ksenija", 200, "D");
 let std5 = new Student("Vlad", 666, "B");
 
 const students =  [std1, std2, std3, std4, std5];
-// редьюсом посчитать бабки
+let bigMoney = students.reduce(function(sum, value,){
+    return sum +=value.maxCreditSum();
+},0)
+// редьюсом считать бабки
+
+console.log(bigMoney);
+console.log('##########');
+//task 1 ADVANCED level
+
