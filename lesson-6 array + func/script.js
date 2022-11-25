@@ -190,3 +190,25 @@ console.log(isIsogram("aba"));// == false
 console.log(isIsogram("moOse"));// == false // -- ignore letter case
 console.log('##########');
 //task 5 ADVANCED level
+
+
+
+
+function getNotASCIIString(str){
+    let date = str.split('');
+    let total1 = date.map(item => item.charCodeAt()).join('');
+    let total2 = total1.split('');
+    
+    for (let i = 0; i < total2.length; i++){
+        (total2[i] == 7) ? total2[i] = 1 : total2[i] = total2[i];
+    }
+
+    return +total1 - +total2.join('');
+}
+
+
+console.log(getNotASCIIString("ABC"));
+console.log(getNotASCIIString("CC"));
+console.log(getNotASCIIString("XYZ"));
+console.log('##########');
+//task 6 ADVANCED level
