@@ -212,3 +212,24 @@ console.log(getNotASCIIString("CC"));
 console.log(getNotASCIIString("XYZ"));
 console.log('##########');
 //task 6 ADVANCED level
+
+
+
+function getBrekits(str){
+    let arrDate = str.split("").map(item => item.toLowerCase());
+    let result = [];
+
+    for(let i = 0; i <arrDate.length; i++){
+        let rule = arrDate.filter(item => item == arrDate[i]);
+        (rule.length > 1) ? result.push(")") : result.push("(");
+    }
+
+    return result.join('');
+}
+
+console.log(getBrekits("din"));
+console.log(getBrekits("recede"));
+console.log(getBrekits("Success"));
+console.log(getBrekits("(( @"));
+console.log('##########');
+//task 7 ADVANCED level
