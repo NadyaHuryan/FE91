@@ -170,12 +170,23 @@ console.log('##########');
 
 function isIsogram(str){
     let arrDate = str.split("").map(item => item.toLowerCase());
-    let arrRules = [];
     let value = true;
-//// цикл каторый каждую этэрацию сравнивает date b rules
+
+
+    for(let i = 0; i <arrDate.length; i++){
+        let rule = arrDate.filter(item => item == arrDate[i]);
+        (rule.length > 1) ? value = false : value = value;
+    }
+
     return value;
 }
+// результатом фильта всегда будет масив с длинной как минимум 1, 
+// это результат проверки элимента самого на себя
+// если результа больше 1 то в масивее есть такие же элименты
+
 
 console.log(isIsogram("Dermatoglyphics"));// == true
 console.log(isIsogram("aba"));// == false
 console.log(isIsogram("moOse"));// == false // -- ignore letter case
+console.log('##########');
+//task 5 ADVANCED level
