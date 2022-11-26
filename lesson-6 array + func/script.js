@@ -180,7 +180,7 @@ function isIsogram(str){
 
     return value;
 }
-// результатом фильта всегда будет масив с длинной как минимум 1, 
+// результатом фильтра всегда будет масив с длинной как минимум 1, 
 // это результат проверки элимента самого на себя
 // если результа больше 1 то в масивее есть такие же элименты
 
@@ -197,13 +197,9 @@ console.log('##########');
 function getNotASCIIString(str){
     let date = str.split('');
     let total1 = date.map(item => item.charCodeAt()).join('');
-    let total2 = total1.split('');
+    let total2 = total1.replaceAll(7,1);
     
-    for (let i = 0; i < total2.length; i++){
-        (total2[i] == 7) ? total2[i] = 1 : total2[i] = total2[i];
-    }
-
-    return +total1 - +total2.join('');
+    return +total1 - +total2;
 }
 
 
@@ -226,6 +222,7 @@ function getBrekits(str){
 
     return result.join('');
 }
+/// по сути таже функция isIsogram
 
 console.log(getBrekits("din"));
 console.log(getBrekits("recede"));
