@@ -14,7 +14,7 @@ delete anyObject.isValid;
 
 console.log (anyObject);
 
-// #### Task 2 🖥 #### функция не работает
+// #### Task 2 🖥 #### 
 
 let testObject = {
     prop: 'something',
