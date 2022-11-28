@@ -23,8 +23,8 @@ console.log("Task 1");
   ];
 
   // function declaration
-  function showFibonacci(a) {
-    console.log(a);
+  function showFibonacci(number) {
+    console.log(number);
   }
   fibonacci.forEach(showFibonacci);
 
@@ -55,8 +55,8 @@ console.log("Task 2");
 // function declaration
 const users = ["Darya", "Masha", "Denis", "Vitaliy", "Polina", "Anton"];
 
-function transformUsers(a, b) {
-  return "member " + (b + 1) + ": " + a;
+function transformUsers(item, index) {
+  return "member " + (index + 1) + ": " + item;
 }
 
 const newUsers = users.map(transformUsers);
@@ -84,8 +84,8 @@ console.log("Task 3");
 const numbers = [7, -4, 32, -90, 54, 32, -21];
 
 // function declaration
-function removesNegativeNumbers(a) {
-  if (a >= 0) return a;
+function removesNegativeNumbers(num) {
+  if (num >= 0) return true;
 }
 
 const result = numbers.filter(removesNegativeNumbers);
@@ -112,8 +112,8 @@ const fibonacci = [
   0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987,
 ];
 // function declaration
-function getSumFibonacci(a, b) {
-  return a + b;
+function getSumFibonacci(acc, item) {
+  return acc + item;
 }
 
 const sumFibonacci = fibonacci.reduce(getSumFibonacci);
@@ -125,6 +125,7 @@ const sumFibonacci1 = fibonacci.reduce(
 );
 
 console.log(sumFibonacci1);
+
 // #### Task 5 🖥
 
 // Используя метод **`find`** найдите в массиве первое четное число.
@@ -139,8 +140,8 @@ console.log("Task 5");
 {
   const numbers = [5, 9, 13, 24, 54, 10, 13, 99, 1, 5];
 
-  function getPositiveNumber(a) {
-    if (a >= 0) return a;
+  function getPositiveNumber(num) {
+    if (num % 2 === 0) return true;
   }
 
   const firstPositiveNumder = numbers.find(getPositiveNumber);
@@ -149,7 +150,7 @@ console.log("Task 5");
 
   // arrow function
 
-  const firstPositiveNumder1 = numbers.find((item) => item >= 0);
+  const firstPositiveNumder1 = numbers.find((item) => item % 2 === 0);
 
   console.log(firstPositiveNumder1);
 }
@@ -173,11 +174,11 @@ console.log("Task 5");
 // + **D** - плохой рейтинг и мы не можем дать кредит
 
 console.log("Task 1. ADVANCED");
-let maximumPossibleCredit = "";
-function Student(name, rate, salary) {
-  this.name = name;
-  this.rate = rate;
-  this.salary = salary;
+
+function Student(student) {
+  this.name = student.name;
+  this.rate = student.rate;
+  this.salary = student.salary;
   this.credit = function () {
     if (this.rate == "A") return this.salary * 12;
     if (this.rate == "B") return this.salary * 9;
@@ -186,33 +187,44 @@ function Student(name, rate, salary) {
   };
 }
 
-let student_1 = new Student("Allena", "A", 100);
-console.log(student_1);
+// const student_1 = new Student("Allena", "A", 200);
+// console.log(student_1);
 
-let student_2 = new Student("Aliona", "B", 100);
-console.log(student_2);
+// const student_2 = new Student("Aliona", "B", 100);
+// console.log(student_2);
 
-let student_3 = new Student("Andrey", "C", 100);
-console.log(student_3);
+// const student_3 = new Student("Andrey", "C", 100);
+// console.log(student_3);
 
-let student_4 = new Student("Kseniya", "D", 100);
-console.log(student_4);
+// const student_4 = new Student("Kseniya", "D", 100);
+// console.log(student_4);
 
-let student_5 = new Student("Liza", "A", 100);
-console.log(student_5);
+// const student_5 = new Student("Liza", "A", 100);
+// console.log(student_5);
 
-const students = [student_1, student_2, student_3, student_4, student_5];
+// const students = [student_1, student_2, student_3, student_4, student_5];
 
-let sumCredits = 0;
+const studentsInfo = [
+  { name: "Allena", rate: "A", salary: 100 },
+  { name: "Aliona", rate: "B", salary: 100 },
+  { name: "Andrey", rate: "C", salary: 100 },
+  { name: "Kseniya", rate: "D", salary: 100 },
+  { name: "Liza", rate: "A", salary: 100 },
+];
 
-function getSumCredits(...arr) {
+const students = studentsInfo.map((student) => new Student(student));
+console.log(students);
+
+function getSumCredits(arr) {
+  let sumCredits = 0;
+
   for (let value of arr) {
     sumCredits += value.credit();
   }
   return sumCredits;
 }
 
-console.log(getSumCredits(...students));
+console.log(getSumCredits(students));
 
 // #### Task 2 👨‍🏫 Тролли атакуют наш раздел с комментариями!!!
 
@@ -221,6 +233,7 @@ console.log(getSumCredits(...students));
 // + Например, строка «This website is for losers LOL!» станет "Ths wbst s fr lsrs LL!".
 
 // > Примечание: для этой задачи **`y`** не считается гласной.
+
 console.log("Task 2. ADVANCED");
 
 const vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
@@ -254,8 +267,14 @@ function accum(str) {
   return (splitString = str
     .toLocaleLowerCase()
     .split("")
-    .map((item, index) => item.repeat(index + 1))
-    .map((item) => item[0].toUpperCase() + item.slice(1))
+    // .map((item, index) => item.repeat(index + 1))
+    // .map((item) => item[0].toUpperCase() + item.slice(1))
+    // !   способ ниже позволяет выполнить необходимые действия за один перебор массива 
+    .map((item, index) => {
+      let newItem = item.repeat(index + 1);
+       newItem = newItem[0].toUpperCase() + newItem.slice(1);
+       return newItem;
+    })
     .join("-"));
 }
 
@@ -294,6 +313,23 @@ console.log(highAndLow("1 9 3 4 -5"));
 //     isIsogram("aba") == false
 //     isIsogram("moOse") == false // -- ignore letter case
 // ```
+console.log("Task 5. ADVANCED");
+
+function isIsogram(str) {
+  let arrIsIsogram = str.toLocaleLowerCase().split("");
+
+  return !arrIsIsogram.some(
+    (item, index) => arrIsIsogram.indexOf(item) !== index
+  );
+}
+//!  1) метод ".toLocaleLowerCase" преобразует все символы строки в строчные и позволяет игнорировать использование заглавных букв
+// !  2) метод ".split("")" позволяет разбить строку на массив строчных элементов,при этом использование в качестве разделителя пустой строки "("")" позволяет получить массив состоящий из символов исходной строки
+//!  3) метод ".some" проверяет соответствует ли по крайней мере один элемент в массиве условию, заданному в передаваемой функции.
+//! 3.1) В теле функции, переданной методом ".some".сравнивается индекс элемента массива возвращенный методом indexOf(item) (возвращает индекс только первого найденного элемента массива => не происходит полный перебор массива!) и индекса элемента переданного в качестве параметра функцией метода ".some.
+//! т.к. при выполнении условия "indexOf(item) !== index" метод .some(item, index)  возвращает "true", для выполнения условий задачи преобразуем полученное значение на противоположное с помощью оператора "!"
+console.log(isIsogram("Dermatoglyphics"));
+console.log(isIsogram("aba"));
+console.log(isIsogram("moOse"));
 
 // #### Task 6 👨‍🏫 Считаем коды символов
 
@@ -304,6 +340,42 @@ console.log(highAndLow("1 9 3 4 -5"));
 // + После верните разницу между суммой цифр **`total1`** и **`total2`**
 
 // > 'ABC' --> 'A' = 65, 'B' = 66, 'C' = 67 --> 656667
+console.log("Task 6. ADVANCED");
+
+function getSymbolFromStr(str) {
+  let total1 = "";
+  for (let i = 0; i <= str.length - 1; i++) {
+    total1 += str.charCodeAt(i);
+  }
+  return total1;
+}
+
+// console.log(getSymbolFromStr("ABC"));
+
+function replaceNum(str, a = 7, b = 1) {
+  let total1 = getSymbolFromStr(str);
+  let total2 = total1
+    .split("")
+    .map((item) => (+item === a ? b : item))
+    .join("");
+  return total2;
+}
+// console.log(replaceNum("ABC"));
+
+function differenceBetweenSum(str, a = 7, b = 1) {
+  let total1 = getSymbolFromStr(str);
+  let total2 = replaceNum(str, a, b);
+  let result =
+    total1
+      .split("")
+      .reduce((leftMember, rightMember) => +leftMember + +rightMember) -
+    total2
+      .split("")
+      .reduce((leftMember, rightMember) => +leftMember + +rightMember);
+  return result;
+}
+
+console.log(differenceBetweenSum("ABC"));
 
 // #### Task 7 👨‍🏫 Дубликаты
 
@@ -316,3 +388,34 @@ console.log(highAndLow("1 9 3 4 -5"));
 //     "Success" => ")())())"
 //     "(( @" => "))(("
 // ```
+console.log("Task 7. ADVANCED");
+
+function transformStr(str) {
+  let arrFromStr = str.toLocaleLowerCase().split("");
+
+  let strFromArr = arrFromStr
+    .map(function (item, index) {
+      if (
+        arrFromStr.lastIndexOf(item) === index &&
+        arrFromStr.indexOf(item) === index
+      ) {
+        return "(";
+      } else {
+        return ")";
+      }
+    })
+    .join("");
+  return strFromArr;
+}
+
+//!  1) метод ".toLocaleLowerCase" преобразует все символы строки в строчные и позволяет игнорировать использование заглавных букв
+// !  2) метод ".split("")" позволяет разбить строку на массив строчных элементов,при этом использование в качестве разделителя пустой строки "("")" позволяет получить массив состоящий из символов исходной строки
+// !  3) метод ".map" вызывает переданную функцию один раз для каждого элемента массива и формирует новый массив из возвращенных значений. В функцию помещена проверка с использованием инструкции "If", методов "lastIndexOf()" и ".indexOf()" и операторов сравнения "===" и "&&".
+// !  3.1) метод ".indexOf()" возвращает индекс элемента "item" который был передан в качестве аргумента функцией вызванной методом "map".  Проверка начинается с начала массива и возвращает индекс при первом совпадении. Метод "lastIndexOf()" также возвращает индекс элемента массива при первом совпадении, но проверка начинается с конца массива.
+//  !  3.2 С помощью оператора "===" происходит сравнение индекса возвращенного методом ".indexOf()" и индекса, который был передан в качестве параметра функцией вызванной методом "map". Аналогичное сравнение производится для индекса возвращенного методом "lastIndexOf ()". Полученные булевые значения сравниваются между собой оператором логического сравнения "&&". Использование сразу двух методов ".indexOf()" и "lastIndexOf ()" для последовательной проверки элементов массива на соответствие индексу и последующее их сравнение между собой позволяет выявить дубликат (аналогичный результат можно получить используя операторы сравнения "!==" и "||" соответственно). Использование в контексте задачи только одного из методов не дает требуемого значения, т.к. при проверке первого элемента массива,который имеет дубликат, будет возвращаться "true" и только при проверке дубликата будет возвращено "false"
+// !  3.3) Инструкция "if" позволяет, в зависимости от полученного результата сравнений значение "(" или ")"
+
+console.log(transformStr("din"));
+console.log(transformStr("recede"));
+console.log(transformStr("Success"));
+console.log(transformStr("(( @"));
