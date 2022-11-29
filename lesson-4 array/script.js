@@ -125,14 +125,13 @@ let positiveNumbers = [];
 let negativeNumbers = [];
 for (let i = 0; i < mixedNumbers.length; i++) {
     if (mixedNumbers[i] >= 0) {
-        positiveNumbers = positiveNumbers.push(mixedNumbers[i]);
+        positiveNumbers.push(mixedNumbers[i]);
     } else {
-        negativeNumbers = negativeNumbers.push(mixedNumbers[i]);
+        negativeNumbers.push(mixedNumbers[i]);
     }
-    console.log(positiveNumbers);
-    console.log(negativeNumbers);
 }
-
+console.log(positiveNumbers);
+console.log(negativeNumbers);
 
 //##### Task 4 👨‍🏫 #####
 
