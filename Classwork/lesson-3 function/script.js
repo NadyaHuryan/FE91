@@ -351,10 +351,6 @@ showRange(19, 3);
 
 
 //6. Создайте функцию, которая принимает в качестве параметра целое число и возвращает количество цифр в этом числе.
-
-function setDecimalToNumber() {
-
-}
 function checkLength(k) {
     return String(k).length;
 }
