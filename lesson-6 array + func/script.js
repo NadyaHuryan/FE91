@@ -111,28 +111,24 @@ function getRateForStudent(arr){
  };
 
 function Student(name, salary){
-    this.name = name,
-    this.salary = salary,
-    this.rate = getRateForStudent(['A', 'B', 'C', 'D']),
-    this.maxCredit = (function(){
+    this.name = name;
+    this.salary = salary;
+    this.rate = getRateForStudent(['A', 'B', 'C', 'D']);
+    this.maxCredit = function(){
         let creditSumm = 0;
         switch(this.rate){
             case 'A': 
                 return creditSumm = this.salary * 12;
-                break;
             case 'B':
                 return creditSumm = this.salary * 9;
-                break;
             case 'C':
                 return creditSumm = this.salary * 9;
-                break;
             case 'D':
                 return creditSumm;
-                break;
             default:
                 console.log('Нет такого значения рейтинга');
         }
-    })()
+    }
 }
 
 let student1 = new Student('Aliona', 1200);
@@ -141,6 +137,44 @@ let student3 = new Student('Dima', 1000);
 let student4 = new Student('Kate', 1500);
 let student5 = new Student('Vlad', 1000);
 
-console.log(student4);
+let students = [student1, student2, student3, student4, student5];
 
+let summOfCredit = students.reduce((accum, item) => accum + item.maxCredit(), 0)
+        
+console.log(summOfCredit);
 
+    
+
+// #### Task 2 👨‍🏫 ####
+
+let originalStr = 'This website is for losers LOL!';
+let strictedLetters = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u'];
+let strToArr = originalStr.split('');
+
+function matcLetters(){
+    for(let i = 0; i < strictedLetters.length; i++){
+        return !(item == strictedLetters[i]);
+        }
+}
+
+let result = strToArr.filter(function(item){
+    return matcLetters()
+    }
+)
+console.log(result);
+
+// let result = strToArr.filter(function(item){
+//     for(let i = 0; i<strToArr.length; i++){
+//         for(let j = 0; j<strictedLetters.length; j++){
+//             return !(item == strictedLetters[j])
+//             }
+//         }
+//     }
+// )
+// console.log(result);
+
+// #### Task 3 👨‍🏫 ####
+
+let accum = 'string';
+let strToArray = accum.split('');
+letNewArray = strToArray.map((item, index) => )
