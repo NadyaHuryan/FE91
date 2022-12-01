@@ -12,7 +12,7 @@ let main = [
     {
         id: 2,
         task: "Todo text",
-        status: false,
+        status: true,
         date: "date2"
     },
     {
@@ -70,6 +70,71 @@ let cssPanelInput =  `
     padding: 10px;
     text-align: center;
 `;
+
+let cssCard =  `
+    width: 70%;
+    min-height: 100px;
+    border: 3px solid black;
+    margin: 20px auto;
+    background-color: gray;
+    border-radius: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns:  1fr 3fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    "c-status c-text c-close-button"
+    "c-status c-text c-date";
+    justify-items: stretch;
+    gap: 10px;
+`;
+
+let cssCardStatus = `
+    grid-area: c-status;
+    justify-items: left;
+    align-self: center;
+    height: 60px;
+    width: 60px;
+`;
+
+let cssCardDate = `
+    grid-area: c-date;
+    justify-self: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 80px;
+    height: 30px;
+    padding: 5px;
+    color: gray;
+`;
+
+let cssCardText = `
+    grid-area: c-text ;
+    align-self: center;
+    justify-self: center;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 350px;
+    height: 50px;
+    padding: 15px;
+    color: gray;
+`;
+
+let cssCardCloseButton = `
+    grid-area: c-close-button;
+    justify-self: right;
+    background-color: rgb(127, 255, 249);
+    border: 3px solid black;
+    border-radius: 10px;
+    text-align: center;
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+`; 
+
 
 // html generator
 let root = document.getElementById("root")
@@ -132,125 +197,41 @@ let panelCardInfoInputSearch = document.createElement("input");
 
 let panelCardsAera = document.createElement("div");
     panelCardsAera.classList.add("cards-aera");
-    panelCardsAera.style.cssText=`
-        background-color: green;
-        min-height: 100px;
-        min-width: 100px;
-    `;
-
-// card    
-
-for (let i = 0; i < main.length; i++) {
-    let listPanelItem = document.createElement("div");
-    listPanelItem.classList.add("list-panel__item");
-    listPanelItem.style.cssText = `
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    `
-
-    let listPanelProduct = document.createElement("div");
-    listPanelProduct.classList.add("list-panel__product");
-    listPanelProduct.style.cssText = ``;
-    listPanelProduct.innerHTML = `<b>${main[i].task}</b>`
-
-    let listPanelStatus = document.createElement("input");
-    listPanelStatus.setAttribute("type", "checkbox");
-
-    let listPanelDelete = document.createElement("button");
-    listPanelDelete.innerHTML = "X";
-
-    panelCardsAera.appendChild(listPanelItem)
-    listPanelItem.append(listPanelProduct, listPanelStatus, listPanelDelete);
-}
 
 
-// function createCard (){
-//         card = document.createElement("div");
-//         card.classList.add("card");
-//         card.style.cssText = `
-//             width: 70%;
-//             min-height: 100px;
-//             border: 3px solid black;
-//             margin: 40px auto;
-//             background-color: gray;
-//             border-radius: 20px;
-//             padding: 10px;
-//             display: grid;
-//             grid-template-columns:  1fr 3fr 1fr;
-//             grid-template-rows: repeat(2, 1fr);
-//             grid-template-areas: 
-//             "c-status c-text c-close-button"
-//             "c-status c-text c-date";
-//             justify-items: stretch;
-//             gap: 10px;
-//         `;
+// cards    
+main.forEach(function(item){
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.style.cssText = cssCard;
 
-//     let cardStatus = document.createElement("input");
-//         cardStatus.setAttribute("type", "checkbox");
-//         cardStatus.classList.add("card--status");
-//         cardStatus.style.cssText = `
-//             grid-area: c-status;
-//             justify-items: left;
-//             align-self: center;
-//             height: 60px;
-//             width: 60px;
-//         `;
-//     let cardDate = document.createElement("div");
-//         cardDate.classList.add("card--date");
-//         cardDate.textContent ="date"
-//         cardDate.style.cssText=`
-//             grid-area: c-date;
-//             justify-self: center;
-//             align-items: center;
-//             background-color: white;
-//             border-radius: 10px;
-//             text-align: center;
-//             min-width: 80px;
-//             height: 30px;
-//             padding: 5px;
-//             color: gray;
-//         `;
-//     let cardText = document.createElement("div");
-//         cardText.classList.add("card--texts");
-//         cardText.textContent = "Todo text";
-//         cardText.style.cssText = `
-//             grid-area: c-text ;
-//             align-self: center;
-//             justify-self: center;
-//             background-color: white;
-//             border-radius: 10px;
-//             text-align: center;
-//             min-width: 350px;
-//             height: 50px;
-//             padding: 15px;
-//             color: gray;
-//         `;
+let cardStatus = document.createElement("input");
+    cardStatus.setAttribute("type", "checkbox");
+    cardStatus.checked = item.status;
+    cardStatus.classList.add("card--status");
+    cardStatus.style.cssText = cssCardStatus;
 
-//     let cardCloseButton = document.createElement("div");
-//         cardCloseButton.classList.add("card--date");
-//         cardCloseButton.textContent = "X"
-//         cardCloseButton.style.cssText = `
-//             grid-area: c-close-button;
-//             justify-self: right;
-//             background-color: rgb(127, 255, 249);
-//             border: 3px solid black;
-//             border-radius: 10px;
-//             text-align: center;
-//             width: 40px;
-//             height: 30px;
-//             padding: 5px;
-//         `;    
+let cardDate = document.createElement("div");
+    cardDate.classList.add("card--date");
+    cardDate.textContent = item.date
+    cardDate.style.cssText = cssCardDate
 
-//         card.append(cardStatus, cardText, cardCloseButton, cardDate); 
-// }       
+let cardText = document.createElement("div");
+    cardText.classList.add("card--texts");
+    cardText.textContent = item.task
+    cardText.style.cssText = cssCardText
 
-// let card;
-// createCard();
-// let card1 = card.cloneNode(true);
-// let card2 = card.cloneNode(true);
+let cardCloseButton = document.createElement("div");
+    cardCloseButton.classList.add("card--date");
+    cardCloseButton.textContent = "X"
+    cardCloseButton.style.cssText = cssCardCloseButton;
 
-// append elements
+    panelCardsAera.appendChild(card);
+    card.append(cardStatus, cardText, cardCloseButton, cardDate); 
+
+})
+
+// append
 
 root.append(wrapper);
 wrapper.append(panelCardActions, panelCardInfo, panelCardsAera);
