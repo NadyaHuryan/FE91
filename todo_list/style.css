@@ -1,0 +1,34 @@
+*,
+::after,
+::before {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+a {
+   text-decoration: none;
+}
+
+ul,
+ol,
+li {
+   list-style-type: none;
+}
+
+a,
+img,
+button,
+input {
+   border: none;
+   outline: none;
+}
+
+
+
+/* *FOR ALL */
+body {
+   font-family: "Poppins", sans-serif;
+   font-size: 18px;
+   color: #626780;
+}

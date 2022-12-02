@@ -1,0 +1,138 @@
+*,
+::after,
+::before {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+a {
+   text-decoration: none;
+}
+
+ul,
+ol,
+li {
+   list-style-type: none;
+}
+
+a,
+img,
+button,
+input {
+   border: none;
+   outline: none;
+}
+
+
+
+/* *FOR ALL */
+body {
+   font-family: "Poppins", sans-serif;
+   font-size: 18px;
+   color: #626780;
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+   padding: 15px;
+   width: 1140px;
+   margin: 0 auto;
+   padding: 30px;
+   background-color: aqua;
+   border-radius: 20px;
+   border: 2px solid #000;
+}
+
+.button {
+   color: #717784;
+   font-family: "Poppins", sans-serif;
+   font-size: 28px;
+   display: flex;
+   width: 260px;
+   height: 60px;
+   border-radius: 10px;
+   justify-content: center;
+   align-items: center;
+   transition: 1.2s ease-in-out;
+   cursor: pointer;
+   background-color: rgba(217, 217, 217, 1);
+   box-shadow: 0 10px 5px -5px rgba(30, 129, 204, 0.2);
+}
+
+
+.button:hover {
+   background: #9B9BCA;
+   color: #FFFFFF;
+   font-weight: 600;
+}
+
+.input-panel {
+   width: 100%;
+   display: flex;
+   gap: 30px;
+}
+
+.input-panel__content {
+   font-family: 'Rubik', sans-serif;
+   font-size: 18px;
+   color: #9D9D9D;
+   width: 100%;
+   height: 60px;
+   border: 1px solid #9595C9;
+   border-radius: 5px;
+   padding: 10px;
+}
+
+.content-bloc {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.content__item {
+   width: 100%;
+   padding: 60px 0px;
+   display: grid;
+   grid-template-columns: 60px auto 100px;
+   grid-template-rows: 1fr 1fr;
+   gap: 15px;
+   align-items: center;
+   position: relative;
+}
+
+.content__check {
+   grid-row-start: 1;
+   grid-row-end: span 2;
+}
+
+.content__todo {
+   font-family: 'Rubik', sans-serif;
+   font-size: 18px;
+   color: #9D9D9D;
+   width: 100%;
+   height: 60px;
+   border: 1px solid #9595C9;
+   border-radius: 5px;
+   padding: 10px;
+   grid-row-start: 1;
+   grid-row-end: span 2;
+}
+
+.content__delete {
+   width: 60px;
+   height: 40px;
+}
+
+.content__date {
+   width: 100px;
+   height: 40px;
+   font-family: 'Rubik', sans-serif;
+   font-size: 14px;
+   color: #9D9D9D;
+   border: 1px solid #9595C9;
+   border-radius: 5px;
+   padding: 10px;
+}
