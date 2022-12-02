@@ -62,29 +62,14 @@ header__add.style.cssText = `
 
 let container = document.createElement("div");
 container.classList.add("container");
-container.style.cssText = `
-    height: 80px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 8px;
-    margin-bottom: 20px;
-`;
-
-// append elements
-
-root.appendChild(wrapper);
-wrapper.appendChild(header);
-header.append(header__delete, header__input, header__add);
 
 let arr = ["Todo text 1", "Todo text 2", "Todo text 3"];
 
 for (let i = 0; i < arr.length; i++) {
 
-    let container = document.createElement("div");
-    container.classList.add("container");
-    container.style.cssText = `
+    let container__item = document.createElement("div");
+    container__item.classList.add("container__item");
+    container__item.style.cssText = `
         height: 80px;
         display: flex;
         justify-content: space-around;
@@ -138,8 +123,14 @@ for (let i = 0; i < arr.length; i++) {
         border-radius: 6px;
     `;
 
-    wrapper.appendChild(container);
-    container.append(container__status, container__text, container__column);
+    container.appendChild(container__item);
+    container__item.append(container__status, container__text, container__column);
     container__column.append(deleteButton, container__date);
 
 }
+
+// append elements
+
+root.appendChild(wrapper);
+wrapper.append(header, container);
+header.append(header__delete, header__input, header__add);
