@@ -45,6 +45,61 @@ let setCardBG = function(){
     (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
 }
 
+let addCard = function(){
+    let obj = {};
+    let date = new Date();
+
+    if (!(panelCardActionsInputToDo.value === "") && !(panelCardActionsInputToDo.value === " ")){
+        obj.id = 0;
+        obj.task = panelCardActionsInputToDo.value;
+        obj.status = false;
+        obj.date = `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `;
+    
+        main.push(obj);
+        createCard(obj);
+        panelCardActionsInputToDo.value = "";
+    } 
+    ///да;е и незнаю что учше этот код или пустой if и полный else
+}
+
+function createCard (item){
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.style.cssText = cssCard;
+
+let cardStatus = document.createElement("input");
+    cardStatus.setAttribute("type", "checkbox");
+    cardStatus.checked = item.status;
+    cardStatus.classList.add("card--status");
+    cardStatus.style.cssText = cssCardStatus;
+    if (item.status){
+        card.style.backgroundColor= "gray";
+    }
+let cardDate = document.createElement("div");
+    cardDate.classList.add("card--date");
+    cardDate.textContent = item.date
+    cardDate.style.cssText = cssCardDate
+
+let cardText = document.createElement("div");
+    cardText.classList.add("card--text");
+    cardText.textContent = item.task
+    cardText.style.cssText = cssCardText
+    if (item.status){
+        cardText.style.textDecoration = "line-through";
+    }
+
+let cardCloseButton = document.createElement("div");
+    cardCloseButton.classList.add("card--date");
+    cardCloseButton.textContent = "X"
+    cardCloseButton.style.cssText = cssCardCloseButton;
+    cardCloseButton.addEventListener("click", deleteCard);
+
+
+    cardStatus.addEventListener("click", setCardBG);
+
+    panelCardsAera.appendChild(card);
+    card.append(cardStatus, cardText, cardCloseButton, cardDate); 
+}
 //css 
 
 let cssWrapper = `
@@ -187,6 +242,7 @@ let panelCardActionsInputToDo = document.createElement("input");
 let panelCardActionsButtonAdd = document.createElement("button");
     panelCardActionsButtonAdd.textContent = "Add";
     panelCardActionsButtonAdd.style.cssText = cssPanelButton;
+    panelCardActionsButtonAdd.addEventListener("click", addCard);
 
 
 
@@ -222,43 +278,7 @@ let panelCardsAera = document.createElement("div");
 
 // cards    
 main.forEach(function(item){
-    let card = document.createElement("div");
-    card.classList.add("card");
-    card.style.cssText = cssCard;
-
-let cardStatus = document.createElement("input");
-    cardStatus.setAttribute("type", "checkbox");
-    cardStatus.checked = item.status;
-    cardStatus.classList.add("card--status");
-    cardStatus.style.cssText = cssCardStatus;
-    if (item.status){
-        card.style.backgroundColor= "gray";
-    }
-let cardDate = document.createElement("div");
-    cardDate.classList.add("card--date");
-    cardDate.textContent = item.date
-    cardDate.style.cssText = cssCardDate
-
-let cardText = document.createElement("div");
-    cardText.classList.add("card--text");
-    cardText.textContent = item.task
-    cardText.style.cssText = cssCardText
-    if (item.status){
-        cardText.style.textDecoration = "line-through";
-    }
-
-let cardCloseButton = document.createElement("div");
-    cardCloseButton.classList.add("card--date");
-    cardCloseButton.textContent = "X"
-    cardCloseButton.style.cssText = cssCardCloseButton;
-    cardCloseButton.addEventListener("click", deleteCard);
-
-
-    cardStatus.addEventListener("click", setCardBG);
-
-    panelCardsAera.appendChild(card);
-    card.append(cardStatus, cardText, cardCloseButton, cardDate); 
-
+    createCard(item);
 })
 
 // append
