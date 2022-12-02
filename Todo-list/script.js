@@ -1,25 +1,27 @@
 'use strict'
 
 //
+//date
+let date = new Date();
 
 let main = [
     {
         id: 1,
         task: "Todo text",
         status: false,
-        date: "date1"
+        date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
     },
     {
         id: 2,
         task: "Todo text",
         status: true,
-        date: "date2"
+        date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
     },
     {
         id: 3,
         task: "Todo text",
         status: false,
-        date: "date3"
+        date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `
     },
 ]
 
@@ -27,6 +29,13 @@ let main = [
 
 //functions
 
+let deleterCard = function(){
+   this.closest(".card").remove();
+}
+
+let deleterAllCards = function(){
+    panelCardsAera.innerHTML = "";
+}
 //css 
 
 let cssWrapper = `
@@ -106,8 +115,9 @@ let cssCardDate = `
     text-align: center;
     min-width: 80px;
     height: 30px;
-    padding: 5px;
+    padding: 10px 5px ;
     color: gray;
+    font-size: 10px;
 `;
 
 let cssCardText = `
@@ -154,6 +164,8 @@ let panelCardActions = document.createElement("div");
 let panelCardActionsButtonDeleteAll = document.createElement("button");
     panelCardActionsButtonDeleteAll.textContent = "Delete All";
     panelCardActionsButtonDeleteAll.style.cssText = cssPanelButton;
+    panelCardActionsButtonDeleteAll.addEventListener("click", deleterAllCards);
+
 let panelCardActionsButtonDeleteLast = document.createElement("button");
     panelCardActionsButtonDeleteLast.textContent = "Delete last";
     panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
@@ -225,6 +237,7 @@ let cardCloseButton = document.createElement("div");
     cardCloseButton.classList.add("card--date");
     cardCloseButton.textContent = "X"
     cardCloseButton.style.cssText = cssCardCloseButton;
+    cardCloseButton.addEventListener("click", deleterCard);
 
     panelCardsAera.appendChild(card);
     card.append(cardStatus, cardText, cardCloseButton, cardDate); 
