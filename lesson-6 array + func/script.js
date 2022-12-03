@@ -148,33 +148,58 @@ console.log(summOfCredit);
 // #### Task 2 👨‍🏫 ####
 
 let originalStr = 'This website is for losers LOL!';
-let strictedLetters = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u'];
+const pattern = /[AaEeIiOoUu]/
 let strToArr = originalStr.split('');
 
-function matcLetters(){
-    for(let i = 0; i < strictedLetters.length; i++){
-        return !(item == strictedLetters[i]);
-        }
-}
-
 let result = strToArr.filter(function(item){
-    return matcLetters()
-    }
-)
-console.log(result);
+    return !pattern.exec(item)
+})
 
-// let result = strToArr.filter(function(item){
-//     for(let i = 0; i<strToArr.length; i++){
-//         for(let j = 0; j<strictedLetters.length; j++){
-//             return !(item == strictedLetters[j])
-//             }
-//         }
-//     }
-// )
-// console.log(result);
+let modifiedSrting = result.join("");
+
+console.log(modifiedSrting);
+
+
 
 // #### Task 3 👨‍🏫 ####
 
-let accum = 'string';
+let accum = 'RqaEzty';
 let strToArray = accum.split('');
-letNewArray = strToArray.map((item, index) => )
+let newArray = strToArray.map((item, index) => item.repeat(index + 1));
+
+let arr = newArray.map((item) => item.charAt(0).toUpperCase() + item.slice(1));
+
+let modifyString = arr.join("-");
+console.log(modifyString);
+
+
+
+// #### Task 4 👨‍🏫 ####
+
+let highAndLow = "1 4 3 2 5";
+let arrHighAndLow = highAndLow.split(' ');
+
+arrHighAndLow.sort((a, b) => a - b);
+
+console.log(`${arrHighAndLow[arrHighAndLow.length - 1]} ${arrHighAndLow[0]}`);
+
+
+
+// #### Task 5 👨‍🏫 ####
+
+let word = 'moOse';
+let wordToArr = word.split('');
+function isIsogram(wordToArr){
+  for (let i = 0; i < wordToArr.length; i++){
+    let temporary = wordToArr[i]
+        for (j = 0; j < wordToArr.length; j++){
+            if (temporary === wordToArr[j]){
+                return console.log(temporary);
+            } return false;
+        }
+  }
+}
+
+
+console.log(isIsogram(wordToArr));
+console.log(wordToArr);
