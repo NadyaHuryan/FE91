@@ -108,22 +108,24 @@ selectedItem.style.cssText = `
     background-color: aquamarine;
 `;
 
-let itemInput = document.createElement("input");
+let itemInput = document.createElement("div");
 itemInput.classList.add("item__input");
-itemInput.setAttribute("type", "text");
-itemInput.setAttribute("placeholder", "Todo text");
-itemInput.setAttribute("name", "item_text");
 itemInput.style.cssText = `
     height: 70px;
     width: 450px;
     padding-left: 50px;
+    background-color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 23px;
+    line-height: 70px;
     font-weight: bolder;
     color: gray;
     border: 1px solid #c7c6c6;
     border-radius: 10px;
 `;
+
+let itemInputText = document.createElement("p");
+itemInput.classList.add("item__input-text");
 
 let rightPart = document.createElement("div");
 rightPart.classList.add("right__part");
@@ -143,6 +145,7 @@ delItemButton.style.cssText = `
     width: 65px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 23px;
+    line-height: 40px;
     font-weight: bolder;
     padding-bottom: 10px;
     border: 4px solid black;
@@ -150,14 +153,20 @@ delItemButton.style.cssText = `
     background-color: aquamarine;
 `;
 
-let dateInput = document.createElement("input");
+let dateInput = document.createElement("div");
 dateInput.classList.add("date");
 dateInput.style.cssText = `
     height: 45px;
     width: 110px;
+    padding-left: 15px;
+    line-height: 40px;
+    background-color: white;
     border: 1px solid #c7c6c6;
     border-radius: 10px;
 `;
+
+let dateInputText = document.createElement("p");
+itemInput.classList.add("date-text");
 
 // append elements
 
@@ -166,4 +175,6 @@ container.append(buttonPannel, todoPannel);
 buttonPannel.append(delButton, addInput, addButton);
 todoPannel.append(todoItem);
 todoItem.append(selectedItem, itemInput, rightPart);
+itemInput.append(itemInputText);
 rightPart.append(delItemButton, dateInput);
+dateInput.append(dateInputText);
