@@ -37,19 +37,30 @@ let deleteCard = function(){
 
    parent.remove();
    setPanelCardInfoCounterAll();
+   setPanelCardInfoCounterComplited();
 }
 
 let deleteAllCards = function(){
     panelCardsAera.innerHTML = "";
     main.length = 0;
+    completed.length = 0;
     setPanelCardInfoCounterAll();
+    setPanelCardInfoCounterComplited();
 }
 
 let deleteLastCard = function(){
     let last = document.querySelectorAll(".card");
     last[last.length - 1].remove();
+    
+    let key =  completed.some( item => item.id === main[main.length - 1].id);
+    if (key){
+        let newCompleted = completed.filter(item => item.id != main[main.length - 1].id);
+        completed.length = 0;
+        completed = [...newCompleted];
+    }
     main.pop();
     setPanelCardInfoCounterAll();
+    setPanelCardInfoCounterComplited();
 }
 
 let setCardBG = function(){
@@ -60,9 +71,15 @@ let setCardBG = function(){
     (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
 
 }
+
 let setPanelCardInfoCounterAll = function(){
     panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;
 }
+let setPanelCardInfoCounterComplited = function(){
+    panelCardInfoCounterCompleted.innerHTML = `Completed: <span>${completed.length}</span>`; 
+
+}
+
 
 
 
@@ -84,7 +101,7 @@ let addCard = function(){
         createCard(obj);
         panelCardActionsInputToDo.value = "";
 
-        panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;
+        setPanelCardInfoCounterAll();
     } 
     ///да и незнаю что лучше этот код или пустой if и полный else
 }
@@ -102,7 +119,13 @@ function createCard (item){
         cardStatus.style.cssText = cssCardStatus;
         if (item.status){
             card.style.backgroundColor= "gray";
-            completed.push(item);
+
+            let key =  completed.some( elem => elem.id === item.id);
+            if (key == false){
+                completed.push(item);
+            }
+            
+            // проверка на содержание самого себя
         }
 
 
@@ -127,11 +150,32 @@ function createCard (item){
         cardCloseButton.addEventListener("click", deleteCard);
 
 
-        cardStatus.addEventListener("click", setCardBG);
-
+        cardStatus.addEventListener("click",setCardBG);
+        cardStatus.addEventListener("click", function(){
+             item.status = cardStatus.checked;
+             if(item.status){
+                completed.push(item);
+             }else{
+                let parent = this.closest(".card")
+                let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
+                completed.length = 0;
+                completed = [...newCompleted];
+             }
+     
+            setPanelCardInfoCounterComplited();
+        });
 
         panelCardsAera.appendChild(card);
         card.append(cardStatus, cardText, cardCloseButton, cardDate); 
+}
+
+function createCardsAera(arr){ 
+    arr.forEach(function(item){
+        createCard(item);
+    })
+
+    setPanelCardInfoCounterAll();
+    setPanelCardInfoCounterComplited(); 
 }
 
 //css 
@@ -295,18 +339,26 @@ let panelCardInfo = document.createElement("div");
     panelCardInfo.style.cssText=cssPanel;
 
 let panelCardInfoCounterAll= document.createElement("div");
-    panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;    
+    setPanelCardInfoCounterAll();
 
 let panelCardInfoCounterCompleted = document.createElement("div");
-    panelCardInfoCounterCompleted.innerHTML = `Completed: <span>${completed.length}</span>`; 
+    setPanelCardInfoCounterComplited();
 
 let panelCardInfoButtonShowAll = document.createElement("button");
     panelCardInfoButtonShowAll.textContent = "Show All";
     panelCardInfoButtonShowAll.style.cssText = cssPanelButton;
+    panelCardInfoButtonShowAll.addEventListener("click",function(){
+        panelCardsAera.innerHTML = "";
+        createCardsAera(main);
+    })
 
 let panelCardInfoButtonShowCompleted = document.createElement("button");
     panelCardInfoButtonShowCompleted.textContent = "Show Completed";
-    panelCardInfoButtonShowCompleted.style.cssText = cssPanelButton;    
+    panelCardInfoButtonShowCompleted.style.cssText = cssPanelButton;
+    panelCardInfoButtonShowCompleted.addEventListener("click", function(){
+        panelCardsAera.innerHTML = "";
+        createCardsAera(completed);
+    }); 
 
 let panelCardInfoInputSearch = document.createElement("input");
     panelCardInfoInputSearch.setAttribute("type", "text");
@@ -317,11 +369,8 @@ let panelCardsAera = document.createElement("div");
     panelCardsAera.classList.add("cards-aera");
 
 
-// cards    
-main.forEach(function(item){
-    createCard(item);
-})
-
+// cards 
+ createCardsAera(main);
 
 // append
 
