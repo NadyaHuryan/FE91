@@ -25,16 +25,31 @@ let main = [
     },
 ]
 
-
+let completed = [];
 
 //functions
 
 let deleteCard = function(){
-   this.closest(".card").remove();
+   let parent = this.closest(".card")
+
+    let newMain = main.filter(item => item.id != parent.getAttribute('data-id'));
+    main = [...newMain];
+
+   parent.remove();
+   setPanelCardInfoCounterAll();
 }
 
 let deleteAllCards = function(){
     panelCardsAera.innerHTML = "";
+    main.length = 0;
+    setPanelCardInfoCounterAll();
+}
+
+let deleteLastCard = function(){
+    let last = document.querySelectorAll(".card");
+    last[last.length - 1].remove();
+    main.pop();
+    setPanelCardInfoCounterAll();
 }
 
 let setCardBG = function(){
@@ -43,14 +58,24 @@ let setCardBG = function(){
 
     let text = card.querySelector(".card--text");
     (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
+
 }
+let setPanelCardInfoCounterAll = function(){
+    panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;
+}
+
+
 
 let addCard = function(){
     let obj = {};
     let date = new Date();
 
     if (!(panelCardActionsInputToDo.value === "") && !(panelCardActionsInputToDo.value === " ")){
-        obj.id = 0;
+
+        let maxId = main.map((item) => item.id);
+        maxId.sort((a,b) => a - b);
+
+        obj.id = maxId.at(-1) + 1;
         obj.task = panelCardActionsInputToDo.value;
         obj.status = false;
         obj.date = `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `;
@@ -58,48 +83,57 @@ let addCard = function(){
         main.push(obj);
         createCard(obj);
         panelCardActionsInputToDo.value = "";
+
+        panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;
     } 
-    ///да;е и незнаю что учше этот код или пустой if и полный else
+    ///да и незнаю что лучше этот код или пустой if и полный else
 }
 
 function createCard (item){
     let card = document.createElement("div");
-    card.classList.add("card");
-    card.style.cssText = cssCard;
+        card.classList.add("card");
+        card.style.cssText = cssCard;
+        card.setAttribute("data-id", item.id);
 
-let cardStatus = document.createElement("input");
-    cardStatus.setAttribute("type", "checkbox");
-    cardStatus.checked = item.status;
-    cardStatus.classList.add("card--status");
-    cardStatus.style.cssText = cssCardStatus;
-    if (item.status){
-        card.style.backgroundColor= "gray";
-    }
-let cardDate = document.createElement("div");
-    cardDate.classList.add("card--date");
-    cardDate.textContent = item.date
-    cardDate.style.cssText = cssCardDate
-
-let cardText = document.createElement("div");
-    cardText.classList.add("card--text");
-    cardText.textContent = item.task
-    cardText.style.cssText = cssCardText
-    if (item.status){
-        cardText.style.textDecoration = "line-through";
-    }
-
-let cardCloseButton = document.createElement("div");
-    cardCloseButton.classList.add("card--date");
-    cardCloseButton.textContent = "X"
-    cardCloseButton.style.cssText = cssCardCloseButton;
-    cardCloseButton.addEventListener("click", deleteCard);
+    let cardStatus = document.createElement("input");
+        cardStatus.setAttribute("type", "checkbox");
+        cardStatus.checked = item.status;
+        cardStatus.classList.add("card--status");
+        cardStatus.style.cssText = cssCardStatus;
+        if (item.status){
+            card.style.backgroundColor= "gray";
+            completed.push(item);
+        }
 
 
-    cardStatus.addEventListener("click", setCardBG);
 
-    panelCardsAera.appendChild(card);
-    card.append(cardStatus, cardText, cardCloseButton, cardDate); 
+    let cardDate = document.createElement("div");
+        cardDate.classList.add("card--date");
+        cardDate.textContent = item.date
+        cardDate.style.cssText = cssCardDate
+
+    let cardText = document.createElement("div");
+        cardText.classList.add("card--text");
+        cardText.textContent = item.task
+        cardText.style.cssText = cssCardText
+        if (item.status){
+            cardText.style.textDecoration = "line-through";
+        }
+
+    let cardCloseButton = document.createElement("div");
+        cardCloseButton.classList.add("card--date");
+        cardCloseButton.textContent = "X"
+        cardCloseButton.style.cssText = cssCardCloseButton;
+        cardCloseButton.addEventListener("click", deleteCard);
+
+
+        cardStatus.addEventListener("click", setCardBG);
+
+
+        panelCardsAera.appendChild(card);
+        card.append(cardStatus, cardText, cardCloseButton, cardDate); 
 }
+
 //css 
 
 let cssWrapper = `
@@ -135,7 +169,7 @@ let cssPanelInput =  `
     flex-grow: 2 ;
     min-height: 60px;
     background-color: white;
-    color: lightgray;
+    color: black;
     padding: 10px;
     text-align: center;
     border: 3px solid black;
@@ -233,16 +267,23 @@ let panelCardActionsButtonDeleteAll = document.createElement("button");
 let panelCardActionsButtonDeleteLast = document.createElement("button");
     panelCardActionsButtonDeleteLast.textContent = "Delete last";
     panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
+    panelCardActionsButtonDeleteLast.addEventListener("click", deleteLastCard);
 
 let panelCardActionsInputToDo = document.createElement("input");
     panelCardActionsInputToDo.setAttribute("type", "text");
     panelCardActionsInputToDo.setAttribute("placeholder", "Enter todo...");
     panelCardActionsInputToDo.style.cssText = cssPanelInput;
+    panelCardActionsInputToDo.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            addCard();
+        }
+    })
 
 let panelCardActionsButtonAdd = document.createElement("button");
     panelCardActionsButtonAdd.textContent = "Add";
     panelCardActionsButtonAdd.style.cssText = cssPanelButton;
     panelCardActionsButtonAdd.addEventListener("click", addCard);
+
 
 
 
@@ -254,10 +295,10 @@ let panelCardInfo = document.createElement("div");
     panelCardInfo.style.cssText=cssPanel;
 
 let panelCardInfoCounterAll= document.createElement("div");
-    panelCardInfoCounterAll.innerHTML = `All: <span>2</span>`;    
+    panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;    
 
 let panelCardInfoCounterCompleted = document.createElement("div");
-    panelCardInfoCounterCompleted.innerHTML = `Completed: <span>1</span>`; 
+    panelCardInfoCounterCompleted.innerHTML = `Completed: <span>${completed.length}</span>`; 
 
 let panelCardInfoButtonShowAll = document.createElement("button");
     panelCardInfoButtonShowAll.textContent = "Show All";
@@ -280,6 +321,7 @@ let panelCardsAera = document.createElement("div");
 main.forEach(function(item){
     createCard(item);
 })
+
 
 // append
 
