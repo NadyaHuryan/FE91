@@ -12,25 +12,43 @@
 </head>
 
 <body>
-   <div id="root">
-      <div class="container">
-         <div class="input-panel">
-            <button class="input-panel__delete button">Delete All</button>
-            <input type="text" class="input-panel__content">
-            <button class="input-panel__add button">Add</button>
-         </div>
-         <div class="content-bloc">
-            <div class="content__item">
-               <input class="content__check" type="checkbox">
-               <div class="content__todo">Text todo</div>
-               <button class="content__delete button">X</button>
-               <input class="content__date" type="date">
+   <div class="wrapper">
+      <div class="root" id="root">
+         <div class="container">
+            <div class="options-bar">
+               <div class="options-bar__input-panel">
+                  <button class="option__delete-all button">Delete All</button>
+                  <button class="option__delete-last button">Delete Last</button>
+                  <input class="option__input" type="text" placeholder="Enter todo …">
+                  <button class="option__add button">Add</button>
+               </div>
+               <div class="option-bar__show-panel">
+                  <div class="option__count-all">All: 2</div>
+                  <div class="option__count-completed">Completed: 1</div>
+                  <button class="option__show-all button">Show All</button>
+                  <button class="option__show-completed button">Show Completed</button>
+                  <input class="option__search" type="text">
+               </div>
             </div>
-            <div class="content__item">
-               <input class="content__check" type="checkbox">
-               <div class="content__todo">Text todo</div>
-               <button class="content__delete button">X</button>
-               <input class="content__date" type="date">
+            <div class="todo__wrapper">
+               <div class="todo__item">
+                  <label class="todo__check-label " for="todo">
+                     <input class="todo__check" type="checkbox" id="todo">
+                     <span class="todo__check_upgraded"></span>
+                  </label>
+                  <div class="todo__content">Text todo</div>
+                  <button class="todo__delete button">X</button>
+                  <div class="todo__date button"></div>
+               </div>
+               <div class="todo__item">
+                  <label class="todo__check-label " for="todo">
+                     <input class="todo__check" type="checkbox" id="todo">
+                     <span class="todo__check_upgraded"></span>
+                  </label>
+                  <div class="todo__content">Text todo</div>
+                  <button class="todo__delete button">X</button>
+                  <div class="todo__date"></div>
+               </div>
             </div>
          </div>
       </div>
