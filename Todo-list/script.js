@@ -50,15 +50,18 @@ let deleteAllCards = function(){
 
 let deleteLastCard = function(){
     let last = document.querySelectorAll(".card");
+    let id = last[last.length - 1].getAttribute('data-id')
+
+    let newCompleted = completed.filter(item => item.id != id);
+    completed.length = 0;
+    completed = [...newCompleted];
+
+    let newMain = main.filter(item => item.id != id);
+    main.length = 0;
+    main = [...newMain];
+
     last[last.length - 1].remove();
-    
-    let key =  completed.some( item => item.id === main[main.length - 1].id);
-    if (key){
-        let newCompleted = completed.filter(item => item.id != main[main.length - 1].id);
-        completed.length = 0;
-        completed = [...newCompleted];
-    }
-    main.pop();
+
     setPanelCardInfoCounterAll();
     setPanelCardInfoCounterComplited();
 }
@@ -312,6 +315,7 @@ let panelCardActionsButtonDeleteLast = document.createElement("button");
     panelCardActionsButtonDeleteLast.textContent = "Delete last";
     panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteLast.addEventListener("click", deleteLastCard);
+
 
 let panelCardActionsInputToDo = document.createElement("input");
     panelCardActionsInputToDo.setAttribute("type", "text");
