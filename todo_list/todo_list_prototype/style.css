@@ -84,6 +84,7 @@ body {
    display: flex;
    flex-direction: column;
    gap: 15px;
+   position: sticky;
 }
 
 .options-bar__input-panel {
