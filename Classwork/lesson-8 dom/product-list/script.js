@@ -7,7 +7,7 @@ root.style.cssText = `
     margin: 0 auto;
 `;
 
-
+/*
 //header
 let header = document.createElement("header");
 header.classList.add("header");
@@ -95,3 +95,4 @@ container.append(infoPanel, addPanel, listPanel, deletePanel);
 infoPanel.append(infoPanelCount, infoPanelBought)
 addPanel.append(addPanelInput, addPanelButton)
 deletePanel.append(deletePanelSelect, deletePanelDelete)
+*/
