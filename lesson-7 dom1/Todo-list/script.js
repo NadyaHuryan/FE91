@@ -17,7 +17,7 @@ let checkTabStatus = function() {
     let tabText = parent.querySelector(".container__text");
     if (this.checked) {
         tabText.style.textDecoration = "line-through";
-        parent.style.background = "green";
+        parent.style.background = "gray";
 
     } else {
         tabText.style.textDecoration = "none";
@@ -89,7 +89,7 @@ let createNewTab = function(obj) {
 
     let container__date = document.createElement("div");
     container__date.classList.add("container__date");
-    let date = randomDate(new Date(2012, 0, 1), new Date());
+    let date = randomDate(new Date(), new Date(2023, 11, 1));
     container__date.innerHTML = date.toDateString();
     container__date.style.cssText = `
         background-color: white;
