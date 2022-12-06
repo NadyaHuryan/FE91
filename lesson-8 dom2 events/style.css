@@ -1,0 +1,17 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.active{
+    position: absolute;
+top:0;
+left:0;
+width:30px; 
+height:30px;
+background: url(img/checkbox.png) no-repeat center center;
+background-size: contain;
+background-color: white;
+display: block;
+border-radius: 5px;
+}
