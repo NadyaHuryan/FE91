@@ -4,13 +4,8 @@ let root = document.getElementById("root")
 root.style.cssText = `
     width: 800px;
     border: 1px solid black;
-<<<<<<< HEAD
-    margin: 0 auto;
-=======
     margin: 50px auto;
     font-size: 18px;
-
->>>>>>> main
 `;
 
 
@@ -26,10 +21,8 @@ header.style.cssText = `
     align-items: center;
     font-size: 30px;
     color: white;
-<<<<<<< HEAD
-=======
     margin-bottom: 20px;
->>>>>>> main
+
 `;
 
 // .container
@@ -39,33 +32,26 @@ container.classList.add("container");
 // .infoPanel
 let infoPanel = document.createElement("div");
 infoPanel.classList.add("info-panel");
-<<<<<<< HEAD
-=======
 infoPanel.style.cssText = `
     display: flex;
     margin-bottom: 20px;
     column-gap: 20px;
 `
->>>>>>> main
 
 let infoPanelCount = document.createElement("div");
 infoPanelCount.classList.add("info-panel__count");
 infoPanelCount.innerHTML = `Количество: <span>3</span>`;
 
-let infoPanelBought= document.createElement("div");
+let infoPanelBought = document.createElement("div");
 infoPanelBought.classList.add("info-panel__bought");
 infoPanelBought.innerHTML = `Куплено: <span>3</span>`;
 
 // .addPanel
 let addPanel = document.createElement("div");
-<<<<<<< HEAD
-infoPanel.classList.add("add-panel");
-=======
 addPanel.classList.add("add-panel");
 addPanel.style.cssText = `
     margin-bottom: 20px;
 `
->>>>>>> main
 
 let addPanelInput = document.createElement("input");
 addPanelInput.classList.add("add-panel__textfield");
@@ -86,11 +72,6 @@ listPanel.classList.add("list-panel");
 let arr = ["Йогурт", "Кровать", "Шторы"];
 
 for (let i = 0; i < arr.length; i++) {
-<<<<<<< HEAD
-
-    let listPanelProduct = document.createElement("div");
-    listPanelProduct.classList.add("list-panel__product");
-=======
     let listPanelItem = document.createElement("div");
     listPanelItem.classList.add("list-panel__item");
     listPanelItem.style.cssText = `
@@ -102,7 +83,6 @@ for (let i = 0; i < arr.length; i++) {
     let listPanelProduct = document.createElement("div");
     listPanelProduct.classList.add("list-panel__product");
     listPanelProduct.style.cssText = ``;
->>>>>>> main
     listPanelProduct.innerHTML = `<b>${arr[i]}</b>`
 
     let listPanelStatus = document.createElement("input");
@@ -110,13 +90,8 @@ for (let i = 0; i < arr.length; i++) {
 
     let listPanelDelete = document.createElement("button");
     listPanelDelete.innerHTML = "X";
-
-<<<<<<< HEAD
-    listPanel.append(listPanelProduct, listPanelStatus, listPanelDelete);
-=======
     listPanel.appendChild(listPanelItem)
     listPanelItem.append(listPanelProduct, listPanelStatus, listPanelDelete);
->>>>>>> main
 }
 
 let deletePanel = document.createElement("div");
