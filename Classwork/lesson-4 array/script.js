@@ -25,13 +25,13 @@ arr[32] = 40;
 arr["fruit"] = "Apple"; // нечисловые индексы, но лучше так не делать
 console.log(arr); // пустые индексы ()
 console.log(arr[2]); //undefined
-console.log(arr["fruit"]); 
+console.log(arr["fruit"]);
 console.log(arr[0]); // 1
 
 //length - длина массива. Всегда на 1 больше чем последний индекс
 console.log(arr.length); // 33
 
-console.log(arr[arr.length-1]); // как получить последний элемент в массиве?
+console.log(arr[arr.length - 1]); // как получить последний элемент в массиве?
 console.log(arr)
 arr.length = 2; // что произойдет и почему лучше не делать
 console.log(arr)
@@ -41,7 +41,7 @@ let arr3 = [a, b, c]; // передаем переменные в массив
 
 console.log(arr3)
 
-let arr4 = [  
+let arr4 = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 8]
@@ -67,7 +67,7 @@ for (let value of fruits) {
   console.log(value);
 }
 for (let value in fruits) { //используется только для объектов, для массивов нет!
-  console.log("for in "+value);
+  console.log("for in " + value);
 }
 
 
@@ -88,7 +88,7 @@ console.log(fruits);
 fruits.shift(); // ["Яблоко", "Апельсин", "Груша"]
 
 // можно сохранять удаленные элементы в переменные
-let lastFruit = fruits.pop(); 
+let lastFruit = fruits.pop();
 console.log(lastFruit); // "Груша"
 console.log(fruits); //["Яблоко", "Апельсин"]
 
@@ -104,7 +104,7 @@ console.log(arr) // образовалась дырка
 console.log(arr[1]);
 
 
-arr = [1 , undefined, 3]
+arr = [1, undefined, 3]
 console.log(arr)
 
 
@@ -188,7 +188,7 @@ console.log(arr)
 
 //  Копирование массива
 console.log("New Arrs")
-arr = [1, 2, 3, 4 ,5];
+arr = [1, 2, 3, 4, 5];
 const arrCopy = arr;
 console.log(arr);
 console.log(arrCopy);
@@ -199,7 +199,7 @@ console.log(arrCopy); //
 
 // как можно решить задачу?
 // Способ 1
-arr = [1, 2, 3, 4 ,5];
+arr = [1, 2, 3, 4, 5];
 let arrCopy1 = [];
 for (let i = 0; i < arr.length; i++) {
   arrCopy1.push(arr[i]);
@@ -209,7 +209,7 @@ console.log(arr)
 console.log(arrCopy1)
 
 // Способ 2
-arr = [1, 2, 3, 4 ,5];
+arr = [1, 2, 3, 4, 5];
 arrCopy1 = arr.slice(0);
 arr.push(6);
 console.log(arr)
@@ -224,7 +224,7 @@ arr3 = arr.concat(arr2);
 console.log(arr3)
 
 // Способ 4
-arr = [1, 2, 3, 4 ,5];
+arr = [1, 2, 3, 4, 5];
 arrCopy1 = [...arr];
 arr.push(6);
 console.log(arr);
@@ -253,7 +253,7 @@ for (let i = 0; i < arr2.length; i++) {
 // все отриц сделать положит
 
 arr2 = [-2, -1, -3, 15, 0, -4, 2, -5, 9, -15, 0, 4, 5, -6, 10, 7];
-for (let i = 0; i < arr2.length; i++) { 
+for (let i = 0; i < arr2.length; i++) {
   if (arr2[i] < 0) {
     arr2[i] = arr2[i] * (-1);
   }
@@ -288,7 +288,7 @@ console.log(colors.length);
 // Выведите в консоль его последний элемент вне зависимости от его длинны.
 
 const animals = ['monkey', 'dog', 'cat'];
-console.log(animals[animals.length-1]);
+console.log(animals[animals.length - 1]);
 console.log(animals.at(-1));
 
 // Task 3 🖥
@@ -306,4 +306,66 @@ console.log(numbers);
 const numbers = [5, 43, 63, 23, 90];
 numbers.splice(0);
 console.log(numbers);
+
+// Вычислите среднюю зарплату сотрудников и результат поместите в соответствующую переменную
+
+let sumCount = 0;
+let count = 0;
+let salaries = {
+  andreyK: 500,
+  sveta: 413,
+  anton: 987,
+  andrey: 664,
+  alexandra: 199
+}
+for (let item in salaries) {
+  console.log(salaries[item]);
+  sumCount += salaries[item];
+  count++;
+
+}
+let avg = sumCount / count;
+console.log(avg)
+
+console.log(salaries)
+
+//Создать валидатор, запросить у пользователя логин и пароль для регистрации. Затем данные записать в обьект. 
+//Потом попросить пользователя подтвердить данные. Если верно введен логин и пароль, вывести сообщение Добро пожалоВать
+
+let userCheck = function () {
+  let userLoginCheck = prompt('Подтвердите логин'),
+    userPassCheck = prompt('Подтвердите пароль');
+  if (userLoginCheck === this.login && userPassCheck === this.pass) {
+    console.log('Добро пожаловать');
+  } else {
+    console.log('Неверно');
+  }
+}
+
+let userInfo = function () {
+  let userLogin = prompt('Введите логин'),
+    userPass = prompt('Введите пароль'),
+    userInfoObj = {
+      login: userLogin,
+      pass: userPass,
+      check: userCheck
+    };
+  return userInfoObj;
+}
+
+let user1 = userInfo();
+
+user1.check();
+
+
+//ТАблица умножения
+
+
+let i = 0;
+for (i = 1; i <= 10; i++) {
+  document.write(i + `<br> `);
+  for (let j = 1; j <= 10; j++) {
+    document.write(`${i} * ${j} = ${i * j} <br>`)
+  }
+}
 
