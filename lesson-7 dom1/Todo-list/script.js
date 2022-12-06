@@ -180,6 +180,11 @@ addHeaderInput.style.cssText = `
     border: 2px solid black;
     border-radius: 8px;
 `;
+addHeaderInput.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        addNewTab();
+    }
+})
 
 let addHeaderButton = document.createElement("button");
 addHeaderButton.classList.add("header__add");
