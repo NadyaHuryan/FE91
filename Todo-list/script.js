@@ -1,72 +1,105 @@
 'use strict'
 
-//
+// storage 
+
+window.addEventListener("load", () => {
+
+
 //date
-let date = new Date();
+let date = new Date(Date.now());
 
-let main = [
-    {
-        id: 1,
-        task: "Побрить ноги",
-        status: false,
-        date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
-    },
-    {
-        id: 2,
-        task: "Купить шорты",
-        status: true,
-        date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
-    },
-    {
-        id: 3,
-        task: "Открыть шпроты",
-        status: false,
-        date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `
-    },
-]
 
-let completed = [];
+// arrays
+    let main = [
+        {
+            id: 1,
+            task: "Побрить ноги",
+            status: false,
+            date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
+        },
+        {
+            id: 2,
+            task: "Купить шорты",
+            status: true,
+            date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
+        },
+        {
+            id: 3,
+            task: "Открыть шпроты",
+            status: false,
+            date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `
+        },
+    ]
+    let completed = [];
+    let searched = [];
+
+// sorage 
+const getName = function(){
+    main = JSON.parse(localStorage.getItem("todo"));
+
+}
+const setName = function(){
+    localStorage.setItem("todo",JSON.stringify(main));
+};
+
+if (!localStorage.getItem("todo")){
+    setName();
+} else{
+    getName();
+}
 
 //functions
+const deleteCard = function(){
+    let result = confirm("Delete Card?");
+    if (result){
+        let parent = this.closest(".card")
 
-let deleteCard = function(){
-   let parent = this.closest(".card")
+            let newMain = main.filter(item => item.id != parent.getAttribute('data-id'));
+            main = [...newMain];
 
-    let newMain = main.filter(item => item.id != parent.getAttribute('data-id'));
-    main = [...newMain];
-
-   parent.remove();
-   setPanelCardInfoCounterAll();
-   setPanelCardInfoCounterComplited();
+        parent.remove();
+        setName();
+        setPanelCardInfoCounterAll();
+        setPanelCardInfoCounterComplited();
+    }
 }
 
-let deleteAllCards = function(){
-    panelCardsAera.innerHTML = "";
-    main.length = 0;
-    completed.length = 0;
-    setPanelCardInfoCounterAll();
-    setPanelCardInfoCounterComplited();
+const deleteAllCards = function(){
+    let result = confirm("Delete All Cards?");
+    if (result){
+        panelCardsAera.innerHTML = "";
+        main.length = 0;
+        completed.length = 0;
+        setPanelCardInfoCounterAll();
+        setPanelCardInfoCounterComplited()
+        localStorage.removeItem("todo");
+    }
+
+;}
+
+const deleteLastCard = function(){
+    let result = confirm("Delete Last Card?");
+    if (result){
+        let last = document.querySelectorAll(".card");
+        let id = last[last.length - 1].getAttribute('data-id')
+
+        let newCompleted = completed.filter(item => item.id != id);
+        completed.length = 0;
+        completed = [...newCompleted];
+
+        let newMain = main.filter(item => item.id != id);
+        main.length = 0;
+        main = [...newMain];
+
+        last[last.length - 1].remove();
+
+        setName();
+        setPanelCardInfoCounterAll();
+        setPanelCardInfoCounterComplited();
+    }
 }
 
-let deleteLastCard = function(){
-    let last = document.querySelectorAll(".card");
-    let id = last[last.length - 1].getAttribute('data-id')
-
-    let newCompleted = completed.filter(item => item.id != id);
-    completed.length = 0;
-    completed = [...newCompleted];
-
-    let newMain = main.filter(item => item.id != id);
-    main.length = 0;
-    main = [...newMain];
-
-    last[last.length - 1].remove();
-
-    setPanelCardInfoCounterAll();
-    setPanelCardInfoCounterComplited();
-}
-
-let setCardBG = function(){
+const setCardBG = function(){
     let card = this.closest(".card");    
     (this.checked) ? card.style.backgroundColor= "gray" : card.style.backgroundColor= "lightgray";
 
@@ -75,18 +108,31 @@ let setCardBG = function(){
 
 }
 
-let setPanelCardInfoCounterAll = function(){
+const setPanelCardInfoCounterAll = function(){
     panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;
 }
-let setPanelCardInfoCounterComplited = function(){
+const setPanelCardInfoCounterComplited = function(){
     panelCardInfoCounterCompleted.innerHTML = `Completed: <span>${completed.length}</span>`; 
 
 }
 
+const hover = function (color, transition, obj){
+    let curretColor = obj.style.backgroundColor;
+    let hoverColor = color;
+
+    obj.addEventListener("mouseover", function(){
+        obj.style.backgroundColor = hoverColor;
+        obj.style.transition = `background-color ${transition}s`;
+    })
+    obj.addEventListener("mouseout", function(){
+        obj.style.backgroundColor = curretColor;
+    })
+
+}
 
 
 
-let addCard = function(){
+const addCard = function(){
     let obj = {};
     let date = new Date();
 
@@ -103,13 +149,13 @@ let addCard = function(){
         main.push(obj);
         createCard(obj);
         panelCardActionsInputToDo.value = "";
-
+        setName();
         setPanelCardInfoCounterAll();
     } 
     ///да и незнаю что лучше этот код или пустой if и полный else
 }
 
-function createCard (item){
+const createCard = function (item) {
     let card = document.createElement("div");
         card.classList.add("card");
         card.style.cssText = cssCard;
@@ -151,7 +197,8 @@ function createCard (item){
         cardCloseButton.textContent = "X"
         cardCloseButton.style.cssText = cssCardCloseButton;
         cardCloseButton.addEventListener("click", deleteCard);
-
+        hover("red", "0.4", cardCloseButton);
+        
 
         cardStatus.addEventListener("click",setCardBG);
         cardStatus.addEventListener("click", function(){
@@ -166,13 +213,14 @@ function createCard (item){
              }
      
             setPanelCardInfoCounterComplited();
+            setName();
         });
 
         panelCardsAera.appendChild(card);
         card.append(cardStatus, cardText, cardCloseButton, cardDate); 
 }
 
-function createCardsAera(arr){ 
+const createCardsAera = function (arr){ 
     arr.forEach(function(item){
         createCard(item);
     })
@@ -310,11 +358,13 @@ let panelCardActionsButtonDeleteAll = document.createElement("button");
     panelCardActionsButtonDeleteAll.textContent = "Delete All";
     panelCardActionsButtonDeleteAll.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteAll.addEventListener("click", deleteAllCards);
+    hover("red","0.4", panelCardActionsButtonDeleteAll);
 
 let panelCardActionsButtonDeleteLast = document.createElement("button");
     panelCardActionsButtonDeleteLast.textContent = "Delete last";
     panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteLast.addEventListener("click", deleteLastCard);
+    hover("red","0.4", panelCardActionsButtonDeleteLast);
 
 
 let panelCardActionsInputToDo = document.createElement("input");
@@ -331,6 +381,8 @@ let panelCardActionsButtonAdd = document.createElement("button");
     panelCardActionsButtonAdd.textContent = "Add";
     panelCardActionsButtonAdd.style.cssText = cssPanelButton;
     panelCardActionsButtonAdd.addEventListener("click", addCard);
+    hover("yellowgreen","0.4", panelCardActionsButtonAdd);
+
 
 
 
@@ -341,6 +393,7 @@ let panelCardActionsButtonAdd = document.createElement("button");
 let panelCardInfo = document.createElement("div");
     panelCardInfo.classList.add("panel-card-actions");
     panelCardInfo.style.cssText=cssPanel;
+    panelCardInfo.setAttribute("data-search-key", true);
 
 let panelCardInfoCounterAll= document.createElement("div");
     setPanelCardInfoCounterAll();
@@ -354,7 +407,10 @@ let panelCardInfoButtonShowAll = document.createElement("button");
     panelCardInfoButtonShowAll.addEventListener("click",function(){
         panelCardsAera.innerHTML = "";
         createCardsAera(main);
+        panelCardInfo.setAttribute("data-search-key", true);
+        panelCardInfoInputSearch.value = "";
     })
+    hover("yellowgreen","0.4", panelCardInfoButtonShowAll);
 
 let panelCardInfoButtonShowCompleted = document.createElement("button");
     panelCardInfoButtonShowCompleted.textContent = "Show Completed";
@@ -362,12 +418,38 @@ let panelCardInfoButtonShowCompleted = document.createElement("button");
     panelCardInfoButtonShowCompleted.addEventListener("click", function(){
         panelCardsAera.innerHTML = "";
         createCardsAera(completed);
+        panelCardInfo.setAttribute("data-search-key", false);
+        panelCardInfoInputSearch.value = "";
     }); 
+    hover("yellowgreen","0.4", panelCardInfoButtonShowCompleted);
 
 let panelCardInfoInputSearch = document.createElement("input");
     panelCardInfoInputSearch.setAttribute("type", "text");
     panelCardInfoInputSearch.setAttribute("placeholder", "Search..."); 
-    panelCardInfoInputSearch.style.cssText = cssPanelInput; 
+    panelCardInfoInputSearch.style.cssText = cssPanelInput;
+    panelCardInfoInputSearch.addEventListener("keyup", function(){
+        // console.log(this.value)
+        var regexp =`/[${this.value}]/gi`;
+        let value = panelCardInfo.getAttribute("data-search-key");
+        if (value){
+            searched = [];
+            searched = main.filter(item => item.task.includes(this.value));
+
+        } else {
+            searched = [];
+            searched = complited.filter(item => item.task.includes(this.value));
+        }
+        panelCardsAera.innerHTML = "";
+
+        if(searched.length === 0){
+            value ? createCardsAera(main) : createCardsAera(complited);
+        } else{
+            createCardsAera(searched);
+        }
+  
+
+        
+    })
 
 let panelCardsAera = document.createElement("div");
     panelCardsAera.classList.add("cards-aera");
@@ -382,3 +464,5 @@ root.append(wrapper);
 wrapper.append(panelCardActions, panelCardInfo, panelCardsAera);
 panelCardActions.append(panelCardActionsButtonDeleteAll, panelCardActionsButtonDeleteLast, panelCardActionsInputToDo, panelCardActionsButtonAdd);
 panelCardInfo.append(panelCardInfoCounterAll, panelCardInfoCounterCompleted, panelCardInfoButtonShowAll,panelCardInfoButtonShowCompleted, panelCardInfoInputSearch);
+
+})
