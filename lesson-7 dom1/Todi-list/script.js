@@ -1,6 +1,25 @@
 "use strict"
 
-let root = document.getElementById("root")
+let todoList = [
+    {
+    id: 1,
+    todoItem: 'do something',
+    status:true,
+    date: '06.12.2022'
+    },
+]
+
+let checkTodoValue = function(value){
+    if(value === '' || value === ' '){
+        return false
+    } else {
+        return true
+    }
+}
+
+
+
+let root = document.getElementById("root");
 
 // .container
 
