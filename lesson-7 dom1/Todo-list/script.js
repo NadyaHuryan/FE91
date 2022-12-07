@@ -36,7 +36,6 @@ window.addEventListener("load", () => {
         if (this.checked) {
             tabText.style.textDecoration = "line-through";
             parent.style.background = "gray";
-
         } else {
             tabText.style.textDecoration = "none";
             parent.style.background = "gainsboro";
@@ -51,7 +50,7 @@ window.addEventListener("load", () => {
 
     let deleteTab = function () {
         let parent = this.closest(".container__item"); 
-        let tabId = +parent.querySelector(".data-key");
+        let tabId = +parent.getAttribute("data-key");
         let tabFilter = tabData.filter( item => item.id!==tabId);
 
         let tabText = parent.querySelector(".container__text").textContent;
@@ -78,6 +77,7 @@ window.addEventListener("load", () => {
 
         let container__status = document.createElement("input");
         container__status.setAttribute("type", "checkbox");
+        container__status.checked = obj.status;
         container__status.style.cssText = `
             width: 20px;
             height: 20px;
@@ -136,17 +136,18 @@ window.addEventListener("load", () => {
         
         let allId = tabData.map((item) => item.id);
         allId.sort((a,b) => a - b);
-        let maxId = allId.at(-1) + 1;
+        let maxId;
+        (tabData.length === 0) ? maxId = 1 : maxId = allId.at(-1) + 1;
 
-        let product = {
+        let tab = {
             id: maxId,
             name: tabValue,
             status: false,
             date: new Date().toDateString(),
         }
         if (checkTabValue(tabValue)) {
-            createNewTab(product);
-            tabData.push(product);
+            createNewTab(tab);
+            tabData.push(tab);
             updateStorage();
         }
         addHeaderInput.value = "";
