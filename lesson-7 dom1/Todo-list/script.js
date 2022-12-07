@@ -1,5 +1,23 @@
 'use strict'
 
+let tabsAll = [
+    {   id: 1,
+        name: "Test todo 1",
+        status: false, 
+        date: new Date().toDateString(),
+    }, 
+    {   id: 2,
+        name: "Test todo 2",
+        status: false,
+        date: new Date().toDateString(),
+    },
+    {   id: 3,
+        name: "Test todo 3",
+        status: false,
+        date: new Date().toDateString(),
+    }
+]
+
 let checkTabValue = function(value) {
     if (value === "" || value === " ") {
         return false
@@ -31,15 +49,20 @@ let deleteAllTabs = function () {
 
 let deleteTab = function () {
     let parent = this.closest(".container__item"); 
+    let tabId = +parent.querySelector(".data-key");
+    let tabFilter = tabsAll.filter( item => item.id!==tabId);
+
     let tabText = parent.querySelector(".container__text").textContent;
     if (confirm(`Вы точно хотите удалить заметку ${tabText}`)) {
         parent.remove();
+        tabsAll = [...tabFilter];
     }
 }
 
 let createNewTab = function(obj) {
     let container__item = document.createElement("div");
     container__item.classList.add("container__item");
+    container__item.setAttribute("data-key", obj.id);
     container__item.style.cssText = `
         height: 80px;
         display: flex;
@@ -60,7 +83,7 @@ let createNewTab = function(obj) {
 
     let container__text = document.createElement("div");
     container__text.classList.add("container__text");
-    container__text.innerHTML = `${obj}`;
+    container__text.innerHTML = `${obj.name}`;
     container__text.style.cssText = `
         width: 250px;
         padding: 10px 0;
@@ -89,8 +112,7 @@ let createNewTab = function(obj) {
 
     let container__date = document.createElement("div");
     container__date.classList.add("container__date");
-    let date = randomDate(new Date(), new Date(2023, 11, 1));
-    container__date.innerHTML = date.toDateString();
+    container__date.innerHTML = `${obj.date}`;
     container__date.style.cssText = `
         background-color: white;
         padding: 2px 20px;
@@ -109,18 +131,19 @@ let addNewTab = function() {
     let tabValue = addHeaderInput.value;
 
     
-    // let allId = productsAll.map((item) => item.id);
-    // allId.sort((a,b) => a - b);
-    // let maxId = allId.at(-1) + 1;
+    let allId = tabsAll.map((item) => item.id);
+    allId.sort((a,b) => a - b);
+    let maxId = allId.at(-1) + 1;
 
-    // let product = {
-    //     id: maxId,
-    //     name: productValue,
-    //     status: false
-    // }
+    let product = {
+        id: maxId,
+        name: tabValue,
+        status: false,
+        date: new Date().toDateString(),
+    }
     if (checkTabValue(tabValue)) {
-        createNewTab(tabValue);
-        // productsAll.push(product);
+        createNewTab(product);
+        tabsAll.push(product);
     }
     addHeaderInput.value = "";
 }
@@ -203,8 +226,8 @@ container.classList.add("container");
 
 let arr = ["Todo text 1", "Todo text 2", "Todo text 3"];
 
-for (let i = 0; i < arr.length; i++) {
-    createNewTab(arr[i]);
+for (let i = 0; i < tabsAll.length; i++) {
+    createNewTab(tabsAll[i]);
 }
 
 // append elements
