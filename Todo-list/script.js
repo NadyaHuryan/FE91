@@ -239,6 +239,8 @@ let cssWrapper = `
     background-color: lightgray;
     border-radius: 20px;
     padding: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
 `;
 
 let cssPanel = `
