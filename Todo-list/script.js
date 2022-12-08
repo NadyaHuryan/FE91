@@ -430,27 +430,20 @@ let panelCardInfoInputSearch = document.createElement("input");
     panelCardInfoInputSearch.setAttribute("placeholder", "Search..."); 
     panelCardInfoInputSearch.style.cssText = cssPanelInput;
     panelCardInfoInputSearch.addEventListener("keyup", function(){
-        // console.log(this.value)
-        var regexp =`/[${this.value}]/gi`;
+        let regexp = new RegExp([`${this.value}`],'ig' );
         let value = panelCardInfo.getAttribute("data-search-key");
         if (value){
             searched = [];
-            searched = main.filter(item => item.task.includes(this.value));
+            searched = main.filter(item => regexp.test(item.task));
 
         } else {
             searched = [];
-            searched = complited.filter(item => item.task.includes(this.value));
+            searched = complited.filter(item => regexp.test(item.task));
+
         }
         panelCardsAera.innerHTML = "";
 
-        if(searched.length === 0){
-            value ? createCardsAera(main) : createCardsAera(complited);
-        } else{
-            createCardsAera(searched);
-        }
-  
-
-        
+        createCardsAera(searched);
     })
 
 let panelCardsAera = document.createElement("div");
