@@ -2,20 +2,20 @@
 
 window.addEventListener("load", () => {
 
-    let tabData = [];
+    let todos = [];
 
     let loadPage = function() {
-            let localTabData = localStorage.getItem("tabData");
+            let localTabData = localStorage.getItem("todos");
             if (localTabData) {
-                tabData = JSON.parse(localTabData);
+                todos = JSON.parse(localTabData);
             } 
-            console.log(tabData);
+            console.log(todos);
         }
 
         loadPage();
 
         let updateStorage = function() {
-            localStorage.setItem("tabData",JSON.stringify(tabData));
+            localStorage.setItem("todos",JSON.stringify(todos));
         }
 
     let checkTabValue = function(value) {
@@ -44,19 +44,19 @@ window.addEventListener("load", () => {
 
     let deleteAllTabs = function () {
         container.innerHTML = "";
-        tabData = [];
-        localStorage.removeItem("tabData");
+        todos = [];
+        localStorage.removeItem("todos");
     }
 
     let deleteTab = function () {
         let parent = this.closest(".container__item"); 
         let tabId = +parent.getAttribute("data-key");
-        let tabFilter = tabData.filter( item => item.id!==tabId);
+        let tabFilter = todos.filter( item => item.id!==tabId);
 
         let tabText = parent.querySelector(".container__text").textContent;
         if (confirm(`Вы точно хотите удалить заметку ${tabText}`)) {
             parent.remove();
-            tabData = [...tabFilter];
+            todos = [...tabFilter];
             updateStorage();
         }
     }
@@ -110,6 +110,8 @@ window.addEventListener("load", () => {
         deleteButton.style.cssText = `
             width: 20px;
             height: 20px;
+            border-radius: 4px;
+            background-color: #66e0d6;
         `;
         deleteButton.addEventListener("click", deleteTab);
 
@@ -134,20 +136,20 @@ window.addEventListener("load", () => {
         let tabValue = addHeaderInput.value;
 
         
-        let allId = tabData.map((item) => item.id);
+        let allId = todos.map((item) => item.id);
         allId.sort((a,b) => a - b);
         let maxId;
-        (tabData.length === 0) ? maxId = 1 : maxId = allId.at(-1) + 1;
+        (todos.length === 0) ? maxId = 1 : maxId = allId.at(-1) + 1;
 
-        let tab = {
+        let todo = {
             id: maxId,
             name: tabValue,
             status: false,
             date: new Date().toDateString(),
         }
         if (checkTabValue(tabValue)) {
-            createNewTab(tab);
-            tabData.push(tab);
+            createNewTab(todo);
+            todos.push(todo);
             updateStorage();
         }
         addHeaderInput.value = "";
@@ -190,6 +192,7 @@ window.addEventListener("load", () => {
         padding: 10px;
         border: 2px solid black;
         border-radius: 8px;
+        background-color: #66e0d6;
     `;
     headerDelete.addEventListener("click", function() {
         if (confirm("Вы точно хотите удалить все заметки?")) {
@@ -221,6 +224,7 @@ window.addEventListener("load", () => {
         padding: 10px;
         border: 2px solid black;
         border-radius: 8px;
+        background-color: #66e0d6;
     `;
     addHeaderButton.addEventListener("click", addNewTab);
 
@@ -231,8 +235,8 @@ window.addEventListener("load", () => {
 
     let arr = ["Todo text 1", "Todo text 2", "Todo text 3"];
 
-    for (let i = 0; i < tabData.length; i++) {
-        createNewTab(tabData[i]);
+    for (let i = 0; i < todos.length; i++) {
+        createNewTab(todos[i]);
     }
 
     // append elements
