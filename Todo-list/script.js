@@ -39,10 +39,13 @@ const deleteCard = function(){
             main = [...newMain];
 
             let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
-            completed = [...newCompleted];
+            completed = [...newCompleted].sort((a,b) => b.id - a.id);
 
         parent.remove();
         setLocalData();
+        if(main.length == 0){
+            localStorage.removeItem("todo");
+        }
         setPanelCardInfoCounterAll();
         setPanelCardInfoCounterComplited();
     }
@@ -65,20 +68,22 @@ const deleteLastCard = function(){
     let result = confirm("Delete Last Card?");
     if (result){
         let last = document.querySelectorAll(".card");
-        let id = last[last.length - 1].getAttribute('data-id')
+        let id = last[0].getAttribute('data-id')
 
         let newCompleted = completed.filter(item => item.id != id);
         completed.length = 0;
-        completed = [...newCompleted];
+        completed = [...newCompleted].sort((a,b) => b.id - a.id);
+
 
         let newMain = main.filter(item => item.id != id);
         main.length = 0;
         main = [...newMain];
 
-        last[last.length - 1].remove();
+
+        last[0].remove();
 
         setLocalData();
-        if(getLocalData.length == 0){
+        if(main.length == 0){
             localStorage.removeItem("todo");
         }
         setPanelCardInfoCounterAll();
@@ -102,6 +107,17 @@ const setPanelCardInfoCounterComplited = function(){
     panelCardInfoCounterCompleted.innerHTML = `Completed: <span>${completed.length}</span>`; 
 
 }
+const searchForMain = function(){
+    panelCardsAera.innerHTML = "";
+    searched = main.filter(item => item.task.includes(this.value.trim()));
+    createCardsAera(searched);
+};
+const searchForCompleted = function(){
+    panelCardsAera.innerHTML = "";
+    searched = completed.filter(item => item.task.includes(this.value.trim()));
+    createCardsAera(searched);
+};
+
 
 const setHover = function (color, transition, obj){
     let curretColor = obj.style.backgroundColor;
@@ -167,8 +183,6 @@ const createCard = function (item) {
             if (key == false){
                 completed.push(item);
             }
-            
-            // проверка на содержание самого себя
         }
 
 
@@ -203,22 +217,21 @@ const createCard = function (item) {
                 let parent = this.closest(".card")
                 let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
                 completed.length = 0;
-                completed = [...newCompleted];
+                completed = [...newCompleted].sort((a,b) => b.id - a.id);
              }
      
             setPanelCardInfoCounterComplited();
             setLocalData();
         });
 
-        panelCardsAera.appendChild(card);
+        panelCardsAera.prepend(card);
         card.append(cardStatus, cardText, cardCloseButton, cardDate); 
 }
 
 const createCardsAera = function (arr){ 
-    arr.forEach(function(item){
+    arr.forEach((item) => {
         createCard(item);
     })
-
     setPanelCardInfoCounterAll();
     setPanelCardInfoCounterComplited(); 
 }
@@ -389,7 +402,7 @@ let panelCardActionsButtonAdd = document.createElement("button");
 let panelCardInfo = document.createElement("div");
     panelCardInfo.classList.add("panel-card-actions");
     panelCardInfo.style.cssText=cssPanel;
-    panelCardInfo.setAttribute("data-search-key", true);
+
 
 let panelCardInfoCounterAll= document.createElement("div");
     setPanelCardInfoCounterAll();
@@ -403,8 +416,10 @@ let panelCardInfoButtonShowAll = document.createElement("button");
     panelCardInfoButtonShowAll.addEventListener("click",function(){
         panelCardsAera.innerHTML = "";
         createCardsAera(main);
-        panelCardInfo.setAttribute("data-search-key", true);
+        panelCardInfo.setAttribute("data-search-key", false);
         panelCardInfoInputSearch.value = "";
+        panelCardInfoInputSearch.removeEventListener("keyup",searchForCompleted);
+        panelCardInfoInputSearch.addEventListener("keyup", searchForMain);
     })
     setHover("yellowgreen","0.4", panelCardInfoButtonShowAll);
 
@@ -414,8 +429,10 @@ let panelCardInfoButtonShowCompleted = document.createElement("button");
     panelCardInfoButtonShowCompleted.addEventListener("click", function(){
         panelCardsAera.innerHTML = "";
         createCardsAera(completed);
-        panelCardInfo.setAttribute("data-search-key", false);
+        panelCardInfo.setAttribute("data-search-key", true);
         panelCardInfoInputSearch.value = "";
+        panelCardInfoInputSearch.removeEventListener("keyup",searchForMain);
+        panelCardInfoInputSearch.addEventListener("keyup", searchForCompleted);       
     }); 
     setHover("yellowgreen","0.4", panelCardInfoButtonShowCompleted);
 
@@ -423,30 +440,24 @@ let panelCardInfoInputSearch = document.createElement("input");
     panelCardInfoInputSearch.setAttribute("type", "text");
     panelCardInfoInputSearch.setAttribute("placeholder", "Search..."); 
     panelCardInfoInputSearch.style.cssText = cssPanelInput;
+    /*
     panelCardInfoInputSearch.addEventListener("keyup", function(){
-        let regexp = new RegExp([`${this.value}`],'ig' );
-        let value = panelCardInfo.getAttribute("data-search-key");
-        searched.length = 0;
-        if(this.value.length > 0){
-            if (value){
-                searched = main.filter(item => regexp.test(item.task));
-
-            } else {
-                searched = complited.filter(item => regexp.test(item.task));
-            }
+        let rule = panelCardInfo.getAttribute("data-search-key");
+        if (rule){
             panelCardsAera.innerHTML = "";
+            searched = main.filter(item => item.task.includes(this.value.trim()));
             createCardsAera(searched);
-            console.log(`data-search-key ${value}`)
         }
-    })
-
+    });
+*/
 let panelCardsAera = document.createElement("div");
     panelCardsAera.classList.add("cards-aera");
 
 
 // cards 
  createCardsAera(main);
-
+ panelCardInfo.setAttribute("data-search-key", false);
+ panelCardInfoInputSearch.addEventListener("keyup", searchForMain);
 // append
 
 root.append(wrapper);
