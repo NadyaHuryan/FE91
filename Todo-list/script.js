@@ -98,6 +98,9 @@ const setCardBG = function(){
     let text = card.querySelector(".card--text");
     (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
 
+    let content = card.querySelector("span");
+    (this.checked) ? content.textContent = "V" : content.textContent = "";
+
 }
 
 const setPanelCardInfoCounterAll = function(){
@@ -130,9 +133,16 @@ const setHover = function (color, transition, obj){
     obj.addEventListener("mouseout", function(){
         obj.style.backgroundColor = curretColor;
     })
-
 }
 
+const setFocus = function (obj){
+    obj.addEventListener("focus", function(){
+        obj.style.boxShadow = "0 0 0 0.2em #4a90e2";
+    })
+    obj.addEventListener("focusout", function(){
+        obj.style.boxShadow = "none";
+    })
+}
 
 
 const addCard = function(){
@@ -171,6 +181,12 @@ const createCard = function (item) {
         card.style.cssText = cssCard;
         card.setAttribute("data-id", item.id);
 
+    let cardStatusWraper = document.createElement("label");
+        cardStatusWraper.style.cssText = cssCardStatusWraper;
+
+    let statusSpan = document.createElement("span");
+        statusSpan.style.cssText = cssStatusSpan;
+
     let cardStatus = document.createElement("input");
         cardStatus.setAttribute("type", "checkbox");
         cardStatus.checked = item.status;
@@ -178,12 +194,19 @@ const createCard = function (item) {
         cardStatus.style.cssText = cssCardStatus;
         if (item.status){
             card.style.backgroundColor= "gray";
+            statusSpan.textContent = "V"
 
             let key =  completed.some( elem => elem.id === item.id);
             if (key == false){
                 completed.push(item);
             }
         }
+        cardStatus.addEventListener("focus", function(){
+            statusSpan.style.boxShadow = "0 0 0 0.15em #4A90E2";
+        })
+        cardStatus.addEventListener("focusout", function(){
+            statusSpan.style.boxShadow = "none"
+        })
 
 
 
@@ -223,9 +246,11 @@ const createCard = function (item) {
             setPanelCardInfoCounterComplited();
             setLocalData();
         });
+        setFocus(cardStatus)
 
         panelCardsAera.prepend(card);
-        card.append(cardStatus, cardText, cardCloseButton, cardDate); 
+        card.append(cardStatusWraper, cardText, cardCloseButton, cardDate); 
+        cardStatusWraper.append(statusSpan, cardStatus);
 }
 
 const createCardsAera = function (arr){ 
@@ -300,12 +325,34 @@ let cssCard =  `
     gap: 10px;
 `;
 
-let cssCardStatus = `
+let cssCardStatusWraper = `
+    display: block;
     grid-area: c-status;
     justify-items: left;
     align-self: center;
     height: 60px;
     width: 60px;
+`;
+
+let cssStatusSpan = `
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: rgb(127, 255, 249);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    font-size: 20px;
+    padding: 20px
+`;
+
+let cssCardStatus = `
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
 `;
 
 let cssCardDate = `
@@ -368,12 +415,14 @@ let panelCardActionsButtonDeleteAll = document.createElement("button");
     panelCardActionsButtonDeleteAll.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteAll.addEventListener("click", deleteAllCards);
     setHover("red","0.4", panelCardActionsButtonDeleteAll);
+    setFocus(panelCardActionsButtonDeleteAll);
 
 let panelCardActionsButtonDeleteLast = document.createElement("button");
     panelCardActionsButtonDeleteLast.textContent = "Delete last";
     panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteLast.addEventListener("click", deleteLastCard);
     setHover("red","0.4", panelCardActionsButtonDeleteLast);
+    setFocus(panelCardActionsButtonDeleteLast);
 
 
 let panelCardActionsInputToDo = document.createElement("input");
@@ -385,12 +434,14 @@ let panelCardActionsInputToDo = document.createElement("input");
             addCard();
         }
     })
+    setFocus(panelCardActionsInputToDo);
 
 let panelCardActionsButtonAdd = document.createElement("button");
     panelCardActionsButtonAdd.textContent = "Add";
     panelCardActionsButtonAdd.style.cssText = cssPanelButton;
     panelCardActionsButtonAdd.addEventListener("click", addCard);
     setHover("yellowgreen","0.4", panelCardActionsButtonAdd);
+    setFocus(panelCardActionsButtonAdd);
 
 
 
@@ -422,6 +473,7 @@ let panelCardInfoButtonShowAll = document.createElement("button");
         panelCardInfoInputSearch.addEventListener("keyup", searchForMain);
     })
     setHover("yellowgreen","0.4", panelCardInfoButtonShowAll);
+    setFocus(panelCardInfoButtonShowAll);
 
 let panelCardInfoButtonShowCompleted = document.createElement("button");
     panelCardInfoButtonShowCompleted.textContent = "Show Completed";
@@ -435,11 +487,13 @@ let panelCardInfoButtonShowCompleted = document.createElement("button");
         panelCardInfoInputSearch.addEventListener("keyup", searchForCompleted);       
     }); 
     setHover("yellowgreen","0.4", panelCardInfoButtonShowCompleted);
+    setFocus(panelCardInfoButtonShowCompleted);
 
 let panelCardInfoInputSearch = document.createElement("input");
     panelCardInfoInputSearch.setAttribute("type", "text");
     panelCardInfoInputSearch.setAttribute("placeholder", "Search..."); 
     panelCardInfoInputSearch.style.cssText = cssPanelInput;
+    setFocus(panelCardInfoInputSearch);
     /*
     panelCardInfoInputSearch.addEventListener("keyup", function(){
         let rule = panelCardInfo.getAttribute("data-search-key");
