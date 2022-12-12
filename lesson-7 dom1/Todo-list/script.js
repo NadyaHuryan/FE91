@@ -9,7 +9,6 @@ window.addEventListener("load", () => {
             if (localTabData) {
                 todos = JSON.parse(localTabData);
             } 
-            console.log(todos);
         }
 
         loadPage();
@@ -24,10 +23,6 @@ window.addEventListener("load", () => {
         } else {
             return true
         }
-    }
-
-    function randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     }
 
     let checkTabStatus = function() {
@@ -67,11 +62,11 @@ window.addEventListener("load", () => {
         }
     }
 
-    let createNewTab = function(obj) {
+    let createNewTab = function({id, status, name, date}) {
         let container__item = document.createElement("div");
         container__item.classList.add("container__item");
-        container__item.setAttribute("data-key", obj.id);
-    if (obj.status) {
+        container__item.setAttribute("data-key", id);
+    if (status) {
         container__item.style.cssText = `
         height: 80px;
         display: flex;
@@ -97,7 +92,7 @@ window.addEventListener("load", () => {
 
         let container__status = document.createElement("input");
         container__status.setAttribute("type", "checkbox");
-        container__status.checked = obj.status;
+        container__status.checked = status;
         container__status.style.cssText = `
             width: 20px;
             height: 20px;
@@ -106,9 +101,9 @@ window.addEventListener("load", () => {
 
         let container__text = document.createElement("div");
         container__text.classList.add("container__text");
-        container__text.innerHTML = `${obj.name}`;
-        if (obj.status) {
-            container__text.innerHTML = `${obj.name}`;
+        container__text.innerHTML = `${name}`;
+        if (status) {
+            container__text.innerHTML = `${name}`;
             container__text.style.cssText = `
             width: 250px;
             padding: 10px 0;
@@ -117,7 +112,7 @@ window.addEventListener("load", () => {
             border-radius: 6px;
             text-decoration: line-through;`;
         } else {
-            container__text.innerHTML = `${obj.name}`;
+            container__text.innerHTML = `${name}`;
             container__text.style.cssText = `
             width: 250px;
             padding: 10px 0;
@@ -151,7 +146,7 @@ window.addEventListener("load", () => {
 
         let container__date = document.createElement("div");
         container__date.classList.add("container__date");
-        container__date.innerHTML = `${obj.date}`;
+        container__date.innerHTML = `${date}`;
         container__date.style.cssText = `
             background-color: white;
             padding: 2px 20px;
