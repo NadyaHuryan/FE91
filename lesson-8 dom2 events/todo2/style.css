@@ -3,3 +3,7 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.container_text_done {
+    text-decoration: line-through;
+}
