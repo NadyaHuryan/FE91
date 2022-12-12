@@ -33,13 +33,19 @@ window.addEventListener("load", () => {
     let checkTabStatus = function() {
         let parent = this.closest(".container__item"); 
         let tabText = parent.querySelector(".container__text");
+        let tabId = +parent.getAttribute("data-key");
+        let tabIndex = todos.findIndex( item => item.id == tabId); 
         if (this.checked) {
             tabText.style.textDecoration = "line-through";
             parent.style.background = "gray";
+            todos[tabIndex]["status"] = true;
+
         } else {
             tabText.style.textDecoration = "none";
             parent.style.background = "gainsboro";
+            todos[tabIndex]["status"] = false;
         }
+        updateStorage();
     }
 
     let deleteAllTabs = function () {
@@ -65,15 +71,29 @@ window.addEventListener("load", () => {
         let container__item = document.createElement("div");
         container__item.classList.add("container__item");
         container__item.setAttribute("data-key", obj.id);
+    if (obj.status) {
         container__item.style.cssText = `
-            height: 80px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border: 2px solid black;
-            border-radius: 8px;
-            margin-bottom: 20px;
-    `;
+        height: 80px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border: 2px solid black;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-color: gray;
+`;
+    } else {
+        container__item.style.cssText = `
+        height: 80px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border: 2px solid black;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-color: gainsboro;
+`;
+    }
 
         let container__status = document.createElement("input");
         container__status.setAttribute("type", "checkbox");
@@ -87,13 +107,25 @@ window.addEventListener("load", () => {
         let container__text = document.createElement("div");
         container__text.classList.add("container__text");
         container__text.innerHTML = `${obj.name}`;
-        container__text.style.cssText = `
+        if (obj.status) {
+            container__text.innerHTML = `${obj.name}`;
+            container__text.style.cssText = `
             width: 250px;
             padding: 10px 0;
             background-color: white;
             text-align: center;
             border-radius: 6px;
-        `;
+            text-decoration: line-through;`;
+        } else {
+            container__text.innerHTML = `${obj.name}`;
+            container__text.style.cssText = `
+            width: 250px;
+            padding: 10px 0;
+            background-color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;`;
+        }
 
         let container__column = document.createElement("div");
         container__column.classList.add("container__column");
@@ -112,6 +144,8 @@ window.addEventListener("load", () => {
             height: 20px;
             border-radius: 4px;
             background-color: #66e0d6;
+            font-size: 10px;
+            text-align: center;
         `;
         deleteButton.addEventListener("click", deleteTab);
 
