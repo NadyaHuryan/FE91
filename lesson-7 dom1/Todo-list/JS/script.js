@@ -1,4 +1,4 @@
-"use strict"
+
 
 let todoList = [
     {
@@ -37,8 +37,9 @@ let deleteTodo = function() {
 
 //Добавление заметки
 
-let addNewTodo = function() {
+export let addNewTodo = function() {
     let todoValue = addInput.value;
+    const now = new Date();
 
     let allId = todoList.map((item) => item.id);
     allId.sort((a,b) => a - b);
@@ -48,12 +49,12 @@ let addNewTodo = function() {
         id: maxId,
         name: todoValue,
         status: false,
-        date: '12.12.1212'
+        date: `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`,
     }
 
     if (checkTodoValue(todoValue)){
         createNewTodo(todo);
-        todoList.push(todo);
+        todoList.unshift(todo);
     }
     addInput.value = "";
 }
@@ -64,15 +65,6 @@ let deleteAllTodo = function(){
     todoPannel.innerHTML = "";
 }
 
-let checkTodoAll = function(){
-    let item = document.querySelectorAll('.todo__item');
-    item.forEach(function(item){
-        let todo = item.querySelector('.todoName'),
-            status = item.querySelector("input[type='checkbox']");
-        todo.style.textDecoration = 'line-through';
-        status.checked = true;
-    })
-}
 
 let createNewTodo = function(obj) {
     let todoItem = document.createElement('div');
@@ -83,7 +75,7 @@ let createNewTodo = function(obj) {
         align-items: center;
         justify-content: space-around;
         height: 150px;
-        width: 755px;
+        width: 730px;
         margin: 0 auto;
         border: 4px solid black;
         border-radius: 10px;
@@ -217,6 +209,13 @@ delButton.style.cssText = `
     border-radius: 10px;
     background-color: aquamarine;
 `;
+delButton.addEventListener('click', function(){
+    if(confirm('Выточно хотите удалить все заметки?')){
+        deleteAllTodo()
+    } else {
+        alert('Ничего не удалено!')
+    }
+});
 
 let addInput = document.createElement("input");
 addInput.classList.add("entering__todo");
@@ -235,6 +234,11 @@ addInput.style.cssText = `
     border: 4px solid black;
     border-radius: 10px;
 `;
+addInput.addEventListener('keyup', function(event){
+    if (event.key === "Enter"){
+        addNewTodo();
+    }
+})
 
 let addButton = document.createElement("button");
 addButton.classList.add("add__button");
@@ -251,6 +255,7 @@ addButton.style.cssText = `
 `;
 addButton.addEventListener('click', addNewTodo);
 
+
 //to do pannel
 
 let todoPannel = document.createElement("div");
@@ -262,6 +267,7 @@ todoPannel.style.cssText = `
     justify-content: space-around;
     height: 400px;
     width: 760px;
+    overflow-y: scroll;
 `;
 
 // append elements
