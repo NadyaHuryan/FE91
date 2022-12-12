@@ -94,12 +94,10 @@ const deleteLastCard = function(){
 const setCardBG = function(){
     let card = this.closest(".card");    
     (this.checked) ? card.style.backgroundColor= "gray" : card.style.backgroundColor= "lightgray";
-
     let text = card.querySelector(".card--text");
     (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
-
     let content = card.querySelector("span");
-    (this.checked) ? content.textContent = "V" : content.textContent = "";
+    (this.checked) ? content.style.backgroundImage = cssImage : content.style.backgroundImage = "none";
 
 }
 
@@ -185,6 +183,7 @@ const createCard = function (item) {
         cardStatusWraper.style.cssText = cssCardStatusWraper;
 
     let statusSpan = document.createElement("span");
+        statusSpan.setAttribute("class", "span");
         statusSpan.style.cssText = cssStatusSpan;
 
     let cardStatus = document.createElement("input");
@@ -194,7 +193,7 @@ const createCard = function (item) {
         cardStatus.style.cssText = cssCardStatus;
         if (item.status){
             card.style.backgroundColor= "gray";
-            statusSpan.textContent = "V"
+            statusSpan.style.backgroundImage = cssImage;
 
             let key =  completed.some( elem => elem.id === item.id);
             if (key == false){
@@ -206,6 +205,12 @@ const createCard = function (item) {
         })
         cardStatus.addEventListener("focusout", function(){
             statusSpan.style.boxShadow = "none"
+        })
+        cardStatus.addEventListener("focus", function(){
+            card.style.boxShadow = "0 0 0 0.04em black";
+        })
+        cardStatus.addEventListener("focusout", function(){
+            card.style.boxShadow = "none"
         })
 
 
@@ -228,7 +233,7 @@ const createCard = function (item) {
         cardCloseButton.textContent = "X"
         cardCloseButton.style.cssText = cssCardCloseButton;
         cardCloseButton.addEventListener("click", deleteCard);
-        setHover("red", "0.4", cardCloseButton);
+        setHover("Red", "0.4", cardCloseButton);
         
 
         cardStatus.addEventListener("click",setCardBG);
@@ -287,7 +292,7 @@ let cssPanel = `
 let cssPanelButton = `
     flex-grow: 1 ;
     min-height: 60px;
-    background-color: rgb(127, 255, 249);
+    background-color: MediumAquamarine			;
     border: 3px solid black;
     border-radius: 20px;
     padding: 10px;
@@ -340,7 +345,8 @@ let cssStatusSpan = `
     height: 60px;
     overflow: hidden;
     border-radius: 10px;
-    background-color: rgb(127, 255, 249);
+    border: 3px solid black;
+    background-color: MediumAquamarine			;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     font-size: 20px;
@@ -385,7 +391,7 @@ let cssCardText = `
 let cssCardCloseButton = `
     grid-area: c-close-button;
     justify-self: right;
-    background-color: rgb(127, 255, 249);
+    background-color: MediumAquamarine			;
     border: 3px solid black;
     border-radius: 10px;
     text-align: center;
@@ -394,7 +400,7 @@ let cssCardCloseButton = `
     padding: 5px;
 `; 
 
-
+let cssImage = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAArCAYAAAA65tviAAAACXBIWXMAAC4jAAAuIwF4pT92AAABYklEQVRogdWZbQ2DMBCGXwmTMAlIQQISJmEOkIAEJEwCEiYBCVtIICH9oleud9c3uezPVvps7bOjwHgeAKb9tenMAH4AvgC6VkHGHeKoFUDvvct4BgfiXK9WILrA5N2avE8Zy3NfQqHJu7VYlcA2qSUw4VSZlMBhKGqZkoBrKGot3ogKSRkqp9Z9b6kmx1BXpb5HKIaK1eCNmkhfgbrEUG6N3qiJHOt3ZYYpNdRRszdiIu4m5ILhMFT2H2HMJHdhYuNWMdTVxdbC1kDUULnfGLXPETUU9WfPhRE1VOnazYERM1RNi4ga6hMYgOOC4j0Uxxp2YdR6KE6YTrqHqgVzt0g9VCzaMKQeyipMSBjNwVS9y5OEqX6XJwFzy1BWYFgMpQ3DaigtGPXjTg4YE+dQYGhBTJ3VlsKIGYoSKoy4oWrAqBmKkisYsw9kQonBmDEUJSGYZh8pn2FMGoqSDeYtekUAf4SQBuU1udF6AAAAAElFTkSuQmCC')"
 // html generator
 let root = document.getElementById("root")
     root.style.cssText = `
@@ -414,14 +420,14 @@ let panelCardActionsButtonDeleteAll = document.createElement("button");
     panelCardActionsButtonDeleteAll.textContent = "Delete All";
     panelCardActionsButtonDeleteAll.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteAll.addEventListener("click", deleteAllCards);
-    setHover("red","0.4", panelCardActionsButtonDeleteAll);
+    setHover("Red","0.4", panelCardActionsButtonDeleteAll);
     setFocus(panelCardActionsButtonDeleteAll);
 
 let panelCardActionsButtonDeleteLast = document.createElement("button");
     panelCardActionsButtonDeleteLast.textContent = "Delete last";
     panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
     panelCardActionsButtonDeleteLast.addEventListener("click", deleteLastCard);
-    setHover("red","0.4", panelCardActionsButtonDeleteLast);
+    setHover("Red","0.4", panelCardActionsButtonDeleteLast);
     setFocus(panelCardActionsButtonDeleteLast);
 
 
