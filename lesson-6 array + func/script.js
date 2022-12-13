@@ -185,21 +185,3 @@ console.log(`${arrHighAndLow[arrHighAndLow.length - 1]} ${arrHighAndLow[0]}`);
 
 
 
-// #### Task 5 👨‍🏫 ####
-
-let word = 'moOse';
-let wordToArr = word.split('');
-function isIsogram(wordToArr){
-  for (let i = 0; i < wordToArr.length; i++){
-    let temporary = wordToArr[i]
-        for (j = 0; j < wordToArr.length; j++){
-            if (temporary === wordToArr[j]){
-                return console.log(temporary);
-            } return false;
-        }
-  }
-}
-
-
-console.log(isIsogram(wordToArr));
-console.log(wordToArr);
