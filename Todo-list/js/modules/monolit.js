@@ -22,11 +22,8 @@ const deleteCard = function(){
     let result = confirm("Delete Card?");
     if (result){
         let parent = this.closest(".card")
-            let main = getLocalData();
             let newMain = main.filter(item => item.id != parent.getAttribute('data-id'));
             main = [...newMain];
-            
-
             let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
             completed = [...newCompleted].sort((a,b) => b.id - a.id);
 
@@ -100,39 +97,7 @@ const searchForCompleted = function(){
     createCardsAera(searched);
 };
 
-
-const setHover = function (color, transition, obj){
-    let curretColor = obj.style.backgroundColor;
-    let setHoverColor = color;
-
-    obj.addEventListener("mouseover", function(){
-        obj.style.backgroundColor = setHoverColor;
-        obj.style.transition = `background-color ${transition}s`;
-    })
-    obj.addEventListener("mouseout", function(){
-        obj.style.backgroundColor = curretColor;
-    })
-}
-
-const setFocus = function (obj){
-    obj.addEventListener("focus", function(){
-        obj.style.boxShadow = "0 0 0 0.2em DodgerBlue";
-    })
-    obj.addEventListener("focusout", function(){
-        obj.style.boxShadow = "none";
-    })
-}
-
-
 const addCard = function(){
-
-    let main;
-    if (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined){
-        main = [];
-        setLocalData(main);
-    } else{
-        main = getLocalData();
-    }
     
     let obj = {};
     let date = new Date();
@@ -223,16 +188,6 @@ const createCard = function (item) {
 
         cardStatus.addEventListener("click",setCardStyle);
         cardStatus.addEventListener("click", function(){
-            // let main;
-            // if (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined){
-            //     main = [];
-            //     setLocalData(main);
-            // } else{
-            //     main = getLocalData();
-            // }
-            // let completed = main.filter(item => item.status);
-
-
              item.status = cardStatus.checked;
              if(item.status){
                 completed.push(item);
@@ -261,19 +216,16 @@ const createCardsAera = function (arr){
     setCounterCompletedCards(); 
 }
 
-//css 
 
-// html generator
 let root = document.getElementById("root")
     root.style.cssText = `
             padding: 10px;
 `;
-// wrapper
+
 let wrapper = document.createElement("div");
     wrapper.classList.add("wrapper");
     wrapper.style.cssText =  cssWrapper;
 
-/// panel card Actions 
 let panelActions = document.createElement("div");
     panelActions.classList.add("panel-card-actions");
     panelActions.style.cssText = cssPanel;
@@ -312,8 +264,6 @@ let buttonAddCard = document.createElement("button");
     setFocus(buttonAddCard);
 
 
-
-/// panel  card INFO
 let panelCardInfo = document.createElement("div");
     panelCardInfo.classList.add("panel-card-actions");
     panelCardInfo.style.cssText=cssPanel;
@@ -361,10 +311,8 @@ let cardsAera = document.createElement("div");
     cardsAera.classList.add("cards-aera");
 
 
-// cards 
  createCardsAera(main);
  inputSearch.addEventListener("keyup", searchForMain);
-// append
 
 root.append(wrapper);
 wrapper.append(panelActions, panelCardInfo, cardsAera);
