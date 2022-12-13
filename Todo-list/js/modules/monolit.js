@@ -2,9 +2,6 @@ import {getLocalData, setLocalData} from './userData.js'
 import {cssWrapper, cssPanel, cssPanelButton, cssPanelInput, cssCard, cssCardStatusWraper, cssStatusSpan, cssCardStatus, cssCardDate, cssCardText, cssCardCloseButton, cssImage, setCardStyle, setHover, setFocus} from './style.js'
 
 export let main = function (){
-    window.addEventListener('storage', function (evt) {
-        console.log(evt)
-      })
 
     let date = new Date(Date.now());
     let main;
@@ -30,8 +27,8 @@ const deleteCard = function(){
             main = [...newMain];
             
 
-            // let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
-            // completed = [...newCompleted].sort((a,b) => b.id - a.id);
+            let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
+            completed = [...newCompleted].sort((a,b) => b.id - a.id);
 
         parent.remove();
         if(main.length == 0){
@@ -89,7 +86,6 @@ let setCounterAllCards = function(){
     counterAllCards.innerHTML = `All: <span>${main.length}</span>`;
 }
 let setCounterCompletedCards = function(){
-    let completed = main.filter(item => item.status);
     counterCompletedCards.innerHTML = `Completed: <span>${completed.length}</span>`; 
 
 }
