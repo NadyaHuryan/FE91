@@ -1,187 +1,45 @@
-'use strict'
+import {getLocalData, setLocalData} from './userData.js'
+import {cssWrapper, cssPanel, cssPanelButton, cssPanelInput, cssCard, cssCardStatusWraper, cssStatusSpan, cssCardStatus, cssCardDate, cssCardText, cssCardCloseButton, cssImage, setCardStyle, setHover, setFocus} from './style.js'
 
-// storage 
+export let main = function (){
+    window.addEventListener('storage', function (evt) {
+        console.log(evt)
+      })
 
-window.addEventListener("load", () => {
+    let date = new Date(Date.now());
+    let main;
+    if (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined){
+        main = [];
+        setLocalData(main);
+    } else{
+        main = getLocalData();
+    }
 
 
-//date
-let date = new Date(Date.now());
-
-
-// arrays
-    let main = []
-    let completed = [];
+    let completed = main.filter(item => item.status);
     let searched = [];
 
-// sorage 
-const getLocalData = function(){
-    main = JSON.parse(localStorage.getItem("todo"));
-
-}
-const setLocalData = function(){
-    localStorage.setItem("todo",JSON.stringify(main));
-};
-
-if (!localStorage.getItem("todo")){
-    setLocalData();
-} else{
-    getLocalData();
-}
-// css
- let cssWrapper = `
-    width: 800px;
-    min-height: 200px;
-    border: 3px solid black;
-    margin: 40px auto;
-    background-color: lightgray;
-    border-radius: 20px;
-    padding: 10px;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 16px;
-`;
-
- let cssPanel = `
-    padding: 10px 10px;
-    display: flex;
-    gap: 16px;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-`;
-
- let cssPanelButton = `
-    flex-grow: 1 ;
-    min-height: 60px;
-    background-color: MediumAquamarine			;
-    border: 3px solid black;
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-`;
-
- let cssPanelInput =  `
-    flex-grow: 2 ;
-    min-height: 60px;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    text-align: center;
-    border: 3px solid black;
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-`;
-
- let cssCard =  `
-    width: 70%;
-    min-height: 100px;
-    border: 3px solid black;
-    margin: 20px auto;
-    background-color: lightgray;
-    border-radius: 20px;
-    padding: 10px;
-    display: grid;
-    grid-template-columns:  1fr 3fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: 
-    "c-status c-text c-close-button"
-    "c-status c-text c-date";
-    justify-items: stretch;
-    gap: 10px;
-`;
-
- let cssCardStatusWraper = `
-    display: block;
-    grid-area: c-status;
-    justify-items: left;
-    align-self: center;
-    height: 60px;
-    width: 60px;
-`;
-
- let cssStatusSpan = `
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 3px solid black;
-    background-color: MediumAquamarine			;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    font-size: 20px;
-    padding: 20px
-`;
-
- let cssCardStatus = `
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-`;
-
- let cssCardDate = `
-    grid-area: c-date;
-    justify-self: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 80px;
-    height: 30px;
-    padding: 10px 5px ;
-    color: gray;
-    font-size: 10px;
-`;
-
- let cssCardText = `
-    grid-area: c-text ;
-    align-self: center;
-    justify-self: center;
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 350px;
-    height: 50px;
-    padding: 15px;
-    color: gray;
-`;
-
- let cssCardCloseButton = `
-    grid-area: c-close-button;
-    justify-self: right;
-    background-color: MediumAquamarine			;
-    border: 3px solid black;
-    border-radius: 10px;
-    text-align: center;
-    width: 40px;
-    height: 30px;
-    padding: 5px;
-`; 
-
- let cssImage = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAArCAYAAAA65tviAAAACXBIWXMAAC4jAAAuIwF4pT92AAABYklEQVRogdWZbQ2DMBCGXwmTMAlIQQISJmEOkIAEJEwCEiYBCVtIICH9oleud9c3uezPVvps7bOjwHgeAKb9tenMAH4AvgC6VkHGHeKoFUDvvct4BgfiXK9WILrA5N2avE8Zy3NfQqHJu7VYlcA2qSUw4VSZlMBhKGqZkoBrKGot3ogKSRkqp9Z9b6kmx1BXpb5HKIaK1eCNmkhfgbrEUG6N3qiJHOt3ZYYpNdRRszdiIu4m5ILhMFT2H2HMJHdhYuNWMdTVxdbC1kDUULnfGLXPETUU9WfPhRE1VOnazYERM1RNi4ga6hMYgOOC4j0Uxxp2YdR6KE6YTrqHqgVzt0g9VCzaMKQeyipMSBjNwVS9y5OEqX6XJwFzy1BWYFgMpQ3DaigtGPXjTg4YE+dQYGhBTJ3VlsKIGYoSKoy4oWrAqBmKkisYsw9kQonBmDEUJSGYZh8pn2FMGoqSDeYtekUAf4SQBuU1udF6AAAAAElFTkSuQmCC')"
 
 //functions
 const deleteCard = function(){
     let result = confirm("Delete Card?");
     if (result){
         let parent = this.closest(".card")
-
+            let main = getLocalData();
             let newMain = main.filter(item => item.id != parent.getAttribute('data-id'));
             main = [...newMain];
+            
 
-            let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
-            completed = [...newCompleted].sort((a,b) => b.id - a.id);
+            // let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
+            // completed = [...newCompleted].sort((a,b) => b.id - a.id);
 
         parent.remove();
-        setLocalData();
         if(main.length == 0){
             localStorage.removeItem("todo");
         }
         setCounterAllCards();
         setCounterCompletedCards();
+        setLocalData(main);
     }
 }
 
@@ -225,20 +83,13 @@ const deleteLastCard = function(){
     }
 }
 
-const setCardStyle = function(){
-    let card = this.closest(".card");    
-    (this.checked) ? card.style.backgroundColor= "gray" : card.style.backgroundColor= "lightgray";
-    let text = card.querySelector(".card--text");
-    (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
-    let content = card.querySelector("span");
-    (this.checked) ? content.style.backgroundImage = cssImage : content.style.backgroundImage = "none";
 
-}
 
-const setCounterAllCards = function(){
+let setCounterAllCards = function(){
     counterAllCards.innerHTML = `All: <span>${main.length}</span>`;
 }
-const setCounterCompletedCards = function(){
+let setCounterCompletedCards = function(){
+    let completed = main.filter(item => item.status);
     counterCompletedCards.innerHTML = `Completed: <span>${completed.length}</span>`; 
 
 }
@@ -278,6 +129,15 @@ const setFocus = function (obj){
 
 
 const addCard = function(){
+
+    let main;
+    if (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined){
+        main = [];
+        setLocalData(main);
+    } else{
+        main = getLocalData();
+    }
+    
     let obj = {};
     let date = new Date();
 
@@ -298,7 +158,7 @@ const addCard = function(){
         main.push(obj);
         createCard(obj);
         inputTask.value = "";
-        setLocalData();
+        setLocalData(main);
         setCounterAllCards();
     } 
 }
@@ -367,6 +227,16 @@ const createCard = function (item) {
 
         cardStatus.addEventListener("click",setCardStyle);
         cardStatus.addEventListener("click", function(){
+            // let main;
+            // if (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined){
+            //     main = [];
+            //     setLocalData(main);
+            // } else{
+            //     main = getLocalData();
+            // }
+            // let completed = main.filter(item => item.status);
+
+
              item.status = cardStatus.checked;
              if(item.status){
                 completed.push(item);
@@ -378,7 +248,7 @@ const createCard = function (item) {
              }
      
             setCounterCompletedCards();
-            setLocalData();
+            setLocalData(main);
         });
         setFocus(cardStatus)
 
@@ -504,5 +374,4 @@ root.append(wrapper);
 wrapper.append(panelActions, panelCardInfo, cardsAera);
 panelActions.append(buttonDeleteAllCards, buttonDeleteLastCard, inputTask, buttonAddCard);
 panelCardInfo.append(counterAllCards, counterCompletedCards, buttonShowAll,buttonShowCompleted, inputSearch);
-
-})
+}
