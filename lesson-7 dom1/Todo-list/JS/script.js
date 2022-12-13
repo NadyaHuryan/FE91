@@ -1,13 +1,20 @@
 
+window.addEventListener("load", () => {
 
-let todoList = [
-    {
-    id: 1,
-    name: 'do something',
-    status: true,
-    date: '06.12.2022'
-    },
-]
+let todos = [];
+
+let getName = function() {
+    let localTodos = localStorage.getItem('todos');
+    if (localTodos) {
+        todos = JSON.parse(localTodos);
+    }
+};
+
+getName();
+
+let setName = function() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
 
 let checkTodoValue = function(value){
     if(value === '' || value === ' '){
@@ -20,51 +27,72 @@ let checkTodoValue = function(value){
 let checkTodoStatus = function() {
     let parent = this.closest('.todo__item');
     let todoName = parent.querySelector('.item-name');
-    (this.checked) ? todoName.style.textDecoration = "line-through" : todoName.style.textDecoration = "none";
+    let parsedTodos = JSON.parse(localStorage.getItem('todos'));
+    let count = 0;
+    for (let i = 0; parent.previousElementSibling !== null; i++, parent = parent.previousElementSibling){
+        count ++
+    }
+    
+    if (this.checked) {
+        todoName.style.textDecoration = "line-through";
+        
+        parsedTodos[count].isChecked = true;
+        localStorage.setItem('todos', JSON.stringify(parsedTodos));
+    }   else { 
+        todoName.style.textDecoration = "none";
+
+        parsedTodos[count].isChecked = false;
+        localStorage.setItem('todos', JSON.stringify(parsedTodos));
+    }
 }
 
 let deleteTodo = function() {
     let parent = this.closest('.todo__item');
     let todoId = +parent.getAttribute("data-key");
-    let todoFilter = todoList.filter( item => item.id === todoId);
+    let todoFilter = todos.filter( item => item.id !== todoId);
 
     let todoName  = parent.querySelector('.item-name').textContent;
     if (confirm(`Вы точно хотите удалить позицию ${todoName} ?`)) {
         parent.remove();
-        todoList = [...todoFilter];
+        todos = [...todoFilter];
+        setName();
     }
 };
 
-//Добавление заметки
-
-export let addNewTodo = function() {
+let addNewTodo = function() {
     let todoValue = addInput.value;
     const now = new Date();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
+    'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let month = now.getMonth();
+    month = months[month]; 
 
-    let allId = todoList.map((item) => item.id);
+    let allId = todos.map((item) => item.id);
     allId.sort((a,b) => a - b);
-    let maxId = allId.at(-1) + 1;
+    let maxId;
+    (todos.length === 0) ? maxId = 1 : maxId = allId.at(-1) + 1;
 
     let todo = {
         id: maxId,
-        name: todoValue,
-        status: false,
-        date: `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`,
+        text: todoValue,
+        isChecked: false,
+        date: `${now.getHours()}:${now.getMinutes()} ${now.getDate()} ${month}`,
     }
 
     if (checkTodoValue(todoValue)){
         createNewTodo(todo);
-        todoList.unshift(todo);
+        todos.push(todo);
+        setName();
     }
+
     addInput.value = "";
 }
 
-// Очистить все элементы
-
 let deleteAllTodo = function(){
     todoPannel.innerHTML = "";
+    todos = [];
+    localStorage.removeItem('todos');
 }
-
 
 let createNewTodo = function(obj) {
     let todoItem = document.createElement('div');
@@ -80,7 +108,7 @@ let createNewTodo = function(obj) {
         border: 4px solid black;
         border-radius: 10px;
         margin-bottom: 20px;
-    `
+    `;
 
 let itemInput = document.createElement('div');
 itemInput.classList.add('item__input');
@@ -97,16 +125,17 @@ itemInput.style.cssText = `
     border: 1px solid #c7c6c6;
     border-radius: 10px;
 `;
-if (obj.status) {
-    itemInput.innerHTML = `<b class="item-name" style="text-decoration: line-through">${obj.name}</b>`;
+
+if (obj.isChecked) {
+    itemInput.innerHTML = `<b class="item-name" style="text-decoration: line-through">${obj.text}</b>`;
 } else {
-    itemInput.innerHTML = `<b class="item-name">${obj.name}</b>`
+    itemInput.innerHTML = `<b class="item-name">${obj.text}</b>`
 }
 
 let selectedItem = document.createElement("input");
 selectedItem.classList.add("selected__item");
 selectedItem.setAttribute("type", "checkbox");
-selectedItem.checked = obj.status;
+selectedItem.checked = obj.isChecked;
 selectedItem.style.cssText = `
     height: 45px;
     width: 65px;
@@ -167,17 +196,15 @@ todoItem.append(selectedItem, itemInput, rightPart);
 itemInput.append(itemInputText);
 rightPart.append(delItemButton, dateInput);
 dateInput.append(dateInputText);
-
 };
 
 let root = document.getElementById("root");
 
-// .container
-
 let container = document.createElement("div");
 container.classList.add("container");
 container.style.cssText = `
-    height: 600px;
+    min-height: 600px;
+    max-height: max-content;
     width: 800px;
     padding-top: 20px;
     margin: 100px auto;
@@ -185,8 +212,6 @@ container.style.cssText = `
     border-radius: 30px;
     background-color: #c7c6c6;
 `;
-
-//button pannel
 
 let buttonPannel = document.createElement("div");
 buttonPannel.classList.add("button__pannel");
@@ -238,7 +263,7 @@ addInput.addEventListener('keyup', function(event){
     if (event.key === "Enter"){
         addNewTodo();
     }
-})
+});
 
 let addButton = document.createElement("button");
 addButton.classList.add("add__button");
@@ -255,9 +280,6 @@ addButton.style.cssText = `
 `;
 addButton.addEventListener('click', addNewTodo);
 
-
-//to do pannel
-
 let todoPannel = document.createElement("div");
 todoPannel.classList.add("todo__pannel");
 todoPannel.style.cssText = `
@@ -265,14 +287,14 @@ todoPannel.style.cssText = `
     flex-direction: column;
     margin: 0 auto;
     justify-content: space-around;
-    height: 400px;
     width: 760px;
-    overflow-y: scroll;
 `;
 
-// append elements
+for (let i = 0; i < todos.length; i++) {
+    createNewTodo(todos[i])
+};
 
 root.append(container);
 container.append(buttonPannel, todoPannel);
 buttonPannel.append(delButton, addInput, addButton);
-
+});
