@@ -1,10 +1,73 @@
 
   
+export let createNewTodoStyle = `
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 150px;
+    width: 730px;
+    margin: 0 auto;
+    border: 4px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+`;
 
-export let container = document.createElement("div");
-container.classList.add("container");
-container.style.cssText = `
-    height: 600px;
+export let itemInputStyle = `
+    height: 70px;
+    width: 450px;
+    padding-left: 50px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    line-height: 70px;
+    font-weight: bolder;
+    color: gray;
+    border: 1px solid #c7c6c6;
+    border-radius: 10px;
+`;
+
+export let selectedItemStyle = `
+    height: 45px;
+    width: 65px;
+    border: 4px solid black;
+    border-radius: 7px;
+    background-color: aquamarine;
+`;
+
+export let rightPartStyle = `
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-between;
+`;
+
+export let delItemButtonStyle = `
+    height: 45px;
+    width: 65px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    line-height: 40px;
+    font-weight: bolder;
+    padding-bottom: 10px;
+    border: 4px solid black;
+    border-radius: 7px;
+    background-color: aquamarine;
+`;
+
+export let dateInputStyle = `
+    height: 45px;
+    width: 110px;
+    padding-left: 15px;
+    line-height: 40px;
+    background-color: white;
+    border: 1px solid #c7c6c6;
+    border-radius: 10px;
+`;
+
+export let containerStyle = `
+    min-height: 250px;
+    max-height: max-content;
     width: 800px;
     padding-top: 20px;
     margin: 100px auto;
@@ -13,18 +76,13 @@ container.style.cssText = `
     background-color: #c7c6c6;
 `;
 
-export let buttonPannel = document.createElement("div");
-buttonPannel.classList.add("button__pannel");
-buttonPannel.style.cssText = `
+export let buttonPannelStyle = `
     display: flex;
     justify-content: space-around;
     padding-bottom: 40px;
 `;
 
- export let delButton = document.createElement("button");
-delButton.classList.add("del-all__button");
-delButton.textContent = "Delete All";
-delButton.style.cssText = `
+ export let delButtonStyle = `
     width: 150px;
     height: 70px;
     font-size: 23px;
@@ -34,21 +92,9 @@ delButton.style.cssText = `
     border-radius: 10px;
     background-color: aquamarine;
 `;
-delButton.addEventListener('click', function(){
-    if(confirm('Выточно хотите удалить все заметки?')){
-        deleteAllTodo()
-    } else {
-        alert('Ничего не удалено!')
-    }
-});
 
-export let addInput = document.createElement("input");
-addInput.classList.add("entering__todo");
-addInput.setAttribute("type", "text");
-addInput.setAttribute("placeholder", "Enter todo ...");
-addInput.setAttribute("name", "item-new");
-addInput.setAttribute("id", "item-new");
-addInput.style.cssText = `
+
+export let addInputStyle = `
     height: 70px;
     width: 400px;
     padding-left: 50px;
@@ -59,16 +105,8 @@ addInput.style.cssText = `
     border: 4px solid black;
     border-radius: 10px;
 `;
-addInput.addEventListener('keyup', function(event){
-    if (event.key === "Enter"){
-        addNewTodo();
-    }
-})
 
-export let addButton = document.createElement("button");
-addButton.classList.add("add__button");
-addButton.textContent = "Add";
-addButton.style.cssText = `
+export let addButtonStyle = `
     width: 140px;
     height: 70px;
     font-size: 23px;
@@ -78,16 +116,11 @@ addButton.style.cssText = `
     border-radius: 10px;
     background-color: aquamarine;
 `;
-addButton.addEventListener('click', addNewTodo);
 
-export let todoPannel = document.createElement("div");
-todoPannel.classList.add("todo__pannel");
-todoPannel.style.cssText = `
+export let todoPannelStyle = `
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     justify-content: space-around;
-    height: 400px;
     width: 760px;
-    overflow-y: scroll;
 `;
