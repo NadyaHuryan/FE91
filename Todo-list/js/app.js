@@ -1,4 +1,4 @@
-import {main} from './modules/monolit.js';
+import {main} from './modules/main.js';
 
 
 

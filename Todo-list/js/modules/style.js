@@ -1,3 +1,6 @@
+export let cssRoot = `
+    padding: 10px;
+`;
 export let cssWrapper = `
     width: 800px;
     min-height: 200px;
@@ -132,34 +135,3 @@ export let cssCardCloseButton = `
 
 export let cssImage = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAArCAYAAAA65tviAAAACXBIWXMAAC4jAAAuIwF4pT92AAABYklEQVRogdWZbQ2DMBCGXwmTMAlIQQISJmEOkIAEJEwCEiYBCVtIICH9oleud9c3uezPVvps7bOjwHgeAKb9tenMAH4AvgC6VkHGHeKoFUDvvct4BgfiXK9WILrA5N2avE8Zy3NfQqHJu7VYlcA2qSUw4VSZlMBhKGqZkoBrKGot3ogKSRkqp9Z9b6kmx1BXpb5HKIaK1eCNmkhfgbrEUG6N3qiJHOt3ZYYpNdRRszdiIu4m5ILhMFT2H2HMJHdhYuNWMdTVxdbC1kDUULnfGLXPETUU9WfPhRE1VOnazYERM1RNi4ga6hMYgOOC4j0Uxxp2YdR6KE6YTrqHqgVzt0g9VCzaMKQeyipMSBjNwVS9y5OEqX6XJwFzy1BWYFgMpQ3DaigtGPXjTg4YE+dQYGhBTJ3VlsKIGYoSKoy4oWrAqBmKkisYsw9kQonBmDEUJSGYZh8pn2FMGoqSDeYtekUAf4SQBuU1udF6AAAAAElFTkSuQmCC')"
 
-export const setCardStyle = function(){
-    let card = this.closest(".card");    
-    (this.checked) ? card.style.backgroundColor= "gray" : card.style.backgroundColor= "lightgray";
-    let text = card.querySelector(".card--text");
-    (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
-    let content = card.querySelector("span");
-    (this.checked) ? content.style.backgroundImage = cssImage : content.style.backgroundImage = "none";
-
-}
-
-export const setHover = function (color, transition, obj){
-    let curretColor = obj.style.backgroundColor;
-    let setHoverColor = color;
-
-    obj.addEventListener("mouseover", function(){
-        obj.style.backgroundColor = setHoverColor;
-        obj.style.transition = `background-color ${transition}s`;
-    })
-    obj.addEventListener("mouseout", function(){
-        obj.style.backgroundColor = curretColor;
-    })
-}
-
-export const setFocus = function (obj){
-    obj.addEventListener("focus", function(){
-        obj.style.boxShadow = "0 0 0 0.2em DodgerBlue";
-    })
-    obj.addEventListener("focusout", function(){
-        obj.style.boxShadow = "none";
-    })
-}
