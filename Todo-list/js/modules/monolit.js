@@ -1,4 +1,4 @@
-import {getLocalData, setLocalData} from './userData.js'
+import {getLocalData, setLocalData, removeLocalData} from './userData.js'
 import {cssWrapper, cssPanel, cssPanelButton, cssPanelInput, cssCard, cssCardStatusWraper, cssStatusSpan, cssCardStatus, cssCardDate, cssCardText, cssCardCloseButton, cssImage, setCardStyle, setHover, setFocus} from './style.js'
 
 export let main = function (){
@@ -29,7 +29,7 @@ const deleteCard = function(){
 
         parent.remove();
         if(main.length == 0){
-            localStorage.removeItem("todo");
+            removeLocalData();
         }
         setCounterAllCards();
         setCounterCompletedCards();
@@ -45,7 +45,7 @@ const deleteAllCards = function(){
         completed.length = 0;
         setCounterAllCards();
         setCounterCompletedCards()
-        localStorage.removeItem("todo");
+        removeLocalData();
     }
 
 ;}
@@ -68,9 +68,9 @@ const deleteLastCard = function(){
 
         last[0].remove();
 
-        setLocalData();
+        setLocalData(main);
         if(main.length == 0){
-            localStorage.removeItem("todo");
+            removeLocalData();
         }
         setCounterAllCards();
         setCounterCompletedCards();
@@ -114,7 +114,7 @@ const addCard = function(){
 
         obj.task = inputTask.value;
         obj.status = false;
-        obj.date = `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `;
+        obj.date = `${date.getDate()} - ${date.getMonth()+1} - ${date.getFullYear()} `;
     
         main.push(obj);
         createCard(obj);
