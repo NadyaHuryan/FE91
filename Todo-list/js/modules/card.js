@@ -77,7 +77,7 @@ export  const renderCard = function (item, main, completed, cardsAera, deleteCar
              }
      
             setCounterCompletedCards();
-            setLocalData();
+            setLocalData(main);
         });
         setFocus(cardStatus)
 

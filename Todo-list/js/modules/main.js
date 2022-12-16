@@ -132,7 +132,9 @@ const createCardsAera = function (arr){
     setCounterCompletedCards(); 
 }
 
-
+function renderApp(){
+    
+}
 let root = document.getElementById("root")
     root.style.cssText = cssRoot;
  
