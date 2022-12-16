@@ -1,13 +1,13 @@
-import {getLocalData, setLocalData, removeLocalData} from './userData.js'
+import {getLocalData, setLocalData, removeLocalData, valideLocalData} from './userData.js'
 import {cssWrapper, cssPanel, cssPanelButton, cssPanelInput, cssRoot} from './style.js'
 import {setHover, setFocus} from './events.js';
-import {renderCard as createCard} from './card.js';
+import {renderCard} from './card.js';
 
 export let main = function (){
 
     let date = new Date(Date.now());
     let main;
-    if (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined){
+    if (valideLocalData()){
         main = [];
         setLocalData(main);
     } else{
@@ -97,7 +97,7 @@ const addCard = function(){
         obj.date = `${date.getDate()} - ${date.getMonth()+1} - ${date.getFullYear()} `;
     
         main.push(obj);
-        createCard(obj, main, completed, cardsAera, deleteCard, setCounterCompletedCards,setLocalData);
+        renderCard(obj, main, completed, cardsAera, deleteCard, setCounterCompletedCards,setLocalData);
         inputTask.value = "";
         setLocalData(main);
         setCounterAllCards();

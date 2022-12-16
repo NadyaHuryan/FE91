@@ -12,6 +12,6 @@ export const removeLocalData = function(){
     localStorage.removeItem("todo");
 }
 
-// export const valideLocalData = function(){
-//     return !(localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined);
-// }
+export const valideLocalData = function(){
+    return (localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined);
+}
