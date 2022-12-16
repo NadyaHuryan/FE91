@@ -1,7 +1,7 @@
 import {getLocalData, setLocalData, removeLocalData} from './userData.js'
 import {cssWrapper, cssPanel, cssPanelButton, cssPanelInput, cssRoot} from './style.js'
 import {setHover, setFocus} from './events.js';
-import {renderCard} from './card.js';
+import {renderCard as createCard} from './card.js';
 
 export let main = function (){
 
@@ -97,7 +97,7 @@ const addCard = function(){
         obj.date = `${date.getDate()} - ${date.getMonth()+1} - ${date.getFullYear()} `;
     
         main.push(obj);
-        createCard(obj);
+        createCard(obj, main, completed, cardsAera, deleteCard, setCounterCompletedCards,setLocalData);
         inputTask.value = "";
         setLocalData(main);
         setCounterAllCards();

@@ -1,14 +1,17 @@
 
-export let getLocalData = function(){
+export const getLocalData = function(){
     return  JSON.parse(localStorage.getItem("todo"));
 
 }
-export let setLocalData = function(arr){
+export const setLocalData = function(arr){
     localStorage.setItem("todo",JSON.stringify(arr));
 };
 
 
-export let removeLocalData = function(){
+export const removeLocalData = function(){
     localStorage.removeItem("todo");
 }
 
+// export const valideLocalData = function(){
+//     return !(localStorage.getItem("todo") === null ||localStorage.getItem("todo") === undefined);
+// }
