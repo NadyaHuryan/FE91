@@ -1,4 +1,26 @@
-"use strict";
+function getName () {
+  const dataLocalStorage = localStorage.getItem("todos");
+  return dataLocalStorage
+};
+
+
+function setName (data) {
+  const sendDataToLocal = localStorage.setItem("todos", JSON.stringify(data));
+  return sendDataToLocal
+};
+
+window.addEventListener("load", function (e) {
+	let dataFromLocalStorage = localStorage.getItem("todos")
+	todos = JSON.parse(dataFromLocalStorage)
+
+	for (let todoElement of todos) {
+		renderForm(e, todoElement)
+	}
+});
+
+window.addEventListener("beforeunload", function () {
+	localStorage.setItem("todos", JSON.stringify(todos))
+});
 
 //Selectors
 
@@ -77,6 +99,7 @@ addBtn.style.cssText = `
 let todos = [];
 let toDo;
 
+
 //container
 function renderForm(event, toDo) {
   if (inputTodo.value === "") return;
@@ -84,12 +107,14 @@ function renderForm(event, toDo) {
   if (!toDo) {
     toDo = {
       id: new Date().getTime(),
-      date: new Date().toLocaleDateString(),
+      // date: new Date().toLocaleDateString(),
+      date: createDateFunc(),
       text: inputTodo.value,
       isChecked: false,
     };
     inputTodo.value = "";
     todos.push(toDo);
+    setName(todos);
   }
 
   let container = document.createElement("div");
@@ -175,11 +200,11 @@ function renderForm(event, toDo) {
 
   let dateCard = document.createElement("button");
   dateCard.classList.add("dateCard");
-  dateCard.innerHTML = toDo.date;
+  dateCard.innerHTML = createDateFunc();
   card.append(dateCard);
   dateCard.style.cssText = `
         margin-top: 10px;
-        width: 110px;
+        width: 150px;
         height: 30px;
         justify-content: center;
         display: flex;
@@ -239,16 +264,3 @@ wrapper.append(deleteAllBtn, inputTodo, addBtn);
 // container.append(selectCard, textCard, card);
 // card.append(deleteCardBtn, dateCard);
 
-
-// window.addEventListener("load", function (e) {
-// 	let dataFromLocalStorage = localStorage.getItem("todos")
-// 	todos = JSON.parse(dataFromLocalStorage)
-
-// 	for (let todoElement of todos) {
-// 		renderForm(e, todoElement)
-// 	}
-// });
-
-// window.addEventListener("beforeunload", function () {
-// 	localStorage.setItem("todos", JSON.stringify(todos))
-// });
