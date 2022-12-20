@@ -63,28 +63,38 @@ header__add.style.cssText = `
 `;
 
 ///////////////////////////
-///ДОБОВЛЕНИЕ НОВЫЪХ ЭЛЕМЕНТОВ В КОНТЕЙНЕР И ВЫВОД ИХ.
 header__add.onclick = () => {
     let header__input2 = header__input.value;//присваиваю переменной a2 содержимое инпут
     arr.push(header__input2);//пытаюсь содержимое input положить в пустой массив 
     ///
-    console.log(arr)
+    // console.log(arr)
     ///
+
+    const newTask = {
+        id: Date.now(),
+        text: header__input2,
+        done: false,
+    };
+
+    tasks.push(newTask);
+
+
     const taskHTML = `
-        <div class="container" style="background-color: rgb(249, 213, 157); height: 80px; display: flex; justify-content: space-around; align-items: center; border: 2px solid black; border-radius: 8px; margin-bottom: 20px;">
+        <div id="${newTask.id}" class="container" style="background-color: rgb(249, 213, 157); height: 80px; display: flex; justify-content: space-around; align-items: center; border: 2px solid black; border-radius: 8px; margin-bottom: 20px;">
 
         <input type="checkbox" class="container__status" data-action="done" style="width: 25px; height: 25px;">
 
-        <div class="container_text" style="width: 250px; padding: 10px 0px; background-color: white; text-align: center; border-radius: 6px;">${header__input2}</div>
+        <div class="container__text" style="width: 250px; padding: 10px 0px; background-color: white; text-align: center; border-radius: 6px;">${header__input2}</div>
 
-        <div class="container_column" style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: flex-end;">
+        <div class="container__column" style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: flex-end;">
                 
         <button data-action="button__delete" style="width: 25px; height: 25px;">X</button></button>
 
         <div class="container__date" style="background-color: rgb(0, 110, 153); padding: 2px 20px; border-radius: 4px;">Дата</div>
         </div>
         </div>
-        `
+        `;
+
 
     ///ДОБОВЛЕНИЕ на страницу
     wrapper.insertAdjacentHTML("beforeend", taskHTML)
@@ -105,7 +115,19 @@ function deleteTask(event) {
         const parenNode = event.target.closest(".container");
 
         parenNode.remove()
+
+        const id = Number(parenNode.id);
+
+        const index = tasks.findIndex(function (task) {
+
+            return task.id === id;
+
+        })
+
+        tasks.splice(index, 1)
+
     }
+
 }
 ///////////////////////////
 ///ОТМЕЧЕНАЯ ЗАДАЧА И ДОБОВЛЕНИЯ НОВОГО КЛАССА
@@ -116,22 +138,42 @@ function doneTask(event) {
     if (event.target.dataset.action === "done") {
 
         const parenNode = event.target.closest(".container");
-        const taskTitle = parenNode.querySelector(".container_text")
-        taskTitle.classList.toggle("container_text-done")
-        console.log(taskTitle)
+        const taskTitle = parenNode.querySelector(".container__text")
+        taskTitle.classList.toggle("container__text-done")
+        // console.log(taskTitle)
 
     }
+
+    //определяем id задачи
+    const id = Number(parentNode.id);
+
+
+    const task = tasks.find(function (task) {
+        if (task.id === id) {
+            return true
+        }
+    })
+
+console.log(task);
+
+
+
+
+
+
+
+
+
 }
 ///////////////////////////
+let tasks = [];
 
 
 
 
 
 
-
-
-
+///////////////////////////
 
 //container
 let container = document.createElement("div");
@@ -151,8 +193,8 @@ root.appendChild(wrapper);
 wrapper.appendChild(header);
 header.append(header__delete, header__input, header__add);
 
-let arr = ["Dota 2", "Fortnite", "God of War"];
-
+let arr = [];
+// "Dota 2", "Fortnite", "God of War"
 for (let i = 0; i < arr.length; i++) {
 
     let container = document.createElement("div");
@@ -175,7 +217,7 @@ for (let i = 0; i < arr.length; i++) {
     width: 25px;
     height: 25px;
     `;
-    
+
     let container__text = document.createElement("div");
     container__text.classList.add("container__text");
     container__text.innerHTML = `${arr[i]}`;
