@@ -23,11 +23,12 @@ export const setHover = function (color, transition, obj){
     })
 }
 
-export const setFocus = function (obj){
-    obj.addEventListener("focus", function(){
-        obj.style.boxShadow = "0 0 0 0.2em DodgerBlue";
+export const setFocus = function (focusObj, paintedObj = focusObj, efect = "0 0 0 0.2em DodgerBlue"){
+    focusObj.addEventListener("focus", function(){
+        paintedObj.style.boxShadow = efect;
     })
-    obj.addEventListener("focusout", function(){
-        obj.style.boxShadow = "none";
+    focusObj.addEventListener("focusout", function(){
+        paintedObj.style.boxShadow = "none";
     })
 }
+
