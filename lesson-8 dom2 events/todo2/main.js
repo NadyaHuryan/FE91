@@ -10,6 +10,48 @@ root.style.cssText = `
     padding-bottom: 50px;
 `;
 
+let tasks = [];
+///вывод сахраненной информации при обновлении страницы.
+if (localStorage.getItem("tasks")) {
+    tasks = JSON.parse(localStorage.getItem("tasks"))
+}
+
+tasks.forEach(function (task) {
+    //Формируем css класс
+    const cssClass = task.done ? "container__text container_text_done" : "container__text";
+
+
+    // ${header__input2}
+    const taskHTML = `
+        <div id="${task.id}" class="container" style="background-color: rgb(249, 213, 157); height: 80px; display: flex; justify-content: space-around; align-items: center; border: 2px solid black; border-radius: 8px; margin-bottom: 20px;">
+
+        <input type="checkbox" class="container__status" data-action="done" style="width: 25px; height: 25px;">
+
+        <div class="${cssClass}" style="width: 250px; padding: 10px 0px; background-color: white; text-align: center; border-radius: 6px;"> ${task.text}</div>
+
+        <div class="container__column" style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: flex-end;">
+                
+        <button data-action="button__delete" style="width: 25px; height: 25px;">X</button></button>
+
+        <div class="container__date" style="background-color: rgb(0, 110, 153); padding: 2px 20px; border-radius: 4px;">Дата</div>
+        </div>
+        </div>
+        `;
+
+/// Не работает строчка 
+    ///ДОБОВЛЕНИЕ на страницу
+    // wrapper.insertAdjacentHTML("beforeend", taskHTML)
+})
+
+
+
+
+
+//Сохранение в локал сторедж
+function saveToLocalStorage() {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+}
+
 //wrapper
 
 let wrapper = document.createElement("div");
@@ -78,13 +120,21 @@ header__add.onclick = () => {
 
     tasks.push(newTask);
 
+    // Добавляем задачу в хранилище в localStorage
+    saveToLocalStorage()
 
+
+    //Формируем css класс
+    const cssClass = newTask.done ? "container__text container_text_done" : "container__text";
+
+
+    // ${header__input2}
     const taskHTML = `
         <div id="${newTask.id}" class="container" style="background-color: rgb(249, 213, 157); height: 80px; display: flex; justify-content: space-around; align-items: center; border: 2px solid black; border-radius: 8px; margin-bottom: 20px;">
 
         <input type="checkbox" class="container__status" data-action="done" style="width: 25px; height: 25px;">
 
-        <div class="container__text" style="width: 250px; padding: 10px 0px; background-color: white; text-align: center; border-radius: 6px;">${header__input2}</div>
+        <div class="${cssClass}" style="width: 250px; padding: 10px 0px; background-color: white; text-align: center; border-radius: 6px;"> ${newTask.text}</div>
 
         <div class="container__column" style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: flex-end;">
                 
@@ -102,7 +152,6 @@ header__add.onclick = () => {
     /// Очищаем поле ввода и возвращаем на него фокус
     header__input.value = ""
     header__input.focus()
-
 };
 ///////////////////////////
 //УДАЛЕНИЕ ЗАДАЧИ
@@ -126,6 +175,8 @@ function deleteTask(event) {
 
         tasks.splice(index, 1)
 
+        // Удаляем задачу с хранилище в localStorage
+        saveToLocalStorage()
     }
 
 }
@@ -142,34 +193,27 @@ function doneTask(event) {
         taskTitle.classList.toggle("container__text-done")
         // console.log(taskTitle)
 
+        ////////////////
+        // Меняем статус задачу с хранилище в localStorage
+        saveToLocalStorage()
+        ////////////////
     }
+    //////////////////////////////////////////////////////////
+    //1:30
 
-    //определяем id задачи
-    const id = Number(parentNode.id);
+    // определяем id задачи
+    // const id = Number(parenNode.id);
 
+    // const task = tasks.find(function (task) {
+    //     if (task.id === id) {
+    //         return true
+    //     }
+    // })
 
-    const task = tasks.find(function (task) {
-        if (task.id === id) {
-            return true
-        }
-    })
-
-console.log(task);
-
-
-
-
-
-
-
-
-
+    // console.log(task);
+    //////////////////////////////////////////////////////////
 }
 ///////////////////////////
-let tasks = [];
-
-
-
 
 
 
