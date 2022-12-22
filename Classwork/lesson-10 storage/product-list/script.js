@@ -16,11 +16,11 @@ window.addEventListener("load", () => {
 
     loadPage();
 
-
-    let updateStorage = function() {
+let updateStorage = function() {
         localStorage.setItem("productData",JSON.stringify(productData));
     }
 
+    
 
 let checkProductValue = function(value) {
     if (value === "" || value === " ") {
