@@ -14,9 +14,9 @@ function printTodos (arr){
 function getTodos (){
     return new Promise((resolve, reject) => {
 
-        fetch('https://jsonplaceholder.typicode.com/todos2')
+        fetch('https://jsonplaceholder.typicode.com/todos')
         .then(response => response.json())
-        .then(arr => resolve(arr)))
+        .then(arr => resolve(arr))
 
     })
  }
