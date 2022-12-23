@@ -1,11 +1,14 @@
 function printTodos (arr){
+
     let list = document.createElement('ul');
     list.style.cssText = `list-style-type: none;`
-    arr.forEach(elem => {
-        let listItem = document.createElement('li');
-        list.appendChild(listItem);
-        listItem.textContent =`${elem.id} ${elem.title}`;
-    });
+    
+        arr.forEach(elem => {
+            let listItem = document.createElement('li');
+            list.appendChild(listItem);
+            listItem.textContent =`${elem.id} ${elem.title}`;
+        });
+
     let body = document.querySelector("body");
     body.appendChild(list);
 }
