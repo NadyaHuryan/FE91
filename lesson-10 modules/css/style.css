@@ -1,0 +1,18 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a, a:visited {
+    text-decoration: none;
+}
+
+a, img {
+    border: none;
+    outline: none;
+}
+
+ul, ol {
+    list-style-type: none;
+}
