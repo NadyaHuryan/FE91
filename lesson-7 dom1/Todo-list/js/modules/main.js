@@ -1,23 +1,13 @@
-import {cssHeader, cssHeaderDelete, cssAddHeaderInput, cssAddHeaderButton, cssWrapper, cssRoot, cssContainerItemGray,
-    cssContainerItemGainsboro, cssContainerStatus, cssContainerTextCrossed, cssContainerText, cssContainerColumn, 
-    cssDeleteButton, cssContainerDate} from "./modules/style.js"
+import {cssContainerItemGray, cssContainerItemGainsboro, cssContainerStatus, cssContainerTextCrossed, cssContainerText,
+    cssDeleteButton, cssContainerDate, cssContainerColumn} from "./style.js"
+import {addHeaderButton, headerDelete, root, header, wrapper, addHeaderInput, container} from "./render.js"
+import {updateStorage, loadPage} from "./loadStorage.js"
 
-window.addEventListener("load", () => {
+export let main = function() {
 
     let todos = [];
 
-    let loadPage = function() {
-            let localTabData = localStorage.getItem("todos");
-            if (localTabData) {
-                todos = JSON.parse(localTabData);
-            } 
-        }
-
         loadPage();
-
-        let updateStorage = function() {
-            localStorage.setItem("todos",JSON.stringify(todos));
-        }
 
     let checkTabValue = function(value) {
         if (value === "" || value === " ") {
@@ -42,7 +32,7 @@ window.addEventListener("load", () => {
             parent.style.background = "gainsboro";
             todos[tabIndex]["status"] = false;
         }
-        updateStorage();
+        updateStorage(todos);
     }
 
     let deleteAllTabs = function () {
@@ -60,7 +50,7 @@ window.addEventListener("load", () => {
         if (confirm(`Вы точно хотите удалить заметку ${tabText}`)) {
             parent.remove();
             todos = [...tabFilter];
-            updateStorage();
+            updateStorage(todos);
         }
     }
 
@@ -130,30 +120,13 @@ window.addEventListener("load", () => {
         if (checkTabValue(tabValue)) {
             createNewTab(todo);
             todos.push(todo);
-            updateStorage();
+            updateStorage(todos);
         }
         addHeaderInput.value = "";
     }
 
-    let root = document.getElementById("root")
-    root.style.cssText = cssRoot;
-
-    //wrapper
-
-    let wrapper = document.createElement("div");
-    wrapper.classList.add("wrapper");
-    wrapper.style.cssText = cssWrapper;
-
     //header
 
-    let header = document.createElement("header");
-    header.classList.add("header");
-    header.style.cssText = cssHeader;
-
-    let headerDelete = document.createElement("button");
-    headerDelete.classList.add("header__delete");
-    headerDelete.innerHTML = `Delete all`;
-    headerDelete.style.cssText = cssHeaderDelete;
     headerDelete.addEventListener("click", function() {
         if (confirm("Вы точно хотите удалить все заметки?")) {
             deleteAllTabs();
@@ -162,27 +135,13 @@ window.addEventListener("load", () => {
         }
     })
 
-    let addHeaderInput = document.createElement("input");
-    addHeaderInput.classList.add("header__input");
-    addHeaderInput.setAttribute("type", "text");
-    addHeaderInput.setAttribute("placeholder", "Enter todo …");
-    addHeaderInput.style.cssText = cssAddHeaderInput;
     addHeaderInput.addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             addNewTab();
         }
     })
 
-    let addHeaderButton = document.createElement("button");
-    addHeaderButton.classList.add("header__add");
-    addHeaderButton.innerHTML = `Add`;
-    addHeaderButton.style.cssText = cssAddHeaderButton;
     addHeaderButton.addEventListener("click", addNewTab);
-
-    //container
-
-    let container = document.createElement("div");
-    container.classList.add("container");
 
     for (let i = 0; i < todos.length; i++) {
         createNewTab(todos[i]);
@@ -194,4 +153,4 @@ window.addEventListener("load", () => {
     wrapper.append(header, container);
     header.append(headerDelete, addHeaderInput, addHeaderButton);
 
-});
+};

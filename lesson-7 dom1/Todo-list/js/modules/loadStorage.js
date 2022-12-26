@@ -1,10 +1,7 @@
 export let loadPage = function() {
-    let localTabData = localStorage.getItem("todos");
-    if (localTabData) {
-        todos = JSON.parse(localTabData);
-    }
+    return JSON.parse(localStorage.getItem("todos"));      
 }
 
-export let updateStorage = function() {
+export let updateStorage = function(todos) {
     localStorage.setItem("todos",JSON.stringify(todos));
 }
