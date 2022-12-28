@@ -1,0 +1,94 @@
+@use 'default';
+
+$red: #e74c3c;
+$defaultFontSize: 18px;
+$theme: light;
+
+body {
+  background-color: if($theme=='dark',black,mix(blue,yellow, 30%));
+}
+h1 {
+  color: $red;
+  font-size: $defaultFontSize*2;
+}
+ul {
+  color: black;
+  li {
+    padding: {
+      left: 20px;
+      right: 30px;
+    }
+    font: {
+      size: 30px;
+      family: "Tahoma";
+    } 
+  }
+  a {
+    text-decoration: none;
+    &.active {
+      color: red;
+    }
+    &:hover {
+      color: green;
+    }
+    // .wrapper & {
+    //   color: coral;
+    // }
+  }
+  
+}
+/*Шаблон*/
+%button {
+  width: 300px;
+  border: 2px dotted black;
+}
+
+.button {
+  @extend %button;
+  &-send {
+    background-color: aqua;
+  }
+  &-ok {
+    background-color: lightgreen;
+  }
+}
+.input-reset {
+  @extend %button;
+  background-color: #e74c3c;
+}
+
+/*Миксины*/
+@mixin square($size, $color) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+}
+.sq {
+  &-black {
+    @include square(200px, black)
+  }
+  &-red {
+    @include square(20px, red)
+  }
+}
+
+@mixin col($count) {
+  .col-#{$count} {
+    width: 100% / $count;
+  }
+}
+
+@mixin col2($count) {
+  @each $newCount in $count {
+    .col-#{$newCount} {
+      width: 100% / $newCount;
+    }
+  }
+}
+
+@include col(4);
+
+@include col2(1 2 3 4 5 6 7 8 9);
+
+
+
