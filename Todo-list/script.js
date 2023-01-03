@@ -10,43 +10,158 @@ let date = new Date(Date.now());
 
 
 // arrays
-    let main = [
-        {
-            id: 1,
-            task: "Побрить ноги",
-            status: false,
-            date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
-        },
-        {
-            id: 2,
-            task: "Купить шорты",
-            status: true,
-            date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `,
-        },
-        {
-            id: 3,
-            task: "Открыть шпроты",
-            status: false,
-            date: `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `
-        },
-    ]
+    let main = []
     let completed = [];
     let searched = [];
 
 // sorage 
-const getName = function(){
+const getLocalData = function(){
     main = JSON.parse(localStorage.getItem("todo"));
 
 }
-const setName = function(){
+const setLocalData = function(){
     localStorage.setItem("todo",JSON.stringify(main));
 };
 
 if (!localStorage.getItem("todo")){
-    setName();
+    setLocalData();
 } else{
-    getName();
+    getLocalData();
 }
+// css
+ let cssWrapper = `
+    width: 800px;
+    min-height: 200px;
+    border: 3px solid black;
+    margin: 40px auto;
+    background-color: lightgray;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+`;
+
+ let cssPanel = `
+    padding: 10px 10px;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+`;
+
+ let cssPanelButton = `
+    flex-grow: 1 ;
+    min-height: 60px;
+    background-color: MediumAquamarine			;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+`;
+
+ let cssPanelInput =  `
+    flex-grow: 2 ;
+    min-height: 60px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+`;
+
+ let cssCard =  `
+    width: 70%;
+    min-height: 100px;
+    border: 3px solid black;
+    margin: 20px auto;
+    background-color: lightgray;
+    border-radius: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns:  1fr 3fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    "c-status c-text c-close-button"
+    "c-status c-text c-date";
+    justify-items: stretch;
+    gap: 10px;
+`;
+
+ let cssCardStatusWraper = `
+    display: block;
+    grid-area: c-status;
+    justify-items: left;
+    align-self: center;
+    height: 60px;
+    width: 60px;
+`;
+
+ let cssStatusSpan = `
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 3px solid black;
+    background-color: MediumAquamarine			;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    font-size: 20px;
+    padding: 20px
+`;
+
+ let cssCardStatus = `
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+`;
+
+ let cssCardDate = `
+    grid-area: c-date;
+    justify-self: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 80px;
+    height: 30px;
+    padding: 10px 5px ;
+    color: gray;
+    font-size: 10px;
+`;
+
+ let cssCardText = `
+    grid-area: c-text ;
+    align-self: center;
+    justify-self: center;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 350px;
+    height: 50px;
+    padding: 15px;
+    color: gray;
+`;
+
+ let cssCardCloseButton = `
+    grid-area: c-close-button;
+    justify-self: right;
+    background-color: MediumAquamarine			;
+    border: 3px solid black;
+    border-radius: 10px;
+    text-align: center;
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+`; 
+
+ let cssImage = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAArCAYAAAA65tviAAAACXBIWXMAAC4jAAAuIwF4pT92AAABYklEQVRogdWZbQ2DMBCGXwmTMAlIQQISJmEOkIAEJEwCEiYBCVtIICH9oleud9c3uezPVvps7bOjwHgeAKb9tenMAH4AvgC6VkHGHeKoFUDvvct4BgfiXK9WILrA5N2avE8Zy3NfQqHJu7VYlcA2qSUw4VSZlMBhKGqZkoBrKGot3ogKSRkqp9Z9b6kmx1BXpb5HKIaK1eCNmkhfgbrEUG6N3qiJHOt3ZYYpNdRRszdiIu4m5ILhMFT2H2HMJHdhYuNWMdTVxdbC1kDUULnfGLXPETUU9WfPhRE1VOnazYERM1RNi4ga6hMYgOOC4j0Uxxp2YdR6KE6YTrqHqgVzt0g9VCzaMKQeyipMSBjNwVS9y5OEqX6XJwFzy1BWYFgMpQ3DaigtGPXjTg4YE+dQYGhBTJ3VlsKIGYoSKoy4oWrAqBmKkisYsw9kQonBmDEUJSGYZh8pn2FMGoqSDeYtekUAf4SQBuU1udF6AAAAAElFTkSuQmCC')"
 
 //functions
 const deleteCard = function(){
@@ -57,21 +172,27 @@ const deleteCard = function(){
             let newMain = main.filter(item => item.id != parent.getAttribute('data-id'));
             main = [...newMain];
 
+            let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
+            completed = [...newCompleted].sort((a,b) => b.id - a.id);
+
         parent.remove();
-        setName();
-        setPanelCardInfoCounterAll();
-        setPanelCardInfoCounterComplited();
+        setLocalData();
+        if(main.length == 0){
+            localStorage.removeItem("todo");
+        }
+        setCounterAllCards();
+        setCounterCompletedCards();
     }
 }
 
 const deleteAllCards = function(){
     let result = confirm("Delete All Cards?");
     if (result){
-        panelCardsAera.innerHTML = "";
+        cardsAera.innerHTML = "";
         main.length = 0;
         completed.length = 0;
-        setPanelCardInfoCounterAll();
-        setPanelCardInfoCounterComplited()
+        setCounterAllCards();
+        setCounterCompletedCards()
         localStorage.removeItem("todo");
     }
 
@@ -81,78 +202,105 @@ const deleteLastCard = function(){
     let result = confirm("Delete Last Card?");
     if (result){
         let last = document.querySelectorAll(".card");
-        let id = last[last.length - 1].getAttribute('data-id')
+        let id = last[0].getAttribute('data-id')
 
         let newCompleted = completed.filter(item => item.id != id);
         completed.length = 0;
-        completed = [...newCompleted];
+        completed = [...newCompleted].sort((a,b) => b.id - a.id);
+
 
         let newMain = main.filter(item => item.id != id);
         main.length = 0;
         main = [...newMain];
 
-        last[last.length - 1].remove();
 
-        setName();
-        setPanelCardInfoCounterAll();
-        setPanelCardInfoCounterComplited();
+        last[0].remove();
+
+        setLocalData();
+        if(main.length == 0){
+            localStorage.removeItem("todo");
+        }
+        setCounterAllCards();
+        setCounterCompletedCards();
     }
 }
 
-const setCardBG = function(){
+const setCardStyle = function(){
     let card = this.closest(".card");    
     (this.checked) ? card.style.backgroundColor= "gray" : card.style.backgroundColor= "lightgray";
-
     let text = card.querySelector(".card--text");
     (this.checked) ? text.style.textDecoration = "line-through" : text.style.textDecoration = "none"
+    let content = card.querySelector("span");
+    (this.checked) ? content.style.backgroundImage = cssImage : content.style.backgroundImage = "none";
 
 }
 
-const setPanelCardInfoCounterAll = function(){
-    panelCardInfoCounterAll.innerHTML = `All: <span>${main.length}</span>`;
+const setCounterAllCards = function(){
+    counterAllCards.innerHTML = `All: <span>${main.length}</span>`;
 }
-const setPanelCardInfoCounterComplited = function(){
-    panelCardInfoCounterCompleted.innerHTML = `Completed: <span>${completed.length}</span>`; 
+const setCounterCompletedCards = function(){
+    counterCompletedCards.innerHTML = `Completed: <span>${completed.length}</span>`; 
 
 }
+const searchForMain = function(){
+    cardsAera.innerHTML = "";
+    searched = main.filter(item => item.task.includes(this.value.trim()));
+    createCardsAera(searched);
+};
+const searchForCompleted = function(){
+    cardsAera.innerHTML = "";
+    searched = completed.filter(item => item.task.includes(this.value.trim()));
+    createCardsAera(searched);
+};
 
-const hover = function (color, transition, obj){
+
+const setHover = function (color, transition, obj){
     let curretColor = obj.style.backgroundColor;
-    let hoverColor = color;
+    let setHoverColor = color;
 
     obj.addEventListener("mouseover", function(){
-        obj.style.backgroundColor = hoverColor;
+        obj.style.backgroundColor = setHoverColor;
         obj.style.transition = `background-color ${transition}s`;
     })
     obj.addEventListener("mouseout", function(){
         obj.style.backgroundColor = curretColor;
     })
-
 }
 
+const setFocus = function (obj){
+    obj.addEventListener("focus", function(){
+        obj.style.boxShadow = "0 0 0 0.2em DodgerBlue";
+    })
+    obj.addEventListener("focusout", function(){
+        obj.style.boxShadow = "none";
+    })
+}
 
 
 const addCard = function(){
     let obj = {};
     let date = new Date();
 
-    if (!(panelCardActionsInputToDo.value === "") && !(panelCardActionsInputToDo.value === " ")){
+    if (!(inputTask.value === "") && !(inputTask.value === " ")){
 
-        let maxId = main.map((item) => item.id);
-        maxId.sort((a,b) => a - b);
+        if(main.length > 0){
+            let maxId = main.map((item) => item.id);
+            maxId.sort((a,b) => a - b);
+            obj.id = maxId.at(-1) + 1;
+        } else{
+            obj.id = 1;
+        }
 
-        obj.id = maxId.at(-1) + 1;
-        obj.task = panelCardActionsInputToDo.value;
+        obj.task = inputTask.value;
         obj.status = false;
         obj.date = `${date.getDate()} - ${date.getMonth()} - ${date.getFullYear()} `;
     
         main.push(obj);
         createCard(obj);
-        panelCardActionsInputToDo.value = "";
-        setName();
-        setPanelCardInfoCounterAll();
+        inputTask.value = "";
+        setLocalData();
+        setCounterAllCards();
     } 
-    ///да и незнаю что лучше этот код или пустой if и полный else
 }
 
 const createCard = function (item) {
@@ -161,6 +309,12 @@ const createCard = function (item) {
         card.style.cssText = cssCard;
         card.setAttribute("data-id", item.id);
 
+    let cardStatusWraper = document.createElement("label");
+        cardStatusWraper.style.cssText = cssCardStatusWraper;
+
+    let cardStatusSpan = document.createElement("span");
+        cardStatusSpan.style.cssText = cssStatusSpan;
+
     let cardStatus = document.createElement("input");
         cardStatus.setAttribute("type", "checkbox");
         cardStatus.checked = item.status;
@@ -168,14 +322,25 @@ const createCard = function (item) {
         cardStatus.style.cssText = cssCardStatus;
         if (item.status){
             card.style.backgroundColor= "gray";
+            cardStatusSpan.style.backgroundImage = cssImage;
 
             let key =  completed.some( elem => elem.id === item.id);
             if (key == false){
                 completed.push(item);
             }
-            
-            // проверка на содержание самого себя
         }
+        cardStatus.addEventListener("focus", function(){
+            cardStatusSpan.style.boxShadow = "0 0 0 0.15em DodgerBlue";
+        })
+        cardStatus.addEventListener("focusout", function(){
+            cardStatusSpan.style.boxShadow = "none"
+        })
+        cardStatus.addEventListener("focus", function(){
+            card.style.boxShadow = "0 0 0 0.04em black";
+        })
+        cardStatus.addEventListener("focusout", function(){
+            card.style.boxShadow = "none"
+        })
 
 
 
@@ -197,10 +362,10 @@ const createCard = function (item) {
         cardCloseButton.textContent = "X"
         cardCloseButton.style.cssText = cssCardCloseButton;
         cardCloseButton.addEventListener("click", deleteCard);
-        hover("red", "0.4", cardCloseButton);
+        setHover("Red", "0.4", cardCloseButton);
         
 
-        cardStatus.addEventListener("click",setCardBG);
+        cardStatus.addEventListener("click",setCardStyle);
         cardStatus.addEventListener("click", function(){
              item.status = cardStatus.checked;
              if(item.status){
@@ -209,137 +374,28 @@ const createCard = function (item) {
                 let parent = this.closest(".card")
                 let newCompleted = completed.filter(item => item.id != parent.getAttribute('data-id'));
                 completed.length = 0;
-                completed = [...newCompleted];
+                completed = [...newCompleted].sort((a,b) => b.id - a.id);
              }
      
-            setPanelCardInfoCounterComplited();
-            setName();
+            setCounterCompletedCards();
+            setLocalData();
         });
+        setFocus(cardStatus)
 
-        panelCardsAera.appendChild(card);
-        card.append(cardStatus, cardText, cardCloseButton, cardDate); 
+        cardsAera.prepend(card);
+        card.append(cardStatusWraper, cardText, cardCloseButton, cardDate); 
+        cardStatusWraper.append(cardStatusSpan, cardStatus);
 }
 
 const createCardsAera = function (arr){ 
-    arr.forEach(function(item){
+    arr.forEach((item) => {
         createCard(item);
     })
-
-    setPanelCardInfoCounterAll();
-    setPanelCardInfoCounterComplited(); 
+    setCounterAllCards();
+    setCounterCompletedCards(); 
 }
 
 //css 
-
-let cssWrapper = `
-    width: 800px;
-    min-height: 200px;
-    border: 3px solid black;
-    margin: 40px auto;
-    background-color: lightgray;
-    border-radius: 20px;
-    padding: 10px;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 16px;
-`;
-
-let cssPanel = `
-    padding: 10px 10px;
-    display: flex;
-    gap: 16px;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-`;
-
-let cssPanelButton = `
-    flex-grow: 1 ;
-    min-height: 60px;
-    background-color: rgb(127, 255, 249);
-    border: 3px solid black;
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-`;
-
-let cssPanelInput =  `
-    flex-grow: 2 ;
-    min-height: 60px;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    text-align: center;
-    border: 3px solid black;
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-`;
-
-let cssCard =  `
-    width: 70%;
-    min-height: 100px;
-    border: 3px solid black;
-    margin: 20px auto;
-    background-color: lightgray;
-    border-radius: 20px;
-    padding: 10px;
-    display: grid;
-    grid-template-columns:  1fr 3fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: 
-    "c-status c-text c-close-button"
-    "c-status c-text c-date";
-    justify-items: stretch;
-    gap: 10px;
-`;
-
-let cssCardStatus = `
-    grid-area: c-status;
-    justify-items: left;
-    align-self: center;
-    height: 60px;
-    width: 60px;
-`;
-
-let cssCardDate = `
-    grid-area: c-date;
-    justify-self: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 80px;
-    height: 30px;
-    padding: 10px 5px ;
-    color: gray;
-    font-size: 10px;
-`;
-
-let cssCardText = `
-    grid-area: c-text ;
-    align-self: center;
-    justify-self: center;
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 350px;
-    height: 50px;
-    padding: 15px;
-    color: gray;
-`;
-
-let cssCardCloseButton = `
-    grid-area: c-close-button;
-    justify-self: right;
-    background-color: rgb(127, 255, 249);
-    border: 3px solid black;
-    border-radius: 10px;
-    text-align: center;
-    width: 40px;
-    height: 30px;
-    padding: 5px;
-`; 
-
 
 // html generator
 let root = document.getElementById("root")
@@ -352,42 +408,42 @@ let wrapper = document.createElement("div");
     wrapper.style.cssText =  cssWrapper;
 
 /// panel card Actions 
-let panelCardActions = document.createElement("div");
-    panelCardActions.classList.add("panel-card-actions");
-    panelCardActions.style.cssText = cssPanel;
+let panelActions = document.createElement("div");
+    panelActions.classList.add("panel-card-actions");
+    panelActions.style.cssText = cssPanel;
 
-let panelCardActionsButtonDeleteAll = document.createElement("button");
-    panelCardActionsButtonDeleteAll.textContent = "Delete All";
-    panelCardActionsButtonDeleteAll.style.cssText = cssPanelButton;
-    panelCardActionsButtonDeleteAll.addEventListener("click", deleteAllCards);
-    hover("red","0.4", panelCardActionsButtonDeleteAll);
+let buttonDeleteAllCards = document.createElement("button");
+    buttonDeleteAllCards.textContent = "Delete All";
+    buttonDeleteAllCards.style.cssText = cssPanelButton;
+    buttonDeleteAllCards.addEventListener("click", deleteAllCards);
+    setHover("Red","0.4", buttonDeleteAllCards);
+    setFocus(buttonDeleteAllCards);
 
-let panelCardActionsButtonDeleteLast = document.createElement("button");
-    panelCardActionsButtonDeleteLast.textContent = "Delete last";
-    panelCardActionsButtonDeleteLast.style.cssText = cssPanelButton;
-    panelCardActionsButtonDeleteLast.addEventListener("click", deleteLastCard);
-    hover("red","0.4", panelCardActionsButtonDeleteLast);
+let buttonDeleteLastCard = document.createElement("button");
+    buttonDeleteLastCard.textContent = "Delete last";
+    buttonDeleteLastCard.style.cssText = cssPanelButton;
+    buttonDeleteLastCard.addEventListener("click", deleteLastCard);
+    setHover("Red","0.4", buttonDeleteLastCard);
+    setFocus(buttonDeleteLastCard);
 
 
-let panelCardActionsInputToDo = document.createElement("input");
-    panelCardActionsInputToDo.setAttribute("type", "text");
-    panelCardActionsInputToDo.setAttribute("placeholder", "Enter todo...");
-    panelCardActionsInputToDo.style.cssText = cssPanelInput;
-    panelCardActionsInputToDo.addEventListener("keyup", function(event) {
+let inputTask = document.createElement("input");
+    inputTask.setAttribute("type", "text");
+    inputTask.setAttribute("placeholder", "Enter todo...");
+    inputTask.style.cssText = cssPanelInput;
+    inputTask.addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             addCard();
         }
     })
+    setFocus(inputTask);
 
-let panelCardActionsButtonAdd = document.createElement("button");
-    panelCardActionsButtonAdd.textContent = "Add";
-    panelCardActionsButtonAdd.style.cssText = cssPanelButton;
-    panelCardActionsButtonAdd.addEventListener("click", addCard);
-    hover("yellowgreen","0.4", panelCardActionsButtonAdd);
-
-
-
-
+let buttonAddCard = document.createElement("button");
+    buttonAddCard.textContent = "Add";
+    buttonAddCard.style.cssText = cssPanelButton;
+    buttonAddCard.addEventListener("click", addCard);
+    setHover("yellowgreen","0.4", buttonAddCard);
+    setFocus(buttonAddCard);
 
 
 
@@ -395,69 +451,58 @@ let panelCardActionsButtonAdd = document.createElement("button");
 let panelCardInfo = document.createElement("div");
     panelCardInfo.classList.add("panel-card-actions");
     panelCardInfo.style.cssText=cssPanel;
-    panelCardInfo.setAttribute("data-search-key", true);
 
-let panelCardInfoCounterAll= document.createElement("div");
-    setPanelCardInfoCounterAll();
 
-let panelCardInfoCounterCompleted = document.createElement("div");
-    setPanelCardInfoCounterComplited();
+let counterAllCards= document.createElement("div");
+    setCounterAllCards();
 
-let panelCardInfoButtonShowAll = document.createElement("button");
-    panelCardInfoButtonShowAll.textContent = "Show All";
-    panelCardInfoButtonShowAll.style.cssText = cssPanelButton;
-    panelCardInfoButtonShowAll.addEventListener("click",function(){
-        panelCardsAera.innerHTML = "";
+let counterCompletedCards = document.createElement("div");
+    setCounterCompletedCards();
+
+let buttonShowAll = document.createElement("button");
+    buttonShowAll.textContent = "Show All";
+    buttonShowAll.style.cssText = cssPanelButton;
+    buttonShowAll.addEventListener("click",function(){
+        cardsAera.innerHTML = "";
         createCardsAera(main);
-        panelCardInfo.setAttribute("data-search-key", true);
-        panelCardInfoInputSearch.value = "";
+        inputSearch.value = "";
+        inputSearch.removeEventListener("keyup",searchForCompleted);
+        inputSearch.addEventListener("keyup", searchForMain);
     })
-    hover("yellowgreen","0.4", panelCardInfoButtonShowAll);
+    setHover("yellowgreen","0.4", buttonShowAll);
+    setFocus(buttonShowAll);
 
-let panelCardInfoButtonShowCompleted = document.createElement("button");
-    panelCardInfoButtonShowCompleted.textContent = "Show Completed";
-    panelCardInfoButtonShowCompleted.style.cssText = cssPanelButton;
-    panelCardInfoButtonShowCompleted.addEventListener("click", function(){
-        panelCardsAera.innerHTML = "";
+let buttonShowCompleted = document.createElement("button");
+    buttonShowCompleted.textContent = "Show Completed";
+    buttonShowCompleted.style.cssText = cssPanelButton;
+    buttonShowCompleted.addEventListener("click", function(){
+        cardsAera.innerHTML = "";
         createCardsAera(completed);
-        panelCardInfo.setAttribute("data-search-key", false);
-        panelCardInfoInputSearch.value = "";
+        inputSearch.value = "";
+        inputSearch.removeEventListener("keyup",searchForMain);
+        inputSearch.addEventListener("keyup", searchForCompleted);       
     }); 
-    hover("yellowgreen","0.4", panelCardInfoButtonShowCompleted);
+    setHover("yellowgreen","0.4", buttonShowCompleted);
+    setFocus(buttonShowCompleted);
 
-let panelCardInfoInputSearch = document.createElement("input");
-    panelCardInfoInputSearch.setAttribute("type", "text");
-    panelCardInfoInputSearch.setAttribute("placeholder", "Search..."); 
-    panelCardInfoInputSearch.style.cssText = cssPanelInput;
-    panelCardInfoInputSearch.addEventListener("keyup", function(){
-        let regexp = new RegExp([`${this.value}`],'ig' );
-        let value = panelCardInfo.getAttribute("data-search-key");
-        if (value){
-            searched = [];
-            searched = main.filter(item => regexp.test(item.task));
+let inputSearch = document.createElement("input");
+    inputSearch.setAttribute("type", "text");
+    inputSearch.setAttribute("placeholder", "Search..."); 
+    inputSearch.style.cssText = cssPanelInput;
+    setFocus(inputSearch);
 
-        } else {
-            searched = [];
-            searched = complited.filter(item => regexp.test(item.task));
-
-        }
-        panelCardsAera.innerHTML = "";
-
-        createCardsAera(searched);
-    })
-
-let panelCardsAera = document.createElement("div");
-    panelCardsAera.classList.add("cards-aera");
+let cardsAera = document.createElement("div");
+    cardsAera.classList.add("cards-aera");
 
 
 // cards 
  createCardsAera(main);
-
+ inputSearch.addEventListener("keyup", searchForMain);
 // append
 
 root.append(wrapper);
-wrapper.append(panelCardActions, panelCardInfo, panelCardsAera);
-panelCardActions.append(panelCardActionsButtonDeleteAll, panelCardActionsButtonDeleteLast, panelCardActionsInputToDo, panelCardActionsButtonAdd);
-panelCardInfo.append(panelCardInfoCounterAll, panelCardInfoCounterCompleted, panelCardInfoButtonShowAll,panelCardInfoButtonShowCompleted, panelCardInfoInputSearch);
+wrapper.append(panelActions, panelCardInfo, cardsAera);
+panelActions.append(buttonDeleteAllCards, buttonDeleteLastCard, inputTask, buttonAddCard);
+panelCardInfo.append(counterAllCards, counterCompletedCards, buttonShowAll,buttonShowCompleted, inputSearch);
 
 })
